@@ -12,16 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('user_tiers', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id_user_tier');
+            $table->string("user_tier_name");
             $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 
     /**
      * Reverse the migrations.
      */
-    public function down(): void
-    {
-        Schema::dropIfExists('user_tiers');
+    public function down(){
+        Schema::table('user_tiers', function (Blueprint $table) {
+        $table->dropSoftDeletes();
+        });
     }
 };

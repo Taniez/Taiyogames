@@ -12,16 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('banks', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('idbank');
+            $table->string("bank_name");
+            $table->integer("bank_account");
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
     /**
      * Reverse the migrations.
      */
-    public function down(): void
-    {
-        Schema::dropIfExists('banks');
+    public function down(){
+        Schema::table('gametypes', function (Blueprint $table) {
+        $table->dropSoftDeletes();
+        });
     }
 };
