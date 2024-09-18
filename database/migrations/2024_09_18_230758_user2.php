@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('users2', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             // $table->string('user_profile');
             $table->rememberToken();
+            $table->foreignId('id_user_tier')->constrained('user_tiers', 'id_user_tier');
             $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamps();
             $table->softDeletes();
@@ -29,7 +30,7 @@ return new class extends Migration
      * Reverse the migrations.
      */
     public function down(){
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('users2', function (Blueprint $table) {
         $table->dropSoftDeletes();
         });
     }
