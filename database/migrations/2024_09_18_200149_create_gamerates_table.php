@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('gamerates', function (Blueprint $table) {
             $table->bigIncrements('idgamerate');
+            $table->foreignId('idgames')->constrained('games', 'idgames');
             $table->string("gamerate_detail");
             $table->string("gamerate_point");
             $table->timestamps();

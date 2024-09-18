@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('developer_logs', function (Blueprint $table) {
             $table->bigIncrements('iddeveloper_log');
+            $table->foreignId('idgames')->constrained('games', 'idgames');
             $table->string("topic");
             $table->string("detail");
             $table->timestamps();
