@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('user_collections', function (Blueprint $table) {
             $table->string("collection_name");
+            $table->foreignId('idgame')->constrained('game', 'idgame');
             $table->timestamps();
             $table->softDeletes();
         });
