@@ -12,16 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('user_collections', function (Blueprint $table) {
-            $table->id();
+            $table->string("collection_name");
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
     /**
      * Reverse the migrations.
      */
-    public function down(): void
-    {
-        Schema::dropIfExists('user_collections');
+    public function down(){
+        Schema::table('drinkings', function (Blueprint $table) {
+        $table->dropSoftDeletes();
+        });
     }
 };

@@ -12,16 +12,19 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('user_recipts', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('user_recipts');
+            $table->integer("Donate");
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
     /**
      * Reverse the migrations.
      */
-    public function down(): void
-    {
-        Schema::dropIfExists('user_recipts');
+    public function down(){
+        Schema::table('user_recipts', function (Blueprint $table) {
+        $table->dropSoftDeletes();
+        });
     }
 };

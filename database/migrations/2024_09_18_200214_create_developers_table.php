@@ -12,16 +12,23 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('developers', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('iddeveloper');
+            $table->string("developer_email");
+            $table->string("developer_password");
+            $table->string("developer_phonenum");
+            $table->string("developer_profile");
             $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 
     /**
      * Reverse the migrations.
      */
-    public function down(): void
-    {
-        Schema::dropIfExists('developers');
+    public function down(){
+        Schema::table('gametypes', function (Blueprint $table) {
+        $table->dropSoftDeletes();
+        });
     }
 };
