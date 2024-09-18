@@ -16,8 +16,7 @@ return new class extends Migration
             $table->string("user_tier_name");
             $table->timestamps();
             $table->softDeletes();
-
-        });
+         });
     }
 
     /**
