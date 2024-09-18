@@ -12,16 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('admins', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('idadmin');
+            $table->string("admin_name");
+            $table->string("admin_password");
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
     /**
      * Reverse the migrations.
      */
-    public function down(): void
-    {
-        Schema::dropIfExists('admins');
+    public function down(){
+        Schema::table('developer_logs', function (Blueprint $table) {
+        $table->dropSoftDeletes();
+        });
     }
 };

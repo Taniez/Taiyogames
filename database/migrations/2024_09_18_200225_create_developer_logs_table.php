@@ -12,16 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('developer_logs', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('iddeveloper_log');
+            $table->string("topic");
+            $table->string("detail");
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
     /**
      * Reverse the migrations.
      */
-    public function down(): void
-    {
-        Schema::dropIfExists('developer_logs');
+    public function down(){
+        Schema::table('developer_logs', function (Blueprint $table) {
+        $table->dropSoftDeletes();
+        });
     }
 };

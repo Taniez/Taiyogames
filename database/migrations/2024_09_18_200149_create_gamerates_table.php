@@ -12,16 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('gamerates', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('idgamerate');
+            $table->string("gamerate_detail");
+            $table->string("gamerate_point");
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
     /**
      * Reverse the migrations.
      */
-    public function down(): void
-    {
-        Schema::dropIfExists('gamerates');
+    public function down(){
+        Schema::table('gametypes', function (Blueprint $table) {
+        $table->dropSoftDeletes();
+        });
     }
 };

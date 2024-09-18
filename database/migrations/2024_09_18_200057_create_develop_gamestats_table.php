@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('develop_gamestats', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('iddevelop_gamestats');
+            $table->string("dowload_stat");
             $table->timestamps();
         });
     }
