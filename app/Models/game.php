@@ -15,5 +15,6 @@ class game extends Model
     }
     public function gamerates(){
         return $this->hasMany(gamerate::class);  
+        
     }
 }
