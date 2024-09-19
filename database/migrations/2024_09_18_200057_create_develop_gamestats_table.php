@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('develop_gamestats', function (Blueprint $table) {
             $table->bigIncrements('iddevelop_gamestats');
+            $table->foreignId('idgame')->constrained('games', 'idgames');
             $table->string("dowload_stat");
             $table->timestamps();
         });

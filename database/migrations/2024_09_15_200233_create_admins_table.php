@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('admin_reports', function (Blueprint $table) {
-            $table->bigIncrements('idadmin_report');
-            $table->string("report_topic");
-            $table->string("report_detail");
+        Schema::create('admins', function (Blueprint $table) {
+            $table->bigIncrements('idadmin');
+            $table->string("admin_name");
+            $table->string("admin_password");
+            
             $table->timestamps();
             $table->softDeletes();
-
         });
     }
 
@@ -25,7 +25,7 @@ return new class extends Migration
      * Reverse the migrations.
      */
     public function down(){
-        Schema::table('admin_reports', function (Blueprint $table) {
+        Schema::table('developer_logs', function (Blueprint $table) {
         $table->dropSoftDeletes();
         });
     }

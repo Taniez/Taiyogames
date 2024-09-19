@@ -11,20 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('admins', function (Blueprint $table) {
-            $table->bigIncrements('idadmin');
-            $table->string("admin_name");
-            $table->string("admin_password");
+        Schema::create('user_tiers', function (Blueprint $table) {
+            $table->bigIncrements('id_user_tier');
+            $table->string("user_tier_name");
             $table->timestamps();
             $table->softDeletes();
-        });
+         });
     }
 
     /**
      * Reverse the migrations.
      */
     public function down(){
-        Schema::table('developer_logs', function (Blueprint $table) {
+        Schema::table('user_tiers', function (Blueprint $table) {
         $table->dropSoftDeletes();
         });
     }

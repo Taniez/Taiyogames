@@ -11,9 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_tiers', function (Blueprint $table) {
-            $table->bigIncrements('id_user_tier');
-            $table->string("user_tier_name");
+        Schema::create('admin_reports', function (Blueprint $table) {
+            $table->bigIncrements('idadmin_report');
+            $table->string("report_topic");
+            $table->string("report_detail");
+            $table->foreignId('idreport_type')->constrained('report_types', 'idreport_type');
+            $table->foreignId('idadmin')->constrained('admins','idadmin');
+
             $table->timestamps();
             $table->softDeletes();
 
@@ -24,7 +28,7 @@ return new class extends Migration
      * Reverse the migrations.
      */
     public function down(){
-        Schema::table('user_tiers', function (Blueprint $table) {
+        Schema::table('admin_reports', function (Blueprint $table) {
         $table->dropSoftDeletes();
         });
     }

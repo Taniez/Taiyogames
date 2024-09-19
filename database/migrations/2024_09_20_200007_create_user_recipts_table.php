@@ -12,7 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('user_recipts', function (Blueprint $table) {
-            $table->bigIncrements('user_recipts');
+            $table->bigIncrements('iduser_recipts');
+            $table->foreignId('id')->constrained('users', 'id');
+            $table->foreignId('idbank')->constrained('banks', 'idbank');
+            $table->foreignId('iddeveloper')->constrained('developers', 'iddeveloper');
             $table->integer("Donate");
             $table->timestamps();
             $table->softDeletes();

@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('user_collections', function (Blueprint $table) {
             $table->string("collection_name");
+            $table->foreignId('idgames')->constrained('games', 'idgames');
+            $table->foreignId('id')->constrained('users', 'id');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -22,7 +24,7 @@ return new class extends Migration
      * Reverse the migrations.
      */
     public function down(){
-        Schema::table('drinkings', function (Blueprint $table) {
+        Schema::table('user_collections', function (Blueprint $table) {
         $table->dropSoftDeletes();
         });
     }
