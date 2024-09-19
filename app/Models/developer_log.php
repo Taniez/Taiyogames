@@ -8,6 +8,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class developer_log extends Model
 {
-    use HasFactory;
+    // use HasFactory;
     use SoftDeletes;
+
+    public function developer() {
+        return $this->belongsTo(developer::class, "iddeveloper");
+    }
+    public function games() {
+        return $this->belongsTo(game::class, "idgames");
+    }
 }
