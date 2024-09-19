@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('idgame')->constrained('games', 'idgames');
             $table->string("dowload_stat");
             $table->timestamps();
+            $table->dropSoftDeletes();
         });
     }
 
@@ -25,5 +26,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('develop_gamestats');
+        $table->dropSoftDeletes();
     }
 };

@@ -10,7 +10,7 @@ class admin extends Model
     // use HasFactory;
     use SoftDeletes;
 
-    public function admin_report() {
+    public function admin_reports() {
         return $this->hasMany(admin_report::class, "idadmin");
     }
 
