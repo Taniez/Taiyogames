@@ -14,8 +14,6 @@ return new class extends Migration
         Schema::create('developers', function (Blueprint $table) {
             $table->bigIncrements('iddeveloper');
             $table->string("developer_email");
-            $table->foreignId('iddeveloper_log')->constrained('developer_logs', 'iddeveloper_log');
-
             $table->string("developer_password");
             $table->string("developer_phonenum");
             $table->string("developer_profile");

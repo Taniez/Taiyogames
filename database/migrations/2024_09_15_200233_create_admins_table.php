@@ -15,7 +15,7 @@ return new class extends Migration
             $table->bigIncrements('idadmin');
             $table->string("admin_name");
             $table->string("admin_password");
-            $table->foreignId('idadmin_report')->constrained('admin_reports', 'idadmin_report');
+            
             $table->timestamps();
             $table->softDeletes();
         });

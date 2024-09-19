@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string("report_topic");
             $table->string("report_detail");
             $table->foreignId('idreport_type')->constrained('report_types', 'idreport_type');
+            $table->foreignId('idadmin')->constrained('admins','idadmin');
 
             $table->timestamps();
             $table->softDeletes();
