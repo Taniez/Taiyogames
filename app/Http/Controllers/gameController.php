@@ -6,5 +6,7 @@ use Illuminate\Http\Request;
 
 class gameController extends Controller
 {
-    //
+    public function index() {
+        
+    }
 }
