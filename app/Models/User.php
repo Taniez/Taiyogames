@@ -20,6 +20,19 @@ class User extends Authenticatable
     use TwoFactorAuthenticatable;
     use SoftDeletes;
 
+    public function user_collections(){
+        return $this->hasMany(user_collection::class);  
+    }
+
+    public function user_recipts(){
+        return $this->hasMany(user_recipt::class);  
+    }
+    
+    public function user_tiers(){
+        return $this->hasMany(user_tier::class);  
+    }
+    
+
     /**
      * The attributes that are mass assignable.
      *

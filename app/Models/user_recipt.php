@@ -11,4 +11,8 @@ class user_recipt extends Model
     use HasFactory;
     use SoftDeletes;
 
+    public function User(){
+        return $this->belongsTo(User::class);  
+    }
+
 }
