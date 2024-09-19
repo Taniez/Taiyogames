@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class admin_report extends Model
 {
-    use HasFactory;
+    // use HasFactory;
     use SoftDeletes;
+
+    public function admin() {
+        return $this->belongsTo(admin::class, "idadmin");
+    }
 }
