@@ -10,4 +10,8 @@ class user_tier extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    public function User(){
+        return $this->belongsTo(User::class);  
+    }
 }
