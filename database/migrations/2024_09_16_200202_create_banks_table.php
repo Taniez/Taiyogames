@@ -15,6 +15,7 @@ return new class extends Migration
             $table->bigIncrements('idbank');
             $table->string("bank_name");
             $table->integer("bank_account");
+            $table->foreignId('iddeveloper')->constrained('developers', 'iddeveloper');
             $table->timestamps();
             $table->softDeletes();
         });
