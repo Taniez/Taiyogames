@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string("version");
             $table->string("Game_preview");
             $table->string("Game_dowload_link");
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -1,7 +1,7 @@
 <?php
-
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Devmanage_controler;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('Devmanage', [Devmanage_controler::class,'index']);
+Route::post('/Devmanage/create', [Devmanage_controler::class,'create']);
 
 Route::middleware([
     'auth:sanctum',
