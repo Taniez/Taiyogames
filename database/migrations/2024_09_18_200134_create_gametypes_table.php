@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('gametypes', function (Blueprint $table) {
+            $table->bigIncrements('idgametypes');
             $table->string("gametype_name");
             $table->timestamps();
             $table->softDeletes();

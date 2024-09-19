@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class gametype extends Model
 {
+    public function games(){
+        return $this->belongsToMany(game::class);  
+    }
     use HasFactory;
     use SoftDeletes;
 }
