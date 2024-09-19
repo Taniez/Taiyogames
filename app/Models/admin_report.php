@@ -15,10 +15,6 @@ class admin_report extends Model
         return $this->belongsTo(admin::class, "idadmin");
     }
     public function report_type() {
-<<<<<<< HEAD
         return $this->belongsTo(report_type::class, "idreport_type");
-=======
-        return $this->belongsTo(report_type::class, "idadmin");
->>>>>>> f645578e596ff653c0daf1a05496eba2267b4b90
     }
 }
