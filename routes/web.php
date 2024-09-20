@@ -2,6 +2,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Devmanage_controler;
+use App\Http\Controllers\Settingcontroller;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +19,7 @@ Route::get('/', function () {
 });
 Route::get('Devmanage', [Devmanage_controler::class,'index']);
 Route::post('/Devmanage/create', [Devmanage_controler::class,'create']);
+Route::get('/settings', [Settingcontroller::class, 'show'])->name('profile.Setting');
 
 Route::middleware([
     'auth:sanctum',
