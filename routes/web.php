@@ -19,9 +19,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-    Route::get('/dashboard', [Homecontroller::class,'index']);
+ Route::get('/dashboard', [Homecontroller::class,'index']);
 
-
+ 
 Route::get('Devmanage', [Devmanage_controler::class,'index']);
 Route::post('/Devmanage/create', [Devmanage_controler::class,'create']);
 Route::get('/Devmanage/delete/{idgames}', [Devmanage_controler::class,'delete']);
