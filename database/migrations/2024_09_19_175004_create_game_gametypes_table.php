@@ -12,8 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('game_gametypes', function (Blueprint $table) {
+            $table->id('id_game_gametype');
             $table->foreignId('idgames')->constrained('games', 'idgames');
-            $table->foreignId('id_gametypes')->constrained('gametypes', 'idgametypes');
+            $table->foreignId('idgametypes')->constrained('gametypes', 'idgametypes');
             $table->timestamps();
             $table->softDeletes();
         });

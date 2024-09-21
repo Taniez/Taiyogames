@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\gametype;
 use App\Models\game;
 class Devmanage_controler extends Controller
 {
@@ -12,15 +13,87 @@ class Devmanage_controler extends Controller
      }
     //
     public function create(Request $request){
-        $new_game =new game;
-        $new_game-> Game_name = $request-> g_name;
-        $new_game-> Game_info = $request-> g_details;
-        $new_game-> version = $request-> g_version;
-        $imageName = time().'.'.$request->g_img->extension();
-        $request->g_img->move(public_path('img'), $imageName);
-        $new_game->Game_preview = 'img/'.$imageName;
-        $new_game-> Game_dowload_link = $request-> g_link;
+        $request->validate([
+            'g_img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validate file type and size
+        ]);
+       
+        $new_game = new game;
+    
+        // Assign other request values
+        $new_game->Game_name = $request->g_name;
+        $new_game->Game_info = $request->g_details;
+        $new_game->version = $request->g_version;
+    
+        // Handle image upload
+        if ($request->hasFile('g_img') && $request->file('g_img')->isValid()) {
+            $imageName = time() . '.' . $request->g_img->extension();
+            $request->g_img->move(public_path('img'), $imageName);
+            $new_game->Game_preview = 'img/' . $imageName;
+        }
+        else {
+            // Set a default image or keep it null if no image is provided
+            $new_game->Game_preview = null;  // or a default image path if needed
+        }
+    
+        // Assign download link
+        $new_game->Game_dowload_link = $request->g_link;
         $new_game->save();
+
+            // Convert tags from string to array
+            $tags = explode(',', $request->g_tags);
+
+            // Find or create the tags in the 'gametypes' table
+            $tagIds = [];
+            foreach ($tags as $tagName) {
+                $gametype = gametype::firstOrCreate(['gametype_name' => trim($tagName)]);
+                $tagIds[] = $gametype->idgametypes;
+            }
+        
+            // Sync tags with the game
+            $new_game->gametypes()->sync($tagIds);
+
+        return redirect('/Devmanage');
+    }
+public function update(Request $request, $idgames) {
+        $game = game::findOrFail($idgames);
+    
+        // Validate the form data
+        $request->validate([
+            'g_img' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validate file type and size
+        ]);
+    
+        // Update game fields
+        $game->Game_name = $request->g_name;
+        $game->Game_info = $request->g_details;
+        $game->version = $request->g_version;
+    
+        // Handle image upload
+        if ($request->hasFile('g_img') && $request->file('g_img')->isValid()) {
+            $imageName = time() . '.' . $request->g_img->extension();
+            $request->g_img->move(public_path('img'), $imageName);
+            $game->Game_preview = 'img/' . $imageName;
+        }
+    
+        $game->Game_dowload_link = $request->g_link;
+        $game->save();
+    
+        // Handle tags
+        $tags = explode(',', $request->g_tags);
+        $tagIds = [];
+        foreach ($tags as $tagName) {
+            $gametype = gametype::firstOrCreate(['gametype_name' => trim($tagName)]);
+            $tagIds[] = $gametype->idgametypes;
+        }
+    
+        // Sync the updated tags
+        $game->gametypes()->sync($tagIds);
+    
+        return redirect('/Devmanage');
+    }
+
+
+    public function delete($idgames){
+        $games = game::destroy($idgames);
         return redirect('/Devmanage');
     }
 }

@@ -8,7 +8,6 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     * 
      */
     public function up(): void
     {
@@ -18,21 +17,18 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            // $table->string('user_profile');
-            $table->foreignId('id_user_tier')->default(1)->constrained('user_tiers', 'id_user_tier');
             $table->rememberToken();
+            $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
     /**
      * Reverse the migrations.
      */
-    public function down(){
-        Schema::table('users', function (Blueprint $table) {
-        $table->dropSoftDeletes();
-        });
+    public function down(): void
+    {
+        Schema::dropIfExists('users');
     }
 };
