@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('game_gametypes', function (Blueprint $table) {
             $table->foreignId('idgames')->constrained('games', 'idgames');
-            $table->foreignId('id_gametypes')->constrained('gametypes', 'idgametypes');
+            $table->foreignId('idgametypes')->constrained('gametypes', 'idgametypes');
             $table->timestamps();
             $table->softDeletes();
         });

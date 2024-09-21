@@ -51,7 +51,7 @@
             <a href={{$games -> Game_dowload_link}}>ลิงค์โหลดเกมหมาๆ</a>
         </td>
         <td>
-        <button onclick="alert_delete({{$games -> idgames }})" class ="delete">
+        <button onclick="alert_delete({{$games -> idgames }})" class ="btn btn-danger">
           delete
         </button>
         </td>
