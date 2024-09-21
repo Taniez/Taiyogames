@@ -11,11 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('gametypes', function (Blueprint $table) {
-            $table->bigIncrements('idgametypes');
-            $table->string("gametype_name");
-            $table->timestamps();
+        Schema::create('games', function (Blueprint $table) {
+            $table->id('idgames');
+            $table->string("Game_name");
+            $table->string("Game_info");
+            $table->string("version");
+            $table->string("Game_preview")->nullable();
+            $table->string("Game_dowload_link",1024); 
             $table->softDeletes();
+            $table->timestamps();
         });
     }
 
@@ -23,7 +27,7 @@ return new class extends Migration
      * Reverse the migrations.
      */
     public function down(){
-        Schema::table('gametypes', function (Blueprint $table) {
+        Schema::table('games', function (Blueprint $table) {
         $table->dropSoftDeletes();
         });
     }
