@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('game_gametypes', function (Blueprint $table) {
-            $table->id('id_game_gametype');
-            $table->foreignId('idgames')->constrained('games', 'idgames');
-            $table->foreignId('idgametypes')->constrained('gametypes', 'idgametypes');
+        Schema::create('tags', function (Blueprint $table) {
+            $table->id('idgametypes');
+            $table->string("gametype_name");
             $table->timestamps();
             $table->softDeletes();
         });
@@ -25,8 +24,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('game_gametypes',function (Blueprint $table) {
-            $table->dropSoftDeletes();
-            });
+        Schema::dropIfExists('tags');
+        $table->dropSoftDeletes();
     }
 };
