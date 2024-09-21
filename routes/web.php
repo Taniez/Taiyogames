@@ -3,6 +3,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Devmanage_controler;
 use App\Http\Controllers\Settingcontroller;
+use App\Http\Controllers\Homecontroller;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,6 +18,10 @@ use App\Http\Controllers\Settingcontroller;
 Route::get('/', function () {
     return view('welcome');
 });
+
+    Route::get('/dashboard', [Homecontroller::class,'index']);
+
+
 Route::get('Devmanage', [Devmanage_controler::class,'index']);
 Route::post('/Devmanage/create', [Devmanage_controler::class,'create']);
 Route::get('/settings', [Settingcontroller::class, 'show'])->name('profile.Setting');
