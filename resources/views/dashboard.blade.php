@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title> 
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+<!-- Tagify CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+<!-- Tagify JS -->
+<script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
    
 </head>
 <style>
@@ -22,7 +31,17 @@
                 {{ __('Latest Featured Games') }}
             </h2>
         </x-slot>
-    
+        <div class="input-group">
+                <div class="form-outline" data-mdb-input-init>
+                    <input type="search" id="form1" class="form-control" />
+                    <label class="form-label" for="form1">Search</label>
+                </div>
+                <button type="button" class="btn btn-primary" data-mdb-ripple-init>
+                <i class="fas fa-search"></i>
+                </button>
+                <script>import { Input, Ripple, initMDB } from "mdb-ui-kit";
+                    initMDB({ Input, Ripple });</script>
+        </div>
         <div class="flex py-12">
             <!-- Sidebar -->
             <div class="w-1/4 bg-gray-800 text-white p-6">
@@ -87,5 +106,11 @@
         </div>
     </div>
 </x-app-layout>
+
+<script>
+import { Input, Ripple, initMDB } from "mdb-ui-kit";
+initMDB({ Input, Ripple });
+</script>
 </body>
 </html>
+
