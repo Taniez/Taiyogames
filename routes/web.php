@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Devmanage_controler;
 use App\Http\Controllers\Settingcontroller;
 use App\Http\Controllers\Homecontroller;
+use App\Http\Controllers\gamecontroller;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,3 +39,4 @@ Route::middleware([
 });
 
 Route::get('/admin', [adminController::class, "index"]);
+Route::get('/game', [gameController::class, "index"]);
