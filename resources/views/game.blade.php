@@ -6,6 +6,13 @@
     <title>Document</title>
 </head>
 <body>
+<x-app-layout>
+    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+        <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+            {{ __('Dashboard') }}
+        </x-nav-link>
+    </div>
+
     <img src="https://static.wikia.nocookie.net/logopedia/images/d/da/Honkai_Impact_3rd_logo.png" alt="">
     <h3 id='gameVersion'>Lastest Demo : v7.7.0 (22/9/2567)</h3>
     <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam nam officiis delectus error rerum natus!</p>
@@ -42,6 +49,8 @@
         </div>
     </div>
 
+    
     <h3>Community</h3>
+</x-app-layout>
 </body>
 </html>
