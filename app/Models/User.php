@@ -9,7 +9,6 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
@@ -18,20 +17,6 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
-    use SoftDeletes;
-
-    public function user_collections(){
-        return $this->hasMany(user_collection::class);  
-    }
-
-    public function user_recipts(){
-        return $this->hasMany(user_recipt::class);  
-    }
-    
-    public function user_tiers(){
-        return $this->hasMany(user_tier::class);  
-    }
-    
 
     /**
      * The attributes that are mass assignable.

@@ -15,7 +15,15 @@
 
 <x-app-layout>
     
-    <div class="flex py-12">
+
+   
+        <x-slot name="header">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Latest Featured Games') }}
+            </h2>
+        </x-slot>
+    
+        <div class="flex py-12">
             <!-- Sidebar -->
             <div class="w-1/4 bg-gray-800 text-white p-6">
                 <h3 class="text-lg font-bold mb-4">Popular Tags</h3>
@@ -46,13 +54,7 @@
             </div>
     
             <!-- Main Content -->
-            <div class="main">
             <div class="w-3/4 p-6">
-                
-                    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                        {{ __('Latest Featured Games') }}
-                    </h2>
-                
                 <div class="grid grid-cols-3 gap-6">
                     <!-- Game Card 1 -->
                     <div class="bg-white shadow-md p-4">

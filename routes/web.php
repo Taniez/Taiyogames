@@ -19,12 +19,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-    Route::get('/dashboard', [Homecontroller::class,'index']);
+ Route::get('/dashboard', [Homecontroller::class,'index']);
 
-
+ 
 Route::get('Devmanage', [Devmanage_controler::class,'index']);
 Route::post('/Devmanage/create', [Devmanage_controler::class,'create']);
-Route::get('/settings', [Settingcontroller::class, 'show'])->name('profile.Setting');
+Route::get('/Devmanage/delete/{idgames}', [Devmanage_controler::class,'delete']);
+Route::post('/Devmanage/update/{idgames}', [Devmanage_controler::class, 'update']);
 
 Route::middleware([
     'auth:sanctum',
