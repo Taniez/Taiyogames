@@ -21,7 +21,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', [Homecontroller::class,'index']);
+Route::get('/home', [Homecontroller::class,'index']);
 Route::get('/settings', [Settingcontroller::class, 'show'])->name('profile.Setting');
 
 Route::get('Devmanage', [Devmanage_controler::class,'index']);
