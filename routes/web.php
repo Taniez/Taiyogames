@@ -5,6 +5,7 @@ use App\Http\Controllers\Devmanage_controler;
 use App\Http\Controllers\Settingcontroller;
 use App\Http\Controllers\Homecontroller;
 use App\Http\Controllers\gamecontroller;
+use App\Http\Controllers\adminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
