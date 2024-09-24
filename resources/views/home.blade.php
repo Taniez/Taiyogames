@@ -1,8 +1,17 @@
 <x-app-layout>
     <x-slot name="header">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css">
+
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Latest Featured Games') }}
         </h2>
+        <form action="/home/serch" method="get">
+        <div class="input-group">
+            <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" name="serch_box" />
+            <button type="button" class="btn btn-outline-primary" data-mdb-ripple-init>search</button>
+        </div>
+        </form>
     </x-slot>
 
     <div class="flex py-12">
@@ -60,9 +69,9 @@
 
                 @foreach($_Games as $game)
                         <div class="bg-white shadow-md p-4">
-                            <img src="{{ $game->image_url }}" alt="{{ $game->title }}">
-                            <h3 class="font-bold text-lg mt-2">{{ $game->title }}</h3>
-                            <p class="text-gray-600">{{ Str::limit($game->description, 100) }}</p>
+                        <img src="{{ asset($game->Game_preview) }}" alt="https://via.placeholder.com/150#" class="mt-2" width="100">
+                            <h3 class="font-bold text-lg mt-2">{{ $game->Game_name }}</h3>
+                            <p class="text-gray-600">{{$game->Game_info}}</p>
                         </div>
                 @endforeach
 
