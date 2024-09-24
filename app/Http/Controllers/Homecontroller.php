@@ -9,7 +9,7 @@ use App\Models\admin;
 class Homecontroller extends Controller
 {
     public function index() {
-        $_Admin = admin::first(); // ดึงข้อมูลเกมทั้งหมดจากฐานข้อมูล
-        return view("dashboard", compact('_Games'));
+        $_Games = game::all(); // ดึงข้อมูลเกมทั้งหมดจากฐานข้อมูล
+        return view("home", compact('_Games'));
     }
 }

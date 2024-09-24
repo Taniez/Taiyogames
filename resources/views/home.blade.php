@@ -58,13 +58,13 @@
                 </div>
                 <!-- Add more game cards as needed -->
 
-                @foreach($games as $game)
+                @foreach($_Games as $game)
                         <div class="bg-white shadow-md p-4">
                             <img src="{{ $game->image_url }}" alt="{{ $game->title }}">
                             <h3 class="font-bold text-lg mt-2">{{ $game->title }}</h3>
                             <p class="text-gray-600">{{ Str::limit($game->description, 100) }}</p>
                         </div>
-                 @endforeach
+                @endforeach
 
             
             </div>

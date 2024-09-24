@@ -8,5 +8,7 @@
 <body>
     <h1>Welcome back, Admin {{$_Admin -> admin_name}}</h1>
     <p>About the report</p>
+
+    
 </body>
 </html>
