@@ -10,8 +10,8 @@
             scale: 30%;
         }
         body {
-            margin:0px 15%;
-            padding:0px auto;
+            margin:0px auto;
+            padding:0px 15%;
             height: auto;
             border: 1px solid green;
             }
@@ -34,7 +34,13 @@
             text-indent: 2em;
         }
 
-        .Info {
+        .gameInformation{
+            border: 1px solid black;
+            padding-left: 50px;
+        }
+        .gameLogs{
+            border: 1px solid black;
+            padding-left: 50px;
         }
     </style>
 </head>
@@ -48,26 +54,34 @@
 
     <div class='Info'>
         <div id='infoZone'>
-            <div id='gameInformation' style=" border:1px solid black;">More information V</div>
-                <div><b>Update</b> xxx</div>
-                <div><b>Status</b> inprogress</div>
-                <div><b>Platforms</b> xxx, xxx</div>
-                <div><b>Rating</b> xxx</div>
-                <div><b>Genre</b> xxx</div>
-                <div><b>Tags</b> xxx, xxx, xxx, xxx, xxx, xxx</div>
-                <div><b>Language</b> xxx, xxx</div>
-            </div>
-
-            <div id='Play_demo'>
-                <button href=''>Play Now!</button>
-            </div>
-
-            <h3 id='gameLogs'>Development Log</h3>
-                <div><a href="">swedrfghjkldfghjkldrfgthyju</a></div>
-                <div><a href="">swedrfghjkldfghjkldrfgthyju</a></div>
-                <div><a href="">swedrfghjkldfghjkldrfgthyju</a></div>
+            <div class='gameInformation'>
+                <p><b>More information V</b></p>
+                <p><b>Update</b> xxx</p>
+                <p><b>Status</b> inprogress</p>
+                <p><b>Platforms</b> xxx, xxx</p>
+                <p><b>Rating</b> xxx</p>
+                <p><b>Genre</b> xxx</p>
+                <p><b>Tags</b> xxx, xxx, xxx, xxx, xxx, xxx</p>
+                <p><b>Language</b> xxx, xxx</p>
             </div>
         </div>
+
+        <div class='Play_demo'>
+            <button href=''>Play Now!</button>
+        </div>
+
+        <div class='downloadGame'>
+            <button href=''>Download</button>
+            <p>Teriri_My_love-pc.zip</p>
+        </div>
+
+        <div class='gameLogs'>
+            <p>Development Log</p>
+            <p><a href="">swedrfghjkldfghjkldrfgthyju</a></p>
+            <p><a href="">swedrfghjkldfghjkldrfgthyju</a></p>
+            <p><a href="">swedrfghjkldfghjkldrfgthyju</a></p>
+        </div>
+            
 
         <div class='pictureZone'>
             <img src="img/Teriri1.jpg" alt="">
