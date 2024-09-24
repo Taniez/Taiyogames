@@ -22,6 +22,7 @@ Route::get('/', function () {
 });
 
 Route::get('/home', [Homecontroller::class,'index']);
+Route::get('/home/serch', [Homecontroller::class,'serch']);
 Route::get('/settings', [Settingcontroller::class, 'show'])->name('profile.Setting');
 
 Route::get('Devmanage', [Devmanage_controler::class,'index']);
@@ -35,7 +36,7 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return view('home');
     })->name('dashboard');
 });
 
