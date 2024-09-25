@@ -23,6 +23,7 @@ Route::get('/', function () {
 
 Route::get('/home', [Homecontroller::class,'index']);
 Route::get('/home/serch', [Homecontroller::class,'serch']);
+Route::get('/search-by-tag/{tag}', [Homecontroller::class, 'searchByTag']);
 Route::get('/settings', [Settingcontroller::class, 'show'])->name('profile.Setting');
 
 Route::get('Devmanage', [Devmanage_controler::class,'index']);

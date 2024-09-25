@@ -18,14 +18,12 @@
         <!-- Sidebar -->
         <div class="w-1/4 bg-gray-800 text-white p-6">
             <h3 class="text-lg font-bold mb-4">Popular Tags</h3>
-            <ul class="space-y-2">
-                <li>Horror Game</li>
-                <li>Simulation</li>
-                <li>Roguelike</li>
-                <li>Multiplayer</li>
-                <li>Visual Novels</li>
-                <li>2D</li>
+            <ul>
+                @foreach ($tags as $tag)
+                    <li><a href="{{ url('/search-by-tag/'.$tag->gametype_name) }}">{{ $tag->gametype_name }}</a></li>
+                @endforeach
             </ul>
+
             <a href="#" class="text-orange-500 mt-4 block">See all Tags &rarr;</a>
 
             <h3 class="text-lg font-bold mt-8 mb-4">Browse</h3>
@@ -45,38 +43,23 @@
         </div>
 
         <!-- Main Content -->
+        @if($_Games->isEmpty())
+        <p>No games found for this tag.</p>
+        @else
         <div class="w-3/4 p-6">
             <div class="grid grid-cols-3 gap-6">
-                <!-- Game Card 1 -->
-                <div class="bg-white shadow-md p-4">
-                    <img src="https://via.placeholder.com/150" alt="Kitsune Tails">
-                    <h3 class="font-bold text-lg mt-2">Kitsune Tails</h3>
-                    <p class="text-gray-600">Jump, and dash across a land inspired by Japanese mythology...</p>
-                </div>
-                <!-- Game Card 2 -->
-                <div class="bg-white shadow-md p-4">
-                    <img src="https://via.placeholder.com/150" alt="Life Eater">
-                    <h3 class="font-bold text-lg mt-2">Life Eater</h3>
-                    <p class="text-gray-600">A horror fantasy kidnapping sim...</p>
-                </div>
-                <!-- Game Card 3 -->
-                <div class="bg-white shadow-md p-4">
-                    <img src="https://via.placeholder.com/150" alt="Make Ten">
-                    <h3 class="font-bold text-lg mt-2">Make Ten</h3>
-                    <p class="text-gray-600">Math arcade blitz...</p>
-                </div>
-                <!-- Add more game cards as needed -->
-
                 @foreach($_Games as $game)
-                        <div class="bg-white shadow-md p-4">
-                        <img src="{{ asset($game->Game_preview) }}" alt="https://via.placeholder.com/150#" class="mt-2" width="100">
+                    <a href="/game">
+                        <div class="bg-white shadow-md p-4 w-100 h-100 overflow-auto">
+                        <img src="{{ asset($game->Game_preview) }}" alt="https://via.placeholder.com/150#" class="mt-2 h-75 w-100" >
                             <h3 class="font-bold text-lg mt-2">{{ $game->Game_name }}</h3>
                             <p class="text-gray-600">{{$game->Game_info}}</p>
                         </div>
+                        </a>
                  @endforeach
-
-            
             </div>
         </div>
+        @endif
     </div>
+    
 </x-app-layout>
