@@ -58,7 +58,7 @@
                     <div class="w-1/4 bg-gray-100 p-4">
                         <ul class="space-y-4">
                             <li><a href="#" class="text-blue-500">Profile</a></li>
-                            <li><a href="#" class="text-gray-500">Password</a></li>
+                            <li><a href="/Update" class="text-gray-500">Password</a></li>
                             <li><a href="#" class="text-gray-500">Email Address</a></li>
                             <li><a href="#" class="text-gray-500">Two Factor Authentication</a></li>
                             <li><a href="#" class="text-gray-500">Payment Methods</a></li>

@@ -7,6 +7,7 @@ use App\Http\Controllers\Homecontroller;
 use App\Http\Controllers\gamecontroller;
 use App\Http\Controllers\usercontroller;
 use App\Http\Controllers\adminController;
+use App\Http\Controllers\update_password;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,6 +27,9 @@ Route::get('/home', [Homecontroller::class,'index']);
 Route::get('/home/serch', [Homecontroller::class,'serch']);
 Route::get('/search-by-tag/{tag}', [Homecontroller::class, 'searchByTag']);
 Route::get('/settings', [Settingcontroller::class, 'show'])->name('profile.Setting');
+
+Route::get('/Update', [update_password::class, 'index']);
+
 Route::get('/home', [Homecontroller::class,'index'])->name('home');
 
 Route::get('Devmanage', [Devmanage_controler::class,'index']);
