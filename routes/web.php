@@ -5,6 +5,7 @@ use App\Http\Controllers\Devmanage_controler;
 use App\Http\Controllers\Settingcontroller;
 use App\Http\Controllers\Homecontroller;
 use App\Http\Controllers\gamecontroller;
+use App\Http\Controllers\usercontroller;
 use App\Http\Controllers\adminController;
 /*
 |--------------------------------------------------------------------------
@@ -42,3 +43,4 @@ Route::middleware([
 
 Route::get('/admin', [adminController::class, "index"]);
 Route::get('/game', [gameController::class, "index"]);
+Route::get('/user', [userController::class, "index"]);
