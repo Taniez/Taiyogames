@@ -10,7 +10,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css">
     <style>
         
+   .center p{ 
+    text-align: center;
+    padding-top:18%; 
+   }
+   .center{
+    
+    margin-right:15px 
    
+   }
 
     </style>
 </head>
@@ -32,14 +40,15 @@
         </form>
     </x-slot>
 
-    <div class="flex py-12">
+    <div class="flex py-12 ">
         <!-- Sidebar -->
         <div class="w-1/4 bg-gray-800 text-white p-6">
             <h3 class="text-lg font-bold mb-4">Popular Tags</h3>
             <ul>
-                @foreach ($tags as $tag)
+               @foreach ($tags as $tag)
                     <li><a href="{{ url('/search-by-tag/'.$tag->gametype_name) }}">{{ $tag->gametype_name }}</a></li>
                 @endforeach
+
             </ul>
 
             <a href="#" class="text-orange-500 mt-4 block">See all Tags &rarr;</a>
@@ -62,7 +71,9 @@
 
         <!-- Main Content -->
         @if($_Games->isEmpty())
-        <p>No games found for this tag.</p>
+        <div class="ms-5 center w-100 ">
+        <p>No games found for this tag. :(</p>
+        </div>
         @else
         <div class="w-3/4 p-6">
             <div class="grid grid-cols-3 gap-6">
