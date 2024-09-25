@@ -5,6 +5,7 @@ use App\Http\Controllers\Devmanage_controler;
 use App\Http\Controllers\Settingcontroller;
 use App\Http\Controllers\Homecontroller;
 use App\Http\Controllers\gamecontroller;
+use App\Http\Controllers\usercontroller;
 use App\Http\Controllers\adminController;
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,7 @@ Route::get('/', function () {
 
 Route::get('/home', [Homecontroller::class,'index']);
 Route::get('/home/serch', [Homecontroller::class,'serch']);
+Route::get('/search-by-tag/{tag}', [Homecontroller::class, 'searchByTag']);
 Route::get('/settings', [Settingcontroller::class, 'show'])->name('profile.Setting');
 
 Route::get('Devmanage', [Devmanage_controler::class,'index']);
@@ -42,3 +44,4 @@ Route::middleware([
 
 Route::get('/admin', [adminController::class, "index"]);
 Route::get('/game', [gameController::class, "index"]);
+Route::get('/user', [userController::class, "index"]);

@@ -1,3 +1,4 @@
+<x-app-layout>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -173,6 +174,7 @@
             <img src="img/Teriri5.jpg" alt="">
         </div>
     </div>
+    <h3>Community</h3>
 </x-app-layout>
 </body>
 </html>
