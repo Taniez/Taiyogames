@@ -14,7 +14,6 @@
 <body>
 
     <div class="bg-black bg-opacity-60">
-    
         <div class="logoGame ">
         <img src="https://static.wikia.nocookie.net/logopedia/images/d/da/Honkai_Impact_3rd_logo.png" alt="logo">
     </div>
