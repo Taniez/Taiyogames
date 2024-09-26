@@ -34,4 +34,8 @@ class game extends Model
         return $this->hasMany(gamerate::class, "idgames");  
         
     }
+    public function screenshots(){
+        return $this->hasMany(screenshot::class, "idgames");  
+        
+    }
 }

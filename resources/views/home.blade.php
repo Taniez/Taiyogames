@@ -19,9 +19,17 @@
         <div class="w-1/4 bg-gray-800 text-white p-6">
             <h3 class="text-lg font-bold mb-4">Popular Tags</h3>
             <ul>
-                @foreach ($tags as $tag)
-                    <li><a href="{{ url('/search-by-tag/'.$tag->gametype_name) }}">{{ $tag->gametype_name }}</a></li>
+            @foreach ($tags as $tag)
+                @php
+                    $cleanedTag = preg_replace('/{value:(.*?)}/', '$1', $tag->gametype_name);
+                @endphp
+                <li>
+                    <a href="{{ url('/search-by-tag/'.$tag->gametype_name) }}">
+                        {{ $cleanedTag }}
+                    </a>
+                </li>
                 @endforeach
+
             </ul>
 
             <a href="#" class="text-orange-500 mt-4 block">See all Tags &rarr;</a>
@@ -30,7 +38,6 @@
             <ul class="space-y-2">
                 <li>Games</li>
                 <li>Tools</li>
-                <li>Mod</li>
             </ul>
 
             <h3 class="text-lg font-bold mt-8 mb-4">Games by Price</h3>
@@ -39,6 +46,10 @@
                 <li>Free Game</li>
                 <li>With Demo</li>
                 <li>$5 or less</li>
+                <p>Tags: 
+
+
+</p>
             </ul>
         </div>
 

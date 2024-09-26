@@ -12,6 +12,8 @@ class Homecontroller extends Controller
     public function index() {
         $tags = gametype::all();
         $_Games = game::with('gametypes')->get(); // ดึงข้อมูลเกมพร้อมประเภทของเกม
+         
+
         return view("home", compact('_Games','tags'));
     }
     public function serch(Request $request) {
