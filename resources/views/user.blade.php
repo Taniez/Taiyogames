@@ -12,6 +12,7 @@
             padding:0px 15%;
             height: auto;
             border: 1px solid black;
+            background-color: teal;
         }
         .profileNstat {
             display: flex;
@@ -23,6 +24,7 @@
         }
         .pfpInfo {
             background-color: orange;
+            margin-left: 25px
         }
         .makeCenter {
             display: flex;
@@ -32,10 +34,26 @@
             display: flex;
             background-color: green;
             text-align: center;
+            margin-right: 50px;
+            width: 200px;
+            height: 100px;
+        }
+        .BG_img {
+            height: 150px;
+            background-color: olive;
+        }
+        #pfp {
+            margin-left: 50px;
+            position: relative;
+            bottom: 30px;
+            z-index: 1;
         }
     </style>
 </head>
 <body>
+    <div class="BG_img">
+        pp
+    </div>
     <div class="profileNstat">
         <div class="group1">
             <div> <img id='pfp' src="img/Teriri7.png" alt=""> </div>
