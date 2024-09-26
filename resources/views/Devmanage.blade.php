@@ -1,3 +1,4 @@
+<x-app-layout>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -195,3 +196,5 @@
     });
 </script>
 </html>
+
+</x-app-layout>

@@ -1,7 +1,33 @@
-<x-app-layout>
-    <x-slot name="header">
+
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css">
+    <style>
+        
+   .center p{ 
+    text-align: center;
+    padding-top:18%; 
+   }
+   .center{
+    
+    margin-right:15px 
+   
+   }
+
+    </style>
+</head>
+<body>
+    
+<x-app-layout>
+
+    <x-slot name="header">
+   
 
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Latest Featured Games') }}
@@ -14,7 +40,7 @@
         </form>
     </x-slot>
 
-    <div class="flex py-12">
+    <div class="flex py-12 ">
         <!-- Sidebar -->
         <div class="w-1/4 bg-gray-800 text-white p-6">
             <h3 class="text-lg font-bold mb-4">Popular Tags</h3>
@@ -55,7 +81,9 @@
 
         <!-- Main Content -->
         @if($_Games->isEmpty())
-        <p>No games found for this tag.</p>
+        <div class="ms-5 center w-100 ">
+        <p>No games found for this tag. :(</p>
+        </div>
         @else
         <div class="w-3/4 p-6">
             <div class="grid grid-cols-3 gap-6">
@@ -74,3 +102,5 @@
     </div>
     
 </x-app-layout>
+</body>
+</html>
