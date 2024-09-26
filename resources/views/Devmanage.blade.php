@@ -50,7 +50,9 @@
             </button>
         </td>
     </tr>
-
+    @foreach ($games->screenshots as $screenshot)
+    <img src="{{ asset($screenshot->image_path) }}" alt="Screenshot" width="100">
+    @endforeach
     <!-- Modal -->
     <div class="modal fade" id="updateModal{{$games->idgames}}" tabindex="-1" aria-labelledby="updateModalLabel{{$games->idgames}}" aria-hidden="true">
         <div class="modal-dialog">
@@ -84,8 +86,15 @@
                             <input type="text" class="form-control" name="g_link" value="{{$games->Game_dowload_link}}" required>
                         </div>
                         <div class="mb-3">
+                            <input type="text" name="g_video" placeholder="video Link" required>
+                        </div>
+                        <div class="mb-3">
                             <label for="g_tags" class="form-label">Game Tags</label>
                             <input id="tags{{$games->idgames}}" name="g_tags" class="form-control" value="{{ implode(',', $games->gametypes->pluck('gametype_name')->toArray()) }}">
+                        </div>
+                        <div class="mb-3">
+                             <label for="screenshots" class="form-label">Upload Multiple Screenshots</label>
+                            <input type="file" name="screenshots[]" class="form-control" multiple> <!-- multiple attribute allows multiple files -->
                         </div>
                         <button type="submit" class="btn btn-success">Save changes</button>
                     </form>
@@ -114,9 +123,16 @@
             <div class="mb-3">
                 <input type="text" name="g_link" placeholder="Download Link" required>
             </div>
+            <div class="mb-3">
+                <input type="text" name="g_video" placeholder="video Link" required>
+            </div>
             <div class="form-group bootstrap-tags">
                 <label for="tags">Add keywords (max 10):</label>
                 <input id="tags" name="g_tags" class="form-control" placeholder="Click to view options, type to filter or enter custom tag">
+            </div>
+            <div class="mb-3">
+                <label for="screenshots" class="form-label">Upload Multiple Screenshots</label>
+                <input type="file" name="screenshots[]" class="form-control" multiple> <!-- multiple attribute allows multiple files -->
             </div>
             <button type="submit" class="btn btn-warning mb-3">Submit</button>
         </form>

@@ -18,6 +18,10 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
 
+    public function user_tiers(){
+        return $this->hasMany(user_tier::class);  
+    }
+
     /**
      * The attributes that are mass assignable.
      *

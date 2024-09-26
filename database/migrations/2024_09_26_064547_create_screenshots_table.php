@@ -5,22 +5,20 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
+
 {
+    
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('games', function (Blueprint $table) {
-            $table->id('idgames');
-            $table->string("Game_name");
-            $table->string("Game_info");
-            $table->string("version");
-            $table->string("Game_preview")->nullable();
-            $table->string("Game_dowload_link",1024); 
-            $table->string("Gamevideo",1024); 
-            $table->softDeletes();
+        Schema::create('screenshots', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('idgames')->constrained('games', 'idgames');
+            $table->string('image_path');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
