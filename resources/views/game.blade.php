@@ -1,5 +1,6 @@
+
 <x-app-layout>
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,18 +8,21 @@
     <title>Document</title>
     <style>
         @import url({{asset('css/game.css')}});
+       
     </style>
 </head>
 <body>
-<x-app-layout>
-    <div class="logoGame">
+
+    <div class="bg-black bg-opacity-60">
+    
+        <div class="logoGame ">
         <img src="https://static.wikia.nocookie.net/logopedia/images/d/da/Honkai_Impact_3rd_logo.png" alt="logo">
     </div>
-    <p id='version'><b>Lastest Version : v7.7.0 (22/9/2567)</b></p>
-    <p id="about">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam nam officiis delectus error rerum natus!</p>
+    <p id='version' ><b>Lastest Version : v7.7.0 (22/9/2567)</b></p>
+    <p id="about" >Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam nam officiis delectus error rerum natus!</p>
 
-    <div class='Info'>
-        <div class='infoZone'>
+    <div class='Info ' >
+        <div class='infoZone '>  
             <div class='gameInformation'>
                 <p id='header'><b>More information V</b></p>
                 <p><b>Update</b> xxx</p>
@@ -64,6 +68,8 @@
         </div>
     </div>
     <h3>Community</h3>
-</x-app-layout>
+</div>
+
 </body>
 </html>
+</x-app-layout>

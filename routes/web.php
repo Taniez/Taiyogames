@@ -7,6 +7,7 @@ use App\Http\Controllers\Homecontroller;
 use App\Http\Controllers\gamecontroller;
 use App\Http\Controllers\usercontroller;
 use App\Http\Controllers\adminController;
+use App\Http\Controllers\update_password;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,8 +28,14 @@ Route::get('/home/serch', [Homecontroller::class,'serch']);
 Route::get('/search-by-tag/{tag}', [Homecontroller::class, 'searchByTag']);
 Route::get('/settings', [Settingcontroller::class, 'show'])->name('profile.Setting');
 
+Route::get('/Update', [update_password::class, 'index']);
+
+Route::get('/home', [Homecontroller::class,'index'])->name('home');
+
 Route::get('Devmanage', [Devmanage_controler::class,'index']);
 Route::post('/Devmanage/create', [Devmanage_controler::class,'create']);
+Route::get('Devmanage', [Devmanage_controler::class,'index'])->name('Upload');
+
 Route::get('/Devmanage/delete/{idgames}', [Devmanage_controler::class,'delete']);
 Route::post('/Devmanage/update/{idgames}', [Devmanage_controler::class, 'update']);
 
@@ -38,8 +45,7 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('home');
-    })->name('dashboard');
+        return view('home');})->name('dashboard');
 });
 
 Route::get('/admin', [adminController::class, "index"]);
