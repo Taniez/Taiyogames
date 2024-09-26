@@ -90,7 +90,7 @@ public function update(Request $request, $idgames) {
         }
     
         $game->Game_dowload_link = $request->g_link;
-        $new_game->Gamevideo = $request->g_video;
+        $game->Gamevideo = $request->g_video;
         $game->save();
     
         // Handle tags

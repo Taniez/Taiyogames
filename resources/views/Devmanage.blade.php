@@ -86,7 +86,8 @@
                             <input type="text" class="form-control" name="g_link" value="{{$games->Game_dowload_link}}" required>
                         </div>
                         <div class="mb-3">
-                            <input type="text" name="g_video" placeholder="video Link" required>
+                            <label for="g_link" class="form-label">video Link</label>
+                            <input type="text" class="form-control" name="g_video" value="{{$games->Gamevideo}}" required>
                         </div>
                         <div class="mb-3">
                             <label for="g_tags" class="form-label">Game Tags</label>
