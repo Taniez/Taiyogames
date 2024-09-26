@@ -88,7 +88,7 @@
         <div class="w-3/4 p-6">
             <div class="grid grid-cols-3 gap-6">
                 @foreach($_Games as $game)
-                    <a href="/game">
+                    <a href="/game/{{$game->idgames}}">
                         <div class="bg-white shadow-md p-4 w-100 h-100 overflow-auto">
                         <img src="{{ asset($game->Game_preview) }}" alt="https://via.placeholder.com/150#" class="mt-2 h-75 w-100" >
                             <h3 class="font-bold text-lg mt-2">{{ $game->Game_name }}</h3>

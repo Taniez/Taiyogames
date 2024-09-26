@@ -9,7 +9,7 @@ body{
     padding:0px 15%;
     height: auto;
     /* background-image: url("/img/Teriri6.png"); */
-    background-image: linear-gradient(rgba(0, 0, 255, 0), rgba(0, 0, 0, 0.8)),url("/img/Teriri6.png");
+    background-image: linear-gradient(rgba(0, 0, 255, 0), rgba(0, 0, 0, 0.8)),url("img/Teriri7.png");
     
     background-repeat: no-repeat;
     background-position-x: -25rem;
@@ -121,8 +121,8 @@ body{
     margin:0px auto;
     padding:0px 15%;
     height: auto;
-    /* background-image: url("/img/Teriri6.png"); */
-    background-image: linear-gradient(rgba(0, 0, 255, 0), rgba(0, 0, 0, 0.8)),url("/img/Teriri6.png");
+    /* background-image: url("img/Teriri7.png"); */
+    background-image: linear-gradient(rgba(0, 0, 255, 0), rgba(0, 0, 0, 0.8)),url("{{ asset($_Games->Game_preview)}}");
     background-size: fix;
     background-repeat: no-repeat;
     background-position-x: -25rem;
