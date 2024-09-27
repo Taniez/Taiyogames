@@ -15,13 +15,7 @@
     @endguest
     @auth
     <style>
-        img {
-            width: 10rem;
-            height: 8rem;
-        }
-        .bootstrap-tags {
-            padding: 10px;
-        }
+        @import url({{asset('css/style.css')}});
     </style>
 
 
@@ -92,7 +86,7 @@
                                 </select>
                         </div>
 
-                        <div class="mb-3">
+                        <div class=" mb-3">
                             <label for="g_img" class="form-label">Game Image</label>
                             <input type="file" class="form-control" name="g_img">
                             <img src="{{ asset($games->Game_preview) }}" alt="#" class="mt-2" width="100">
@@ -142,7 +136,7 @@
             <div class="mb-3">
                 <input type="text" name="g_version" placeholder="Game Version" required>
             </div>
-            <div class="mb-3">
+            <div class="icon mb-3">
                 <input type="file" name="g_img" required>
             </div>
             <label for="g_link" class="form-label">Download Link</label>

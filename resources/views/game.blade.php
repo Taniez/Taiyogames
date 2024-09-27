@@ -28,7 +28,7 @@ body {
     </style>
 </head>
 <body>
-    <div class="shophee ">
+    <div class="ground ">
         <div class="logoGame ">
         <img src="{{ asset($_Games->Game_preview)}}" alt="logo">
         </div>
@@ -71,6 +71,9 @@ body {
             <p id='Commu_header'><b>Community</b></p>
         </div>
         <div class='pictureZone'>
+        <iframe width="350" height="350" 
+            src="https://www.youtube.com/embed/MnSzUX7kU-E"
+            title="YouTube video player" frameborder="0"allowfullscreen></iframe>                       
         @foreach($_Games->screenshots as $screenshot)
             <img src="{{ asset($screenshot->image_path) }}" width="100" alt="#">
         @endforeach   
