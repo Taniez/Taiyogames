@@ -44,7 +44,19 @@
         <div class="w-1/4 bg-gray-800 text-white p-6">
             <h3 class="text-lg font-bold mb-4">Popular Tags</h3>
             <ul>
+                <ul>
+                    @foreach ($tags as $tag)
+                        @php
+                            $cleanedTag = preg_replace('/{value:(.*?)}/', '$1', $tag->gametype_name);
+                        @endphp
+                        <li>
+                            <a href="{{ url('/search-by-tag/'.$tag->gametype_name) }}">
+                                {{ $cleanedTag }}
+                            </a>
+                        </li>
+                        @endforeach
         
+                    </ul>
 
             </ul>
 
