@@ -98,10 +98,9 @@
                     </a>
             
                     <!-- ฟอร์มสำหรับเพิ่มเกมลงใน Wishlist -->
-                    <form action="{{ route('wishlist.store') }}" method="POST">
+                    <form action="{{ route('wishlist.store') }}" method="POST" name="addwishlistform">
                         @csrf
-                        <input type="hidden" name="idgames" value="{{ $game->idgames }}">
-                        <button type="submit" class="mt-2 bg-blue-500 text-white p-2 rounded">
+                        <button type="submit" class="mt-2 bg-blue-500 text-white p-2 rounded"  >
                             Add to Wishlist
                         </button>
                     </form>
@@ -113,6 +112,7 @@
     </div>
    
 </body>
+
 </html>
 </x-app-layout>
 @endauth

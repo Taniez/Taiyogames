@@ -114,7 +114,7 @@ class Devmanage_controler extends Controller
     
         // Handle multiple screenshots
         // First, delete old screenshots
-        $existingScreenshots = screenshot::where('idgames', $game->idgames)->get();
+        $existingScreenshots = screenshot::where('idgames', $game->idgames) ->get();
         foreach ($existingScreenshots as $screenshot) {
             // Delete the file from the public folder
             $imagePath = public_path($screenshot->image_path);
