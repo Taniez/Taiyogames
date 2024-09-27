@@ -21,7 +21,10 @@ class User extends Authenticatable
     public function user_tiers(){
         return $this->hasMany(user_tier::class);  
     }
-
+    public function wishlists()
+    {
+        return $this->hasMany(Wishlist::class);
+    }
     /**
      * The attributes that are mass assignable.
      *

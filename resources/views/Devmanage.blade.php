@@ -1,3 +1,4 @@
+
 <x-app-layout>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,23 +8,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
     <!-- Tagify CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css">
-
+    @guest
+        <script>window.location.href = "{{ route('register') }}";</script>
+    @endguest
+    @auth
     <style>
-        img {
-            width: 10rem;
-            height: 8rem;
-        }
-        .bootstrap-tags {
-            padding: 10px;
-        }
+        @import url({{asset('css/style.css')}});
     </style>
+
+
 </head>
 <body>
     <h1>insert</h1>
-    
     <table  class="table table-bordered">
     <tr>
         <th>ชื่อเกม</th>
@@ -76,7 +74,19 @@
                             <label for="g_version" class="form-label">Game Version</label>
                             <input type="text" class="form-control" name="g_version" value="{{$games->version}}" required>
                         </div>
+                        
                         <div class="mb-3">
+                            <label for="g_status" class="form-label">status</label>
+                                <select class="form-select" aria-label="Default select example"  name="g_status">
+                                    <option selected>Open this select menu</option>
+                                    <option value="Released">Released</option>
+                                    <option value="In development">In development</option>
+                                    <option value="On hold">On hold</option>
+                                    <option value="Prototype">Prototype</option>
+                                </select>
+                        </div>
+
+                        <div class=" mb-3">
                             <label for="g_img" class="form-label">Game Image</label>
                             <input type="file" class="form-control" name="g_img">
                             <img src="{{ asset($games->Game_preview) }}" alt="#" class="mt-2" width="100">
@@ -86,12 +96,18 @@
                             <input type="text" class="form-control" name="g_link" value="{{$games->Game_dowload_link}}" required>
                         </div>
                         <div class="mb-3">
-                            <input type="text" name="g_video" placeholder="video Link" required>
+                            <label for="g_link" class="form-label">video Link</label>
+                            <input type="text" class="form-control" name="g_video" value="{{$games->Gamevideo}}" required>
                         </div>
+
+
                         <div class="mb-3">
                             <label for="g_tags" class="form-label">Game Tags</label>
-                            <input id="tags{{$games->idgames}}" name="g_tags" class="form-control" value="{{ implode(',', $games->gametypes->pluck('gametype_name')->toArray()) }}">
+
+                            <input id="tags{{$games->idgames}}" name="g_tags" class="form-control" value="{{  preg_replace('/{value:(.*?)}/', '$1', implode(',', $games->gametypes->pluck('gametype_name')->toArray())) }}">
                         </div>
+
+                        
                         <div class="mb-3">
                              <label for="screenshots" class="form-label">Upload Multiple Screenshots</label>
                             <input type="file" name="screenshots[]" class="form-control" multiple> <!-- multiple attribute allows multiple files -->
@@ -108,28 +124,46 @@
     <div class="container mt-3">
         <form action="/Devmanage/create" method="POST" enctype="multipart/form-data">
             @csrf
+            <label for="g_name" class="form-label">Game Name</label>
             <div class="mb-3 mt-3"> 
                 <input type="text" name="g_name" placeholder="Game Name" required>
             </div>
+            <label for="g_details" class="form-label">Game Details</label>
             <div class="mb-3">
                 <input type="text" name="g_details" placeholder="Game Details" required>
             </div>
+            <label for="g_version" class="form-label">Game Version</label>
             <div class="mb-3">
                 <input type="text" name="g_version" placeholder="Game Version" required>
             </div>
-            <div class="mb-3">
+            <div class="icon mb-3">
                 <input type="file" name="g_img" required>
             </div>
+            <label for="g_link" class="form-label">Download Link</label>
             <div class="mb-3">
                 <input type="text" name="g_link" placeholder="Download Link" required>
             </div>
+            <label for="g_video" class="form-label">video Link</label>
             <div class="mb-3">
                 <input type="text" name="g_video" placeholder="video Link" required>
             </div>
+
+            <div class="mb-3">
+            <label for="g_status" class="form-label">status</label>
+                <select class="form-select" aria-label="Default select example"  name="g_status">
+                    <option selected>Open this select menu</option>
+                    <option value="Released">Released</option>
+                    <option value="In development">In development</option>
+                    <option value="On hold">On hold</option>
+                    <option value="Prototype">Prototype</option>
+                </select>
+            </div>
+
             <div class="form-group bootstrap-tags">
                 <label for="tags">Add keywords (max 10):</label>
                 <input id="tags" name="g_tags" class="form-control" placeholder="Click to view options, type to filter or enter custom tag">
             </div>
+
             <div class="mb-3">
                 <label for="screenshots" class="form-label">Upload Multiple Screenshots</label>
                 <input type="file" name="screenshots[]" class="form-control" multiple> <!-- multiple attribute allows multiple files -->
@@ -198,3 +232,4 @@
 </html>
 
 </x-app-layout>
+@endauth

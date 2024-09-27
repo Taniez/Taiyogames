@@ -56,5 +56,10 @@
                 </x-button>
             </div>
         </form>
+        <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('login') }}">
+                        {{ __('login') }}
+                    </x-nav-link>
+                </div>
     </x-authentication-card>
 </x-guest-layout>

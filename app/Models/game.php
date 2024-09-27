@@ -36,6 +36,9 @@ class game extends Model
     }
     public function screenshots(){
         return $this->hasMany(screenshot::class, "idgames");  
-        
     }
+    public function wishlists()
+{
+    return $this->hasMany(Wishlist::class);
+}
 }
