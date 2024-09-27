@@ -35,7 +35,7 @@ body {
     <p id='version' ><b>Lastest Version : {{ $_Games->version }} {{ $_Games->updated_at }}</b></p>
     <p id="about" ><p>about {{ $_Games->Game_info }}</p></p>
     <div class='Info '>
-        <div class='infoZone '>  
+        <div class='infoZone '>
             <div class='gameInformation'>
             <p>{{ $_Games->Game_name }}</p>
                 <p id='header'><b>More information V</b></p>

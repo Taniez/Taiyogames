@@ -18,8 +18,8 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
 
-    public function user_tiers(){
-        return $this->hasMany(user_tier::class);  
+    public function user_tier(){
+        return $this->belongsTo(user_tier::class);  
     }
     public function wishlists()
     {
