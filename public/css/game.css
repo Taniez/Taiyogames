@@ -10,7 +10,6 @@ body{
     height: auto;
     /* background-image: url("/img/Teriri6.png"); */
     background-image: linear-gradient(rgba(0, 0, 255, 0), rgba(0, 0, 0, 0.8)),url("img/Teriri7.png");
-    
     background-repeat: no-repeat;
     background-position-x: -25rem;
     background-position-y: -5rem;

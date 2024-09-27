@@ -11,8 +11,10 @@
             margin:0px auto;
             padding:0px 15%;
             height: auto;
-            border: 1px solid black;
-            background-color: teal;
+            background-image: linear-gradient(rgba(0, 0, 255, 0), rgba(0, 0, 0, 0.8)),url("/img/BG_genshin.jpg");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
         }
         .profileNstat {
             display: flex;
@@ -66,8 +68,9 @@
         #BG_img {
             height: 150px;
             width: auto;
-            background-image: url("");
+            background-image: url("/img/BG_pixel.png");
             background-color: olive;
+            border-bottom: 2px solid black;
         }
         #pfp {
             background-image: url("/img/Teriri7.png");
@@ -103,7 +106,7 @@
             font-size: 16px;
         }
         .collectionZone {
-            background-color: orange;
+            background-color: white;
         }
         .navButton {
             margin-left: 25px;
@@ -147,8 +150,15 @@
         }
         .fix_seeAll{
             position: absolute;
-            right: 250px; top: 494px;
-            background-color: fuchsia;
+            right: 275px; top: 494px;
+            font-weight: bold;
+            color: grey;
+        }
+        .fix_seeAll:hover{
+            position: absolute;
+            right: 275px; top: 494px;
+            font-weight: bold;
+            color: black;
         }
         .AllUrPost {
             width: auto;
@@ -202,9 +212,9 @@
 
     <div class="collectionZone">
         <div class="navButton">
-            <button id='button'> COLLECTION </button>
-            <button id='button'> POSTING </button>
-            <button id='button'> DONATE </button>
+            <a href=""> <button id='button'> COLLECTION </button> </a>
+            <a href=""> <button id='button'> POSTING </button> </a>
+            <a href=""> <button id='button'> DONATE </button> </a>
         </div>
         <div class="AllUrCollection">
             <div class="showBox">
