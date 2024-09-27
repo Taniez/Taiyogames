@@ -22,8 +22,8 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('home') }}">
-                        {{ __('Home') }}
+                    <x-nav-link href="{{ route('wishlist.store') }}">
+                        {{ __('wishlist') }}
                     </x-nav-link>
                 </div>
             </div>

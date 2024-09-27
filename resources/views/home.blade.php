@@ -89,21 +89,15 @@
         <div class="w-3/4 p-6">
             <div class="grid grid-cols-3 gap-6">
                 @foreach($_Games as $game)
-                <div class="bg-white shadow-md p-4 w-100 h-50 overflow-auto">
-                    <!-- Link ไปที่รายละเอียดเกม -->
+                <div class="bg-white shadow-md p-4 w-100 h-100 overflow-auto">
                     <a href="/game/{{ $game->idgames }}">
                         <img src="{{ asset($game->Game_preview) }}" alt="Preview" class="mt-2 h-75 w-100">
                         <h3 class="font-bold text-lg mt-2">{{ $game->Game_name }}</h3>
                         <p class="text-gray-600">{{ $game->Game_info }}</p>
                     </a>
             
-                    <!-- ฟอร์มสำหรับเพิ่มเกมลงใน Wishlist -->
-                    <form action="{{ route('wishlist.store') }}" method="POST" name="addwishlistform">
-                        @csrf
-                        <button type="submit" class="mt-2 bg-blue-500 text-white p-2 rounded"  >
-                            Add to Wishlist
-                        </button>
-                    </form>
+                    <!-- ปุ่ม Wishlist -->
+                    <livewire:wishlist-button :gameId="$game->idgames" />
                 </div>
             @endforeach
             </div>
