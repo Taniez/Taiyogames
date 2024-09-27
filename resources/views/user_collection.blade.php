@@ -90,10 +90,31 @@
             </div>
             <div class="AllUrCollection">
                 <div class="showBox">
-                    <div class="game"><a href="#"> <img src="/img/Teriri7.png" alt=""> </a> </div>
-                    <div class="game"><a href="#"> <img src="/img/Teriri7.png" alt=""> </a> </div>
-                    <div class="game"><a href="#"> <img src="/img/Teriri7.png" alt=""> </a> </div>
-                    <div class="game"><a href="#"> <img src="/img/Teriri7.png" alt=""> </a> </div>
+
+                <div class="w-3/4 p-6">
+            <div class="grid grid-cols-3 gap-6">
+               
+                            @foreach($_Wish_list as $wishlist)
+                            <div class="bg-white shadow-md p-4 w-100 h-100 overflow-auto">
+                                <!-- Link ไปที่รายละเอียดเกม -->
+                                <a href="/game/{{ $wishlist->game->Game_name }}">
+                                    <img src="{{ asset($wishlist->game->Game_preview) }}" alt="Preview" class="mt-2 h-75 w-100">
+                                    <h3 class="font-bold text-lg mt-2">{{ $wishlist->game->Game_name }}</h3>
+                                    <p class="text-gray-600">{{ $wishlist->game->Game_info }}</p>
+                                </a>
+                                <form action="{{ route('wishlist.destroy',$wishlist->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="hidden" name="idgames" value="{{ $wishlist->game->idgames }}">
+                                    <button type="submit" class="mt-2 bg-blue-500 text-white p-2 rounded">
+                                        Remove
+                                    </button>
+                                </form> 
+                            </div>
+                            
+                        @endforeach
+                        </div>
+                    </div>
                 </div>
                 <div class="fix_seeAll">
                     <a href="" id='seeAll'>See All</a>

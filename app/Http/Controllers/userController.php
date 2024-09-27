@@ -15,7 +15,7 @@ class userController extends Controller
     // $user_ = User::whereBelongsTo($user_tier)->get();
         $user_tier = user_tier::all();
         $user_ = user::all();
-        $_Wish_list = Wishlist::find(4);
+        $_Wish_list = Wishlist::all();
         return view("user_collection", compact('user_tier','user_','_Wish_list'));
     }
     public function posting() {
