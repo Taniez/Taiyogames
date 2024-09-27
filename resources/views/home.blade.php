@@ -115,3 +115,4 @@
 </body>
 </html>
 </x-app-layout>
+@endauth
