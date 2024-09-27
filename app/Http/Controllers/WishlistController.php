@@ -10,8 +10,8 @@ class WishlistController extends Controller
     public function index()
     {
         $wishlists = auth()->user()->wishlists()->with('game')->get(); 
-        $games = game::all();
-        return view('wishlist', compact('wishlists','games'));
+        
+        return view('wishlist', compact('wishlists'));
         
        
        
