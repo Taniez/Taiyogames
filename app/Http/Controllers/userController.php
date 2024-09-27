@@ -8,6 +8,12 @@ use App\Models\User;
 class userController extends Controller
 {
     public function index() {
-        return view("User");
+        return view("user_collection");
+    }
+    public function posting() {
+        return view("user_posting");
+    }
+    public function donate() {
+        return view("user_donate");
     }
 }
