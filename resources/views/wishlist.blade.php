@@ -1,5 +1,4 @@
-
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -39,25 +38,13 @@
         </div>
         </form>
     </x-slot>
-    @guest
-    <script>window.location.href = "{{ route('register') }}";</script>
-    @endguest
-    @auth
+
     <div class="flex py-12 ">
         <!-- Sidebar -->
         <div class="w-1/4 bg-gray-800 text-white p-6">
             <h3 class="text-lg font-bold mb-4">Popular Tags</h3>
             <ul>
-            @foreach ($tags as $tag)
-                @php
-                    $cleanedTag = preg_replace('/{value:(.*?)}/', '$1', $tag->gametype_name);
-                @endphp
-                <li>
-                    <a href="{{ url('/search-by-tag/'.$tag->gametype_name) }}">
-                        {{ $cleanedTag }}
-                    </a>
-                </li>
-                @endforeach
+        
 
             </ul>
 
@@ -81,14 +68,15 @@
     
 
         <!-- Main Content -->
-        @if($_Games->isEmpty())
+        @if($wishlists->isEmpty())
         <div class="ms-5 center w-100 ">
         <p>No games found for this tag. :(</p>
         </div>
         @else
         <div class="w-3/4 p-6">
             <div class="grid grid-cols-3 gap-6">
-                @foreach($_Games as $game)
+                @foreach($wishlists as $wishlist)
+                @foreach($games as $game)
                 <div class="bg-white shadow-md p-4 w-100 h-50 overflow-auto">
                     <!-- Link ไปที่รายละเอียดเกม -->
                     <a href="/game/{{ $game->idgames }}">
@@ -96,22 +84,23 @@
                         <h3 class="font-bold text-lg mt-2">{{ $game->Game_name }}</h3>
                         <p class="text-gray-600">{{ $game->Game_info }}</p>
                     </a>
-            
-                    <!-- ฟอร์มสำหรับเพิ่มเกมลงใน Wishlist -->
-                    <form action="{{ route('wishlist.store') }}" method="POST">
+                    <form action="{{ route('wishlist.destroy',$wishlist->id) }}" method="POST">
                         @csrf
+                        @method('DELETE')
                         <input type="hidden" name="idgames" value="{{ $game->idgames }}">
                         <button type="submit" class="mt-2 bg-blue-500 text-white p-2 rounded">
-                            Add to Wishlist
+                            Remove
                         </button>
                     </form>
                 </div>
+                @endforeach
             @endforeach
             </div>
         </div>
         @endif
     </div>
-   
+    
+
 </body>
 </html>
 </x-app-layout>
