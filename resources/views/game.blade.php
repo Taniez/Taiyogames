@@ -67,8 +67,6 @@ body {
                 <p><a href="">swedrfghjkldfghjkldrfgthyju</a></p>
                 <p><a href="">swedrfghjkldfghjkldrfgthyju</a></p>
             </div>
-
-            <p id='Commu_header'><b>Community</b></p>
         </div>
         <div class='pictureZone'>
         <iframe width="350" height="350" 
@@ -78,6 +76,7 @@ body {
             <img src="{{ asset($screenshot->image_path) }}" width="100" alt="#">
         @endforeach   
         </div>
+        
     </div>
     <h3>Community</h3>
     </div>  
