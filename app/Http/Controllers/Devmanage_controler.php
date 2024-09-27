@@ -23,6 +23,7 @@ class Devmanage_controler extends Controller
         $new_game->Game_name = $request->g_name;
         $new_game->Game_info = $request->g_details;
         $new_game->version = $request->g_version;
+        $new_game->Status = $request->g_status;
     
         // Handle image upload
         if ($request->hasFile('g_img') && $request->file('g_img')->isValid()) {
@@ -69,7 +70,7 @@ class Devmanage_controler extends Controller
 
     
 
-public function update(Request $request, $idgames) {
+    public function update(Request $request, $idgames) {
         $game = game::findOrFail($idgames);
     
         // Validate the form data
@@ -81,6 +82,7 @@ public function update(Request $request, $idgames) {
         $game->Game_name = $request->g_name;
         $game->Game_info = $request->g_details;
         $game->version = $request->g_version;
+        $new_game->Status = $request->g_status;
     
         // Handle image upload
         if ($request->hasFile('g_img') && $request->file('g_img')->isValid()) {
@@ -94,6 +96,10 @@ public function update(Request $request, $idgames) {
         $game->save();
     
         // Handle tags
+        // First, detach all existing tags
+        $game->gametypes()->detach();
+    
+        // Process and attach new tags
         $tags = explode(',', $request->g_tags);
         $cleanTags = array_map(function($tag) {
             return trim(str_replace(['[', ']', '"'], '', $tag));}, $tags);
@@ -105,20 +111,37 @@ public function update(Request $request, $idgames) {
     
         // Sync the updated tags
         $game->gametypes()->sync($tagIds);
-
-         // Handle multiple screenshots
+    
+        // Handle multiple screenshots
+        // First, delete old screenshots
+        $existingScreenshots = screenshot::where('idgames', $game->idgames)->get();
+        foreach ($existingScreenshots as $screenshot) {
+            // Delete the file from the public folder
+            $imagePath = public_path($screenshot->image_path);
+            if (file_exists($imagePath)) {
+                unlink($imagePath);  // Delete the file from the directory
+            }
+            // Delete the screenshot from the database
+            $screenshot->delete();
+        }
+    
+        // Now, handle new screenshots
         if($request->hasFile('screenshots')){
             foreach ($request->file('screenshots') as $screenshot) {
                 $screenshotName = time() . rand(1, 1000) . '.' . $screenshot->extension();
                 $screenshot->move(public_path('imgscreenshot'), $screenshotName);
-
-            // Save screenshot path to the database
-            screenshot::create([
-                'idgames' => $game->idgames,
-                'image_path' => 'imgscreenshot/' . $screenshotName]);}}
+    
+                // Save screenshot path to the database
+                screenshot::create([
+                    'idgames' => $game->idgames,
+                    'image_path' => 'imgscreenshot/' . $screenshotName
+                ]);
+            }
+        }
     
         return redirect('/Devmanage');
     }
+    
 
 
     public function delete($idgames){

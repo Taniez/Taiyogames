@@ -39,7 +39,10 @@
         </div>
         </form>
     </x-slot>
-
+    @guest
+    <script>window.location.href = "{{ route('register') }}";</script>
+    @endguest
+    @auth
     <div class="flex py-12 ">
         <!-- Sidebar -->
         <div class="w-1/4 bg-gray-800 text-white p-6">
@@ -102,5 +105,6 @@
     </div>
     
 </x-app-layout>
+@endauth
 </body>
 </html>
