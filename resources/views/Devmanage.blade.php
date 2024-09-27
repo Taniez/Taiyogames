@@ -122,6 +122,7 @@
     @endforeach
 
     <div class="container mt-3">
+        <div class="form-container">
         <form action="/Devmanage/create" method="POST" enctype="multipart/form-data">
             @csrf
             <label for="g_name" class="form-label">Game Name</label>
@@ -136,18 +137,10 @@
             <div class="mb-3">
                 <input type="text" name="g_version" placeholder="Game Version" required>
             </div>
-            <div class="icon mb-3">
-                <input type="file" name="g_img" required>
-            </div>
             <label for="g_link" class="form-label">Download Link</label>
             <div class="mb-3">
-                <input type="text" name="g_link" placeholder="Download Link" required>
+                <input type="text" name="g_link" placeholder="Download Link" >
             </div>
-            <label for="g_video" class="form-label">video Link</label>
-            <div class="mb-3">
-                <input type="text" name="g_video" placeholder="video Link" required>
-            </div>
-
             <div class="mb-3">
             <label for="g_status" class="form-label">status</label>
                 <select class="form-select" aria-label="Default select example"  name="g_status">
@@ -158,6 +151,7 @@
                     <option value="Prototype">Prototype</option>
                 </select>
             </div>
+            
 
             <div class="form-group bootstrap-tags">
                 <label for="tags">Add keywords (max 10):</label>
@@ -168,7 +162,24 @@
                 <label for="screenshots" class="form-label">Upload Multiple Screenshots</label>
                 <input type="file" name="screenshots[]" class="form-control" multiple> <!-- multiple attribute allows multiple files -->
             </div>
+        
             <button type="submit" class="btn btn-warning mb-3">Submit</button>
+            </div>
+        <div class="screen-container">
+            <div class="icon mb-3">
+            <label for="images" class="drop-container" id="dropcontainer">
+                <span class="drop-title">Drop files here</span>or
+                <input type="file" name="g_img" id="g_img" required>
+            </label>
+            </div>
+            <label for="g_video" class="form-label">video Link</label>
+            <div class="mb-3">
+                <input type="text" name="g_video" placeholder="video Link" >
+            </div>
+        </div>
+
+
+
         </form>
     </div>
     
@@ -196,7 +207,7 @@
     var input = document.querySelector('#tags');
     var tagify = new Tagify(input, {
         whitelist: [
-            "adult", "erotic", "2d", "horror", "pixel-art", "singleplayer", "adventure", "3d", "short", "retro", "visual-novel"
+            "adult", "erotic", "2d", "horror", "pixel-art", "singleplayer", "adventure", "3d", "short", "retro", "visual-novel","English", "japanese", "chinese" 
         ],
         maxTags: 10,
         dropdown: {
@@ -214,9 +225,9 @@
             if (inputInModal && !inputInModal.classList.contains('tagify-initialized')) {
                 new Tagify(inputInModal, {
                     whitelist: [
-                        "adult", "erotic", "2d", "horror", "pixel-art", "singleplayer", "adventure", "3d", "short", "retro", "visual-novel"
+                        "adult", "erotic", "2d", "horror", "pixel-art", "singleplayer", "adventure", "3d", "short", "retro", "visual-novel","English", "japanese", "chinese" 
                     ],
-                    maxTags: 10,
+                    maxTags: 12,
                     dropdown: {
                         maxItems: 20,
                         classname: "tags-look",
@@ -228,8 +239,32 @@
             }
         });
     });
+
+
+
+const dropContainer = document.getElementById("dropcontainer")
+const fileInput = document.getElementById("g_img")
+
+  dropContainer.addEventListener("dragover", (e) => {
+    // prevent default to allow drop
+    e.preventDefault()
+  }, false)
+
+  dropContainer.addEventListener("dragenter", () => {
+    dropContainer.classList.add("drag-active")
+  })
+
+  dropContainer.addEventListener("dragleave", () => {
+    dropContainer.classList.remove("drag-active")
+  })
+
+  dropContainer.addEventListener("drop", (e) => {
+    e.preventDefault()
+    dropContainer.classList.remove("drag-active")
+    fileInput.files = e.dataTransfer.files
+  })
 </script>
 </html>
 
 </x-app-layout>
-@endauth
+    @endauth
