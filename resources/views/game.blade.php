@@ -5,31 +5,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Document</title>
-    <style>
+    
+    @guest
+    <script>window.location.href = "{{ route('register') }}";</script>
+    @endguest
+
+
+    @if ($_Games)
+   <style>
         @import url({{asset('css/game.css')}});
+body {
+    margin: 0px auto;
+    padding: 0px 15%;
+    height: auto;
+    background-image: linear-gradient(rgba(0, 0, 255, 0), rgba(0, 0, 0, 0.8)), url("{{ asset('img/a.png') }}");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
     </style>
 </head>
 <body>
-    @if ($_Games)
-    <div class="bg-black bg-opacity-60">
+    <div class="ground ">
         <div class="logoGame ">
         <img src="{{ asset($_Games->Game_preview)}}" alt="logo">
-    </div>
+        </div>
     <p id='version' ><b>Lastest Version : {{ $_Games->version }} {{ $_Games->updated_at }}</b></p>
-    <p id="about" ><p>{{ $_Games->Game_info }}</p></p>
-    <div class='Info ' >
+    <p id="about" ><p>about {{ $_Games->Game_info }}</p></p>
+    <div class='Info '>
         <div class='infoZone '>  
             <div class='gameInformation'>
             <p>{{ $_Games->Game_name }}</p>
-            <p>{{ $_Games->Game_info }}</p>
                 <p id='header'><b>More information V</b></p>
-                <p><b>Update</b></p>
                 <p><b>Status</b> inprogress</p>
-                <p><b>Platforms</b> xxx, xxx</p>
                 <p><b>Rating</b> xxx</p>
-                <p><b>Genre</b> xxx</p>
-                <p><b>Tags</b> xxx, xxx, xxx, xxx, xxx, xxx</p>
+                <p><b>Tags</b>:
+                @foreach($_Games->gametypes as $gametype)
+                {{preg_replace('/{value:(.*?)}/', '$1', $gametype ->gametype_name)}},
+                @endforeach          
+            </p>
                 <p><b>Language</b> xxx, xxx</p>
             </div>
 
@@ -39,10 +55,9 @@
             <div class="downloadZone">
                 <p id='header'><b>Download</b></p>
                 <div class='downloadGame'>
-                    <div onclick="window.location.href='https://youtu.be/dQw4w9WgXcQ?si=MVb1-A0gu3qBBpFS'">
+                    <div onclick="window.location.href='{{ $_Games->Game_dowload_link }}'">
                         <button id="play_btn">Download</button>
                     </div>
-                    <p id="file_name">Teriri_My_love-pc.zip</p>
                 </div>
             </div>
 
@@ -55,19 +70,19 @@
 
             <p id='Commu_header'><b>Community</b></p>
         </div>
-
         <div class='pictureZone'>
-            <img src="img/Teriri1.jpg" alt="">
-            <img src="img/Teriri2.jpg" alt="">
-            <img src="img/Teriri3.jpg" alt="">
-            <img src="img/Teriri4.jpg" alt="">
-            <img src="img/Teriri5.jpg" alt="">
+        <iframe width="350" height="350" 
+            src="https://www.youtube.com/embed/MnSzUX7kU-E"
+            title="YouTube video player" frameborder="0"allowfullscreen></iframe>                       
+        @foreach($_Games->screenshots as $screenshot)
+            <img src="{{ asset($screenshot->image_path) }}" width="100" alt="#">
+        @endforeach   
         </div>
     </div>
     <h3>Community</h3>
-</div>
+    </div>  
 @else
-                <p>No game found.</p>
+        <p>No game found.</p>
 
 @endif
 </body>

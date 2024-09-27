@@ -4,18 +4,7 @@ p{
 img{
     width: 350px;
 }
-body{
-    margin:0px auto;
-    padding:0px 15%;
-    height: auto;
-    /* background-image: url("/img/Teriri6.png"); */
-    background-image: linear-gradient(rgba(0, 0, 255, 0), rgba(0, 0, 0, 0.8)),url("img/Teriri7.png");
-    
-    background-repeat: no-repeat;
-    background-position-x: -25rem;
-    background-position-y: -5rem;
-    background-color: black;
-}
+
 .logoGame{
     display: flex;
     justify-content: center;
@@ -42,8 +31,6 @@ p{
 
 .gameInformation{
     width: 600px;
-    border: 1px solid black;
-    background: rgba(0, 0, 0, 0.5);
     padding-left: 50px;
     margin-bottom: 35px;
 }
@@ -54,8 +41,7 @@ p{
 
 .gameLogs{
     width: 400px;
-    border: 1px solid black;
-    background: rgba(0, 0, 0, 0.25);
+
     padding-left: 50px;
     margin-bottom: 35px;
 }
@@ -117,23 +103,11 @@ p{
 img{
     width: 350px;
 }
-body{
-    margin:0px auto;
-    padding:0px 15%;
-    height: auto;
-    /* background-image: url("img/Teriri7.png"); */
-    background-image: linear-gradient(rgba(0, 0, 255, 0), rgba(0, 0, 0, 0.8)),url("{{ asset($_Games->Game_preview)}}");
-    background-size: fix;
-    background-repeat: no-repeat;
-    background-position-x: -25rem;
-    background-position-y: -5rem;
-    background-color: black;
-}
 .logoGame{
     display: flex;
     justify-content: center;
     margin-bottom: 70px;
-    margin-top: 30px;
+    
 }
 .logoGame img{
     width: 250px;
@@ -152,25 +126,13 @@ p{
     margin-bottom: 35px;
 }
 
-.gameInformation{
-    width: 600px;
-    border: 1px solid black;
-    background: rgba(0, 0, 0, 0.5);
-    padding-left: 50px;
-    margin-bottom: 35px;
-}
+
 
 #header{
     text-indent: -1em;
 }
 
-.gameLogs{
-    width: 400px;
-    border: 1px solid black;
-    background: rgba(0, 0, 0, 0.25);
-    padding-left: 50px;
-    margin-bottom: 35px;
-}
+
 
 .Info{
     padding: 0 15px;
@@ -221,4 +183,10 @@ p{
     margin-bottom: 35px;
     padding-left: 50px;
     text-indent: -1em;
+}
+.ground{
+    background: rgba(0, 0, 0, 0.70);
+}
+iframe{
+    margin-bottom: 1rem;
 }
