@@ -15,11 +15,14 @@ class userController extends Controller
     // $user_ = User::whereBelongsTo($user_tier)->get();
         $user_tier = user_tier::all();
         $user_ = user::all();
-        $_Wish_list = Wishlist::all();
+        $_Wish_list = Wishlist::take(4)->get();
         return view("user_collection", compact('user_tier','user_','_Wish_list'));
     }
     public function posting() {
-        return view("user_posting");
+        $user_tier = user_tier::all();
+        $user_ = user::all();
+        $_Wish_list = Wishlist::take(4)->get();
+        return view("user_posting", compact('user_tier','user_','_Wish_list'));
     }
     public function donate() {
         return view("user_donate");

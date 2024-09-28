@@ -21,9 +21,11 @@ class User extends Authenticatable
     public function user_tier(){
         return $this->belongsTo(user_tier::class);  
     }
-    public function wishlists()
-    {
+    public function wishlists(){
         return $this->hasMany(Wishlist::class);
+    }
+    public function games(){
+        return $this->belongsToMany(game::class);
     }
     /**
      * The attributes that are mass assignable.

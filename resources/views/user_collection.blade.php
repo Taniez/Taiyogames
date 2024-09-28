@@ -84,16 +84,15 @@
 
         <div class="collectionZone">
             <div class="navButton">
-                <a href=""> <button id='button'> COLLECTION </button> </a>
-                <a href=""> <button id='button'> POSTING </button> </a>
-                <a href=""> <button id='button'> DONATE </button> </a>
+                <a href="/user/collection"> <button id='button'> COLLECTION </button> </a>
+                <a href="/user/posting"> <button id='button'> POSTING </button> </a>
+                <a href="/user/donate"> <button id='button'> DONATE </button> </a>
             </div>
             <div class="AllUrCollection">
                 <div class="showBox">
 
-                <div class="w-3/4 p-6">
-            <div class="grid grid-cols-3 gap-6">
-               
+                <div class="w-4/4 p-6">
+            <div class="grid grid-cols-4 gap-6">
                             @foreach($_Wish_list as $wishlist)
                             <div class="bg-white shadow-md p-4 w-100 h-100 overflow-auto">
                                 <!-- Link ไปที่รายละเอียดเกม -->
