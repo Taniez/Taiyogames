@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('games', function (Blueprint $table) {
             $table->id('idgames');
             $table->string("Game_name");
-            $table->string("Game_info");
-            $table->string("version");
+            $table->string("Game_info")->nullable();
+            $table->string("version")->nullable();
             $table->string("Game_preview")->nullable();
-            $table->string("Game_dowload_link",1024); 
+            $table->string("Game_dowload_link",1024)->nullable(); 
+            $table->string("Gamevideo",1024)->nullable(); 
+            $table->string("Status")->nullable();  
             $table->softDeletes();
             $table->timestamps();
         });

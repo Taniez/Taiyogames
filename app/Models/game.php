@@ -34,4 +34,14 @@ class game extends Model
         return $this->hasMany(gamerate::class, "idgames");  
         
     }
+    public function screenshots(){
+        return $this->hasMany(screenshot::class, "idgames");  
+    }
+    public function wishlists()
+{
+    return $this->hasMany(Wishlist::class);
+}
+    public function users(){
+        return $this->belongsToMany(User::class);
+    }
 }

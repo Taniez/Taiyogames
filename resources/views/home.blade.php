@@ -39,14 +39,24 @@
         </div>
         </form>
     </x-slot>
-
+    @guest
+    <script>window.location.href = "{{ route('register') }}";</script>
+    @endguest
+    @auth
     <div class="flex py-12 ">
         <!-- Sidebar -->
         <div class="w-1/4 bg-gray-800 text-white p-6">
             <h3 class="text-lg font-bold mb-4">Popular Tags</h3>
             <ul>
-               @foreach ($tags as $tag)
-                    <li><a href="{{ url('/search-by-tag/'.$tag->gametype_name) }}">{{ $tag->gametype_name }}</a></li>
+            @foreach ($tags as $tag)
+                @php
+                    $cleanedTag = preg_replace('/{value:(.*?)}/', '$1', $tag->gametype_name);
+                @endphp
+                <li>
+                    <a href="{{ url('/search-by-tag/'.$tag->gametype_name) }}">
+                        {{ $cleanedTag }}
+                    </a>
+                </li>
                 @endforeach
 
             </ul>
@@ -57,7 +67,6 @@
             <ul class="space-y-2">
                 <li>Games</li>
                 <li>Tools</li>
-                <li>Mod</li>
             </ul>
 
             <h3 class="text-lg font-bold mt-8 mb-4">Games by Price</h3>
@@ -66,8 +75,10 @@
                 <li>Free Game</li>
                 <li>With Demo</li>
                 <li>$5 or less</li>
+                <p>Tags:</p>
             </ul>
         </div>
+    
 
         <!-- Main Content -->
         @if($_Games->isEmpty())
@@ -78,19 +89,24 @@
         <div class="w-3/4 p-6">
             <div class="grid grid-cols-3 gap-6">
                 @foreach($_Games as $game)
-                    <a href="/game">
-                        <div class="bg-white shadow-md p-4 w-100 h-100 overflow-auto">
-                        <img src="{{ asset($game->Game_preview) }}" alt="https://via.placeholder.com/150#" class="mt-2 h-75 w-100" >
-                            <h3 class="font-bold text-lg mt-2">{{ $game->Game_name }}</h3>
-                            <p class="text-gray-600">{{$game->Game_info}}</p>
-                        </div>
-                        </a>
-                 @endforeach
+                <div class="bg-white shadow-md p-4 w-100 h-100 overflow-auto">
+                    <a href="/game/{{ $game->idgames }}">
+                        <img src="{{ asset($game->Game_preview) }}" alt="Preview" class="mt-2 h-75 w-100">
+                        <h3 class="font-bold text-lg mt-2">{{ $game->Game_name }}</h3>
+                        <p class="text-gray-600">{{ $game->Game_info }}</p>
+                    </a>
+            
+                    <!-- ปุ่ม Wishlist -->
+                    <livewire:wishlist-button :gameId="$game->idgames" />
+                </div>
+            @endforeach
             </div>
         </div>
         @endif
     </div>
-    
-</x-app-layout>
+   
 </body>
+
 </html>
+</x-app-layout>
+@endauth
