@@ -1,0 +1,50 @@
+body{
+    width: 100%;
+}
+
+.container{
+    background-color: beige;
+
+}
+.container .head p{
+    display: inline;
+    margin-right: 30px;
+}
+.container .head{
+    margin-bottom: 25px;
+    padding: 0% 2%;
+}
+.content b{
+    color: rgb(255, 0, 0);
+    font-size: larger;
+    background-color: beige;
+}
+.content .box {
+    border-bottom: 1px;
+    border-style: solid;
+    margin: 5px 0 5px 0px;
+}
+
+.content{
+    margin: 5px 0 5px 0px;
+    padding: 0% 2%;
+}
+.content span {
+    color: black;
+    font-weight:lighter;
+    text-align: right;
+}
+.grouph{
+    background-color: rgb(207, 204, 8);
+    margin-bottom: 30px;
+    margin-top: 20px;
+    padding-left: 10px;
+}
+.topic{
+    padding: 5px 0 5px 0 ;
+
+}
+.inline{
+    display: flex;
+    justify-content: space-between;
+}

@@ -8,6 +8,10 @@ use App\Http\Controllers\gamecontroller;
 use App\Http\Controllers\usercontroller;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\update_password;
+use App\Http\Controllers\Communitycontroller;
+use App\Http\Controllers\Developercontroller;
+use App\Http\Controllers\Dashboardcontroller;
+use App\Http\Controllers\Donatecontroller;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -51,3 +55,7 @@ Route::middleware([
 Route::get('/admin', [adminController::class, "index"]);
 Route::get('/game', [gameController::class, "index"]);
 Route::get('/user', [userController::class, "index"]);
+Route::get('/community',[Communitycontroller::class, "index"]);
+Route::get('/developer',[Developercontroller::class,"index"]);
+Route::get('/dashboard',[Dashboardcontroller::class,"index"]);
+Route::get('/donate',[Donatecontroller::class,"index"]);
