@@ -20,7 +20,7 @@ body {
     margin: 0px auto;
     padding: 0px 15%;
     height: auto;
-    background-image: linear-gradient(rgba(0, 0, 255, 0), rgba(0, 0, 0, 0.8)), url("{{ asset('img/a.png') }}");
+    background-image: linear-gradient(rgba(0, 0, 255, 0), rgba(0, 0, 0, 0.8)), url("{{ asset($_Games->Game_preview)}}");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -35,7 +35,7 @@ body {
     <p id='version' ><b>Lastest Version : {{ $_Games->version }} {{ $_Games->updated_at }}</b></p>
     <p id="about" ><p>about {{ $_Games->Game_info }}</p></p>
     <div class='Info '>
-        <div class='infoZone '>  
+        <div class='infoZone '>
             <div class='gameInformation'>
             <p>{{ $_Games->Game_name }}</p>
                 <p id='header'><b>More information V</b></p>
@@ -46,7 +46,6 @@ body {
                 {{preg_replace('/{value:(.*?)}/', '$1', $gametype ->gametype_name)}},
                 @endforeach          
             </p>
-                <p><b>Language</b> xxx, xxx</p>
             </div>
 
             <div class='Play_demo' onclick="window.location.href='https://youtu.be/dQw4w9WgXcQ?si=MVb1-A0gu3qBBpFS'">
@@ -68,10 +67,7 @@ body {
                 <p><a href="">swedrfghjkldfghjkldrfgthyju</a></p>
             </div>
         </div>
-        <div class='pictureZone'>
-        <iframe width="350" height="350" 
-            src="https://www.youtube.com/embed/MnSzUX7kU-E"
-            title="YouTube video player" frameborder="0"allowfullscreen></iframe>                       
+        <div class='pictureZone'>              
         @foreach($_Games->screenshots as $screenshot)
             <img src="{{ asset($screenshot->image_path) }}" width="100" alt="#">
         @endforeach   

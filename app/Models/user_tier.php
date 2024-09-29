@@ -7,11 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class user_tier extends Model
+
 {
+    protected $primaryKey = 'id_user_tier';
     use HasFactory;
     use SoftDeletes;
 
-    public function User(){
-        return $this->belongsTo(User::class);  
+    public function Users(){
+        return $this->hasMany(User::class);
     }
 }

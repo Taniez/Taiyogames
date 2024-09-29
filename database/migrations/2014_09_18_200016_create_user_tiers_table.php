@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string("user_tier_name")->default('เล็กมาก');;
             $table->timestamps();
             $table->softDeletes();
-         });
+        });
 
-         DB::table('user_tiers')->insert([
+        DB::table('user_tiers')->insert([
             ['id_user_tier' => 1, 'user_tier_name' => 'ทาส'],
             ['id_user_tier' => 2, 'user_tier_name' => 'คนใช้เเรงงาน'],
             ['id_user_tier' => 3, 'user_tier_name' => 'ใหญ่มากๆ'],

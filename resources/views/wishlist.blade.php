@@ -103,7 +103,7 @@
                         <button type="submit" class="mt-2 bg-blue-500 text-white p-2 rounded">
                             Remove
                         </button>
-                    </form>
+                    </form> 
                 </div>
                 
             @endforeach

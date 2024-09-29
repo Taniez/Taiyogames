@@ -29,7 +29,7 @@
             background-color: olive;
             border-bottom: 2px solid black;
         }
-        #pfp img{
+        #pfp {
             background-image: url("/img/Teriri7.png");
             background-color: grey;
             width: 217px;
@@ -89,40 +89,14 @@
                 <a href="/user/donate"> <button id='button'> DONATE </button> </a>
             </div>
             <div class="AllUrCollection">
-                <div class="showBox">
-
-                <div class="w-4/4 p-6">
-            <div class="grid grid-cols-4 gap-6">
-                            @foreach($_Wish_list as $wishlist)
-                            <div class="bg-white shadow-md p-4 w-100 h-100 overflow-auto">
-                                <!-- Link ไปที่รายละเอียดเกม -->
-                                <a href="/game/{{ $wishlist->game->Game_name }}">
-                                    <img src="{{ asset($wishlist->game->Game_preview) }}" alt="Preview" class="mt-2 h-75 w-100">
-                                    <h3 class="font-bold text-lg mt-2">{{ $wishlist->game->Game_name }}</h3>
-                                    <p class="text-gray-600">{{ $wishlist->game->Game_info }}</p>
-                                </a>
-                                <form action="{{ route('wishlist.destroy',$wishlist->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <input type="hidden" name="idgames" value="{{ $wishlist->game->idgames }}">
-                                    <button type="submit" class="mt-2 bg-blue-500 text-white p-2 rounded">
-                                        Remove
-                                    </button>
-                                </form> 
-                            </div>
-                            
-                        @endforeach
-                        </div>
-                    </div>
-                </div>
                 <div class="fix_seeAll">
                     <a href="" id='seeAll'>See All</a>
                 </div>
             <div class="AllUrPost">
                 <div>Homu (waiting for code)</div>
-            </div>
-            <div class="AllUrPost">
-                <div>Homu (waiting for code)</div>
+                @foreach($_Wish_list as $wishlist)
+                    <p>1</p>
+                @endforeach
             </div>
         </div>
     </div>
