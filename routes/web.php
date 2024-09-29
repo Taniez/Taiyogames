@@ -61,6 +61,6 @@ Route::middleware([
 
 Route::get('/admin', [adminController::class, "index"]);
 Route::get('/game', [gameController::class, "index"]);
-Route::get('/user/collection', [userController::class, "index"]);
+Route::get('/user/collection', [userController::class, "index"])->name('profile.user');
 Route::get('/user/posting', [userController::class, "posting"]);
 Route::get('/user/donate', [userController::class, "donate"]);

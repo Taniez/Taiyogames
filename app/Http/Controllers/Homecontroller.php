@@ -6,13 +6,22 @@ use Illuminate\Http\Request;
 use App\Models\game;
 use App\Models\admin;
 use App\Models\gametype;
-
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 class Homecontroller extends Controller
 {
     public function index() {
+        if(Auth::id())
+        {
+            $usertype=auth()->user()->usetype;
+            
+            if($usertype=='admin'){
+                return view('dashboard');
+            }
+        }
         $tags = gametype::all();
         $_Games = game::with('gametypes')->get(); // ดึงข้อมูลเกมพร้อมประเภทของเกม
-         
+        
 
         return view("home", compact('_Games','tags'));
     }

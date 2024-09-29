@@ -72,7 +72,7 @@
             background-color: olive;
             border-bottom: 2px solid black;
         }
-        #pfp {
+        #pfp img{
             background-image: url("/img/Teriri7.png");
             background-color: grey;
             width: 217px;
@@ -184,7 +184,7 @@
         <div class="group1">
             <div class="toSetting">
                 <a href="{{ url('settings') }}">
-                    <div id='pfp'></div>
+                    <div id='pfp'><img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" /></div>
                 </a>
                 <div class="middle">
                     <div class="setting">Edit</div>
