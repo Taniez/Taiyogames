@@ -1,4 +1,6 @@
 <?php
+
+use App\Models\admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Devmanage_controler;
@@ -9,6 +11,8 @@ use App\Http\Controllers\usercontroller;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\update_password;
 use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\guestController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,7 +37,14 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
 });
 
+Route::get('/guest', [guestController::class, 'index']);
+Route::get('/guest/serch', [guestController::class,'guestserch']);
+Route::get('/guest/search-by-tag/{tag}', [guestController::class, 'guestsearchByTag']);
+
+
+
 Route::get('/home', [Homecontroller::class,'index']);
+Route::get('/admin', [Homecontroller::class,'in']);
 Route::get('/home/serch', [Homecontroller::class,'serch']);
 Route::get('/search-by-tag/{tag}', [Homecontroller::class, 'searchByTag']);
 Route::get('/settings', [Settingcontroller::class, 'show'])->name('profile.Setting');
@@ -59,10 +70,18 @@ Route::middleware([
         return view('home');})->name('dashboard');
 });
 
-Route::get('/admin', [adminController::class, "index"]);
+Route::get('/admin', [adminController::class,"index","in"]);
 Route::get('/game', [gameController::class, "index"]);
 Route::get('/user/collection/{userID}', [userController::class, "index"])->name('profile.user');
 Route::get('/user/posting/{userID}', [userController::class, "posting"]);
 Route::get('/user/donate', [userController::class, "donate"]);
 Route::get('/user/mygame', [userController::class, "mygame"])->name("mygame");
 Route::post('/addComment', [userController::class, "add_comment"]);
+Route::middleware('admin')->group(function () {
+    Route::get('/admin/adminlogin', [adminController::class, 'login'])->name('admin.login');
+    Route::get('/admin/login', [adminController::class, 'showLoginForm'])->name('admin.login');
+Route::post('/admin/login', [adminController::class, 'login'])->name('admin.login.submit');
+Route::get('/admin/login', [adminController::class, 'showLoginForm'])->name('admin.login');
+// POST route to process the login form submission
+Route::post('/admin/login', [adminController::class, 'login'])->name('admin.login.submit');
+});

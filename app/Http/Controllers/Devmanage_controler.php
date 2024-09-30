@@ -5,6 +5,8 @@ use App\Models\screenshot;
 use Illuminate\Http\Request;
 use App\Models\gametype;
 use App\Models\game;
+use App\Models\Auth;
+use App\Models\developer_log;
 class Devmanage_controler extends Controller
 {
     public function index(){
@@ -76,6 +78,7 @@ class Devmanage_controler extends Controller
 
     public function update(Request $request, $idgames) {
         $game = game::findOrFail($idgames);
+        
     
         // Validate the form data
         $request->validate([
@@ -86,7 +89,7 @@ class Devmanage_controler extends Controller
         $game->Game_name = $request->g_name;
         $game->Game_info = $request->g_details;
         $game->version = $request->g_version;
-        $new_game->Status = $request->g_status;
+        $game->Status = $request->g_status;
     
         // Handle image upload
         if ($request->hasFile('g_img') && $request->file('g_img')->isValid()) {
@@ -99,6 +102,16 @@ class Devmanage_controler extends Controller
         $game->Gamevideo = $request->g_video;
         $game->save();
     
+        $devlogs =  new developer_log;
+        $devlogs->idgames = $game->idgames;
+        $devlogs->user_id =  $request->huser_id;
+        $devlogs->topic = $request->devtopic;
+        $devlogs->detail = $request->devdetail;
+
+        $devlogs->save();
+
+
+
         // Handle tags
         // First, detach all existing tags
         $game->gametypes()->detach();

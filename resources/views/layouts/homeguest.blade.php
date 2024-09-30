@@ -15,8 +15,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 
-        <div class="min-h-screen  bg-opacity-60">
-            
+       
 
         <!-- Styles -->
         <style>
@@ -25,8 +24,14 @@
             }
         </style>
     </head>
+    
     <body>
-        @if (isset($header))
+        
+     <div class="min-h-screen  bg-opacity-60">
+            @livewire('nav-guest')
+    
+    
+    @if (isset($header))
         <header class="bg-white shadow">
             <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                 {{ $header }}

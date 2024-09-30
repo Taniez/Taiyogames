@@ -25,6 +25,10 @@ body {
     background-position: center;
     background-size: cover;
 }
+
+img{
+    width: 60px;
+}
     </style>
 </head>
 <body>
