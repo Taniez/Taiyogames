@@ -16,6 +16,9 @@
     @auth
     <style>
         @import url({{asset('css/style.css')}});
+
+        
+        
     </style>
 
 

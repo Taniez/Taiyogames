@@ -5,6 +5,11 @@
         </h2>
     </x-slot>
 
+
+     @guest
+    <script>window.location.href = "{{ route('register') }}";</script>
+    @endguest
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">

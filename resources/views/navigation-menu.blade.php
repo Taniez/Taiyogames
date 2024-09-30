@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('home') }}">
-                        <img width="100px" src="{{asset('/img/Taiyo_pfp.png')}}"style="">
+                        <img  src="{{asset('/img/Taiyo_pfp.png')}}"style=" width:60px;height:60px;">
                     </a>
                 </div>
 
@@ -106,7 +106,7 @@
                                 {{ __('Manage Account') }}
                             </div>
 
-                            <x-dropdown-link href="{{ route('profile.user') }}">
+                            <x-dropdown-link href="/user/collection/{{ Auth::user()->id }}">
                                 {{ __('Profile') }}
                             </x-dropdown-link>
                             

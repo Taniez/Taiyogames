@@ -12,7 +12,7 @@ use App\Http\Controllers\adminController;
 use App\Http\Controllers\update_password;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\guestController;
-use App\Http\Controllers\AdminLoginController;
+use App\Http\Controllers\Update_username;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,7 +41,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 Route::get('/guest', [guestController::class, 'index']);
 Route::get('/guest/serch', [guestController::class,'guestserch']);
 Route::get('/guest/search-by-tag/{tag}', [guestController::class, 'guestsearchByTag']);
-
+Route::post('/setting/profile-information/update', [Update_username::class, 'updateProfileInformation'])->name('user-profile-information.update');
 
 
 Route::get('/home', [Homecontroller::class,'index']);
@@ -73,8 +73,8 @@ Route::middleware([
 
 Route::get('/admin', [adminController::class,"index","in"]);
 Route::get('/game', [gameController::class, "index"]);
-Route::get('/user/collection', [userController::class, "index"])->name('profile.user');
-Route::get('/user/posting', [userController::class, "posting"]);
+Route::get('/user/collection/{userID}', [userController::class, "index"])->name('profile.user');
+Route::get('/user/posting/{userID}', [userController::class, "posting"]);
 Route::get('/user/donate', [userController::class, "donate"]);
 Route::get('/user/mygame', [userController::class, "mygame"])->name("mygame");
 Route::post('/addComment', [userController::class, "add_comment"]);
