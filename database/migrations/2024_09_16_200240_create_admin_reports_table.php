@@ -15,9 +15,8 @@ return new class extends Migration
             $table->bigIncrements('idadmin_report');
             $table->string("report_topic");
             $table->string("report_detail");
-            $table->foreignId('idreport_type')->constrained('report_types', 'idreport_type');
-            $table->foreignId('idadmin')->constrained('admins','idadmin');
-
+            $table->foreignId('idgames')->constrained('games', 'idgames');
+            $table->foreignId('id')->constrained('users', 'id');
             $table->timestamps();
             $table->softDeletes();
 

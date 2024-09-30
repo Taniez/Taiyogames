@@ -70,7 +70,9 @@ Route::middleware([
         return view('home');})->name('dashboard');
 });
 
-Route::get('/admin', [adminController::class,"index","in"]);
+Route::get('/admin/{adminid}/{adminpassword}', [adminController::class,"isaddmin"]);
+Route::post('/admin/report/{report_toadmin}', [adminController::class,"report"]);
+
 Route::get('/game', [gameController::class, "index"]);
 Route::get('/user/collection/{userID}', [userController::class, "index"])->name('profile.user');
 Route::get('/user/posting/{userID}', [userController::class, "posting"]);

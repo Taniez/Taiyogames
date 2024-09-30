@@ -8,10 +8,16 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css">
 </head>
 </head>
-<body>  
-    <h1>Welcome back, Admin {{$_Admin -> admin_name}}</h1>
-    <p>About the report</p>
-        
+<body>
+<h1>Report  เดกเวร</h1>
+@foreach($admin_report as $report)
+    หัวเรื่องรายงาน {{$report->report_topic}}<br>
+    รายละเอียดรายงาน {{$report->report_detail}}<br>
+    ไอดีเกม {{$report->idgames}}<br>
+    ผู้รายงาน {{$report->idadmin_report}}<br>
+    รายงานเมื่อ {{$report->created_at}}<br>
+    <br>
+@endforeach
 
 </body>
 </html>
