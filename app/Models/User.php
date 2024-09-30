@@ -27,12 +27,13 @@ class User extends Authenticatable
     public function comments(){
         return $this->hasMany(comment::class);
     }
-    public function logs(){
-        return $this->hasMany(developer_log::class);
-    }
     public function games(){
         return $this->hasMany(game::class);
     }
+    public function developer_logs(){
+        return $this->hasMany(developer_log::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *

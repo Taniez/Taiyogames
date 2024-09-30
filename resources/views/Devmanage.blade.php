@@ -77,7 +77,7 @@
                         
                         <div class="mb-3">
                             <label for="g_status" class="form-label">status</label>
-                                <select class="form-select" aria-label="Default select example"  name="g_status">
+                                <select class="form-select" aria-label="Default select example"  name="g_status" value="{{$games->Status}}">
                                     <option selected>Open this select menu</option>
                                     <option value="Released">Released</option>
                                     <option value="In development">In development</option>
@@ -112,6 +112,19 @@
                              <label for="screenshots" class="form-label">Upload Multiple Screenshots</label>
                             <input type="file" name="screenshots[]" class="form-control" multiple> <!-- multiple attribute allows multiple files -->
                         </div>
+
+                        <label for="devtopic" class="form-label">topic</label>
+                             <div class="mb-3 mt-3"> 
+                                <input type="text" name="devtopic" class="form-control" placeholder="topic" required>
+                            </div>
+                        
+                        <label for="devdetail" class="form-label">devlog</label>
+                             <div class="mb-3 mt-3"> 
+                                <input type="text" name="devdetail" class="form-control" placeholder="devlog" required>
+                            </div>
+                            
+                        <input type="hidden" value="{{ Auth::user()->id }}" name="huser_id">
+
                         <button type="submit" class="btn btn-success">Save changes</button>
                     </form>
                 </div>
