@@ -149,3 +149,8 @@
     margin: 70px 0;
     font-weight: bold;
 }
+.wishlist_empty {
+    text-align: center;
+    padding-bottom: 3rem;
+    margin-top: 50px; margin-bottom: 50px;
+}

@@ -39,7 +39,8 @@
             border-radius: 5px;
         }
         .toSetting:hover #pfp {
-            background-image: linear-gradient(rgba(0, 0, 255, 0), rgba(0, 0, 0, 0.6)),url("/img/Teriri7.png");
+            background-image: linear-gradient(rgba(0, 0, 255, 0), rgba(0, 0, 0, 0.6)),url("{{ Auth::user()->profile_photo_url }}");
+            z-index: 5;
         }
     </style>
 </head>
@@ -50,7 +51,9 @@
             <div class="group1">
                 <div class="toSetting">
                     <a href="{{ url('settings') }}">
-                        <div id='pfp'></div>
+                    <div id='pfp'>
+                        <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                    </div>
                     </a>
                     <div class="middle">
                         <div class="setting">Edit</div>
@@ -75,7 +78,7 @@
             </div>
             <div class="makeCenter">
                 <div class="stat">
-                    <div id='totalComment'><p>comment</p> 0 </div>
+                    <div id='totalComment'><p>comment</p> {{$_Num_comment}} </div>
                     <div id='totalVote'><p>vote</p> 0 </div>
                     <div id='totalDonate'><p>donate</p> 0 <p>Baht</p></div>
                 </div>
@@ -84,8 +87,8 @@
 
         <div class="collectionZone">
             <div class="navButton">
-                <a href="/user/collection"> <button id='button'> COLLECTION </button> </a>
-                <a href="/user/posting"> <button id='button'> POSTING </button> </a>
+                <a href="/user/collection/{{ Auth::user()->id }}"> <button id='button'> COLLECTION </button> </a>
+                <a href="/user/posting/{{ Auth::user()->id }}"> <button id='button'> POSTING </button> </a>
                 <a href="/user/donate"> <button id='button'> DONATE </button> </a>
                 <a href="/user/mygame"> <button id='button'> MY GAME </button> </a>
             </div>
@@ -93,7 +96,7 @@
                 <div class="showBox">
                     @if($_Wish_list->isEmpty())
                         <div class="collection_empty">
-                            <p>You haven't Like any game yet. :(</p>
+                            <p class="wishlist_empty">You haven't Like any game yet. :(</p>
                         </div>
                     @else
                         <div class="w-4/4 p-6">
@@ -120,15 +123,13 @@
                     </div>
                     @endif
                 </div>
-                <div class="fix_seeAll">
-                    <a href="/wishlist" id='seeAll'>See All</a>
-                </div>
-                <div class="AllUrPost">
-                    <div>Homu (waiting for code)</div>
-                </div>
-                <div class="AllUrPost">
-                    <div>Homu (waiting for code)</div>
-                </div>
+                @if($_Wish_list->isEmpty())
+
+                @else
+                    <div class="fix_seeAll">
+                        <a href="/wishlist" id='seeAll'>See All</a>
+                    </div>
+                @endif
             </div>
     </div>
 

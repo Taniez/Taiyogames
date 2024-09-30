@@ -14,7 +14,7 @@ class Devmanage_controler extends Controller
     //
     public function create(Request $request){
         $request->validate([
-            'g_img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validate file type and size
+            'g_img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:20048', // Validate file type and size
         ]);
        
         $new_game = new game;
@@ -79,7 +79,7 @@ class Devmanage_controler extends Controller
     
         // Validate the form data
         $request->validate([
-            'g_img' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validate file type and size
+            'g_img' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5048', // Validate file type and size
         ]);
     
         // Update game fields

@@ -17,7 +17,8 @@ class gameController extends Controller
         $tags = gametype::all();
         $_Games = game::where('idgames', $idgames)->first();
         $_Comments = comment::where('idgames', $idgames)->get();
+        $_Num_comment = comment::where('idgames', $idgames)->count();
         
-        return view("game", compact('_Games','tags','_Comments'));
+        return view("game", compact('_Games','tags','_Comments','_Num_comment'));
     }
 }
