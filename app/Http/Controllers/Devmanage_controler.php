@@ -39,6 +39,9 @@ class Devmanage_controler extends Controller
         // Assign download link
         $new_game->Game_dowload_link = $request->g_link;
         $new_game->Gamevideo = $request->g_video;
+
+        // Syn user id auth who created the game
+        $new_game->user_id = $request->huser_id;
         $new_game->save();
 
             // Convert tags from string to array
@@ -64,6 +67,7 @@ class Devmanage_controler extends Controller
                 screenshot::create([
                 'idgames' => $new_game->idgames,
                 'image_path' => 'imgscreenshot/' . $screenshotName]);}}
+
 
         return redirect('/Devmanage');
     }

@@ -24,8 +24,14 @@ class User extends Authenticatable
     public function wishlists(){
         return $this->hasMany(Wishlist::class);
     }
+    public function comments(){
+        return $this->hasMany(comment::class);
+    }
+    public function logs(){
+        return $this->hasMany(developer_log::class);
+    }
     public function games(){
-        return $this->belongsToMany(game::class);
+        return $this->hasMany(game::class);
     }
     /**
      * The attributes that are mass assignable.

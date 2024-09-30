@@ -190,3 +190,38 @@ p{
 iframe{
     margin-bottom: 1rem;
 }
+.collection_empty {
+    text-align: center;
+    margin-top: 50px; margin-bottom: 50px;
+}
+.commuzone {
+    margin-top: 100px;
+    border: 3px solid white;
+    border-radius: 5px;
+}
+.commuzone #header {
+    padding: 15px 0 15px 50px;
+    font-weight: bold;
+    background-color: rgb(255, 255, 255);
+}
+.commuzone #header p {
+    color: black;
+}
+.comment .commenterDetail {
+    padding-left: 50px;
+}
+.comment #detail {
+    padding-left: 70px;
+    font-size: 25px;
+}
+.commenterDetail {
+    display: flex;
+}
+.commenterDetail #name{
+    margin-right: 10px;
+}
+.commentContainer {
+    border-top: 1px solid rgb(180, 180, 180);
+    padding-top: 10px;
+    margin-bottom: 10px;
+}

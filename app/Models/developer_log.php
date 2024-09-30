@@ -17,4 +17,7 @@ class developer_log extends Model
     public function games() {
         return $this->belongsTo(game::class, "idgames");
     }
+    public function user() {
+        return $this->belongsTo(User::class, "id");
+    }
 }

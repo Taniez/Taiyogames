@@ -178,6 +178,8 @@
             </div>
         </div>
 
+        <!-- create by auth -->
+        <input type="hidden" value="{{ Auth::user()->id }}" name="huser_id">
 
 
         </form>

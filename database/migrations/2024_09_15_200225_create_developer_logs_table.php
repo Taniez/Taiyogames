@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('developer_logs', function (Blueprint $table) {
             $table->bigIncrements('iddeveloper_log');
+            $table->unsignedBigInteger('user_id');
             
             $table->foreignId('iddeveloper')->constrained('developers', 'iddeveloper');
             $table->foreignId('idgames')->constrained('games', 'idgames');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->string("topic");
             $table->string("detail");
             $table->timestamps();

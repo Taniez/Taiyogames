@@ -69,7 +69,7 @@
                                     @endif
                                 @endforeach
                             </div>
-                            <div id='firstDaylogin'>Joined - {{ Auth::user()->updated_at }}</div>
+                            <div id='firstDaylogin'>Joined at {{ \Carbon\Carbon::parse(Auth::user()->updated_at)->format('Y-m-d') }}</div>
                         </div>
                     </div>
             </div>
@@ -87,44 +87,49 @@
                 <a href="/user/collection"> <button id='button'> COLLECTION </button> </a>
                 <a href="/user/posting"> <button id='button'> POSTING </button> </a>
                 <a href="/user/donate"> <button id='button'> DONATE </button> </a>
+                <a href="/user/mygame"> <button id='button'> MY GAME </button> </a>
             </div>
             <div class="AllUrCollection">
                 <div class="showBox">
-
-                <div class="w-4/4 p-6">
-            <div class="grid grid-cols-4 gap-6">
-                            @foreach($_Wish_list as $wishlist)
-                            <div class="bg-white shadow-md p-4 w-100 h-100 overflow-auto">
-                                <!-- Link ไปที่รายละเอียดเกม -->
-                                <a href="/game/{{ $wishlist->game->Game_name }}">
-                                    <img src="{{ asset($wishlist->game->Game_preview) }}" alt="Preview" class="mt-2 h-75 w-100">
-                                    <h3 class="font-bold text-lg mt-2">{{ $wishlist->game->Game_name }}</h3>
-                                    <p class="text-gray-600">{{ $wishlist->game->Game_info }}</p>
-                                </a>
-                                <form action="{{ route('wishlist.destroy',$wishlist->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <input type="hidden" name="idgames" value="{{ $wishlist->game->idgames }}">
-                                    <button type="submit" class="mt-2 bg-blue-500 text-white p-2 rounded">
-                                        Remove
-                                    </button>
-                                </form> 
-                            </div>
-                            
+                    @if($_Wish_list->isEmpty())
+                        <div class="collection_empty">
+                            <p>You haven't Like any game yet. :(</p>
+                        </div>
+                    @else
+                        <div class="w-4/4 p-6">
+                            <div class="grid grid-cols-4 gap-6">
+                                @foreach($_Wish_list as $wishlist)
+                                <div class="bg-white shadow-md p-4 w-100 h-100 overflow-auto">
+                                    <!-- Link ไปที่รายละเอียดเกม -->
+                                    <a href="/game/{{ $wishlist->game->idgames }}">
+                                        <img src="{{ asset($wishlist->game->Game_preview) }}" alt="Preview" class="mt-2 h-75 w-100">
+                                        <h3 class="font-bold text-lg mt-2">{{ $wishlist->game->Game_name }}</h3>
+                                        <p class="text-gray-600">{{ $wishlist->game->Game_info }}</p>
+                                    </a>
+                                    <form action="{{ route('wishlist.destroy',$wishlist->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <input type="hidden" name="idgames" value="{{ $wishlist->game->idgames }}">
+                                        <button type="submit" class="mt-2 bg-blue-500 text-white p-2 rounded">
+                                            Remove
+                                        </button>
+                                    </form> 
+                                </div>
                         @endforeach
                         </div>
                     </div>
+                    @endif
                 </div>
                 <div class="fix_seeAll">
-                    <a href="" id='seeAll'>See All</a>
+                    <a href="/wishlist" id='seeAll'>See All</a>
                 </div>
-            <div class="AllUrPost">
-                <div>Homu (waiting for code)</div>
+                <div class="AllUrPost">
+                    <div>Homu (waiting for code)</div>
+                </div>
+                <div class="AllUrPost">
+                    <div>Homu (waiting for code)</div>
+                </div>
             </div>
-            <div class="AllUrPost">
-                <div>Homu (waiting for code)</div>
-            </div>
-        </div>
     </div>
 
 
