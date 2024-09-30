@@ -44,4 +44,8 @@ class game extends Model
     public function users(){
         return $this->belongsToMany(User::class);
     }
+    public function developer_log(){
+        return $this->hasMany(User::class);
+    }
+
 }
