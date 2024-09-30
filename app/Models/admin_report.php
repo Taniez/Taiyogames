@@ -11,7 +11,10 @@ class admin_report extends Model
     // use HasFactory;
     use SoftDeletes;
 
-    public function user() {
+    public function admin() {
         return $this->belongsTo(admin::class, 'idadmin'); // Adjust the foreign key as needed
+    }
+    public function user(){
+        return $this->belongsTo(User::class);  
     }
 }

@@ -12,9 +12,9 @@ use Illuminate\Support\Facades\Hash;
 class adminController extends Controller
 {
     public function isaddmin($adminid, $adminpassword) {
-        $admin_report =admin_report::all();
+        $admin_report = admin_report::all();
         // Retrieve the admin that matches the given adminid
-        $admin = admin::where('admin_name', $adminid)->first();
+        $admin = admin::all()->first();
         // Check if the admin exists and the password matches
         if ($admin && $admin->admin_password === $adminpassword) {
             return view('admin',compact("admin_report"));
@@ -27,7 +27,7 @@ class adminController extends Controller
         $new_report->report_topic = $request->report_topics;
         $new_report->report_detail = $request->report_text;
         $new_report->idgames =  $report_toadmin;
-        $new_report->id = $request->huser_id;
+        $new_report->user_id = $request->huser_id;
         $new_report->save();
         return view('home');
     }

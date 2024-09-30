@@ -14,10 +14,11 @@
     หัวเรื่องรายงาน {{$report->report_topic}}<br>
     รายละเอียดรายงาน {{$report->report_detail}}<br>
     ไอดีเกม {{$report->idgames}}<br>
-    ผู้รายงาน {{$report->idadmin_report}}<br>
+    ผู้รายงาน {{ $report->game->Game_name }}<br>
     รายงานเมื่อ {{$report->created_at}}<br>
     <br>
 @endforeach
+
 
 </body>
 </html>
