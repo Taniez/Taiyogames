@@ -9,6 +9,9 @@ use App\Http\Controllers\usercontroller;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\update_password;
 use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\Communitycontroller;
+use App\Http\Controllers\DonateController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -63,4 +66,7 @@ Route::get('/admin', [adminController::class, "index"]);
 Route::get('/game', [gameController::class, "index"]);
 Route::get('/user/collection', [userController::class, "index"]);
 Route::get('/user/posting', [userController::class, "posting"]);
-Route::get('/user/donate', [userController::class, "donate"]);
+Route::get('/user/donate', [userController::class, "donate"])->name('user.donate');
+Route::post('/user/donate', [userController::class, "store_donate"])->name('user.donate');
+Route::post('/game/comment', [gameController::class, 'store'])->name('game.comment')->middleware('auth');
+
