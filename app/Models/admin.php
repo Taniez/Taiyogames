@@ -14,5 +14,8 @@ class admin extends Model
     public function admin_reports() {
         return $this->hasMany(admin_report::class, "idadmin");
     }
-
+    public function getIsAdminAttribute()
+    {
+        return $this->attributes['admin_name'] == 1;
+    }
 }
