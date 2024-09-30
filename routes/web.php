@@ -12,6 +12,7 @@ use App\Http\Controllers\adminController;
 use App\Http\Controllers\update_password;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\guestController;
+use App\Http\Controllers\AdminLoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,10 +79,6 @@ Route::get('/user/donate', [userController::class, "donate"]);
 Route::get('/user/mygame', [userController::class, "mygame"])->name("mygame");
 Route::post('/addComment', [userController::class, "add_comment"]);
 Route::middleware('admin')->group(function () {
-    Route::get('/admin/adminlogin', [adminController::class, 'login'])->name('admin.login');
-    Route::get('/admin/login', [adminController::class, 'showLoginForm'])->name('admin.login');
-Route::post('/admin/login', [adminController::class, 'login'])->name('admin.login.submit');
-Route::get('/admin/login', [adminController::class, 'showLoginForm'])->name('admin.login');
-// POST route to process the login form submission
-Route::post('/admin/login', [adminController::class, 'login'])->name('admin.login.submit');
+    Route::get('/adminlogin', [AdminLoginController::class, 'showLoginForm'])->name('admin-login');
+    Route::post('/admin/login', [AdminLoginController::class, 'login'])->name('admin-login.submit');
 });
