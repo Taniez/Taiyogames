@@ -5,6 +5,8 @@ use App\Models\screenshot;
 use Illuminate\Http\Request;
 use App\Models\gametype;
 use App\Models\game;
+use App\Models\Auth;
+use App\Models\developer_log;
 class Devmanage_controler extends Controller
 {
     public function index(){
@@ -39,6 +41,9 @@ class Devmanage_controler extends Controller
         // Assign download link
         $new_game->Game_dowload_link = $request->g_link;
         $new_game->Gamevideo = $request->g_video;
+
+        // Syn user id auth who created the game
+        $new_game->user_id = $request->huser_id;
         $new_game->save();
 
             // Convert tags from string to array
@@ -65,6 +70,7 @@ class Devmanage_controler extends Controller
                 'idgames' => $new_game->idgames,
                 'image_path' => 'imgscreenshot/' . $screenshotName]);}}
 
+
         return redirect('/Devmanage');
     }
 
@@ -72,6 +78,7 @@ class Devmanage_controler extends Controller
 
     public function update(Request $request, $idgames) {
         $game = game::findOrFail($idgames);
+        
     
         // Validate the form data
         $request->validate([
@@ -95,6 +102,16 @@ class Devmanage_controler extends Controller
         $game->Gamevideo = $request->g_video;
         $game->save();
     
+        $devlogs =  new developer_log;
+        $devlogs->idgames = $game->idgames;
+        $devlogs->user_id =  $request->huser_id;
+        $devlogs->topic = $request->devtopic;
+        $devlogs->detail = $request->devdetail;
+
+        $devlogs->save();
+
+
+
         // Handle tags
         // First, detach all existing tags
         $game->gametypes()->detach();

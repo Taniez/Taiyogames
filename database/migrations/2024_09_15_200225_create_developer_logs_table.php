@@ -9,13 +9,14 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+    protected $primaryKey = 'iddeveloper_log';
     public function up(): void
     {
         Schema::create('developer_logs', function (Blueprint $table) {
             $table->bigIncrements('iddeveloper_log');
-            
-            $table->foreignId('iddeveloper')->constrained('developers', 'iddeveloper');
+            $table->unsignedBigInteger('user_id');
             $table->foreignId('idgames')->constrained('games', 'idgames');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->string("topic");
             $table->string("detail");
             $table->timestamps();

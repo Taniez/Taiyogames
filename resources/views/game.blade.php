@@ -32,25 +32,26 @@ body {
         <div class="logoGame ">
         <img src="{{ asset($_Games->Game_preview)}}" alt="logo">
         </div>
-    <p id='version' ><b>Lastest Version : {{ $_Games->version }} {{ $_Games->updated_at }}</b></p>
-    <p id="about" ><p>about {{ $_Games->Game_info }}</p></p>
+    <p id='version' ><b>Lastest Version : {{ $_Games->version }} | {{ \Carbon\Carbon::parse($_Games->updated_at)->format('Y-m-d') }}</b></p>
+    <p id="about" >about {{ $_Games->Game_info }}</about>
     <div class='Info '>
         <div class='infoZone '>
             <div class='gameInformation'>
-            <p>{{ $_Games->Game_name }}</p>
-                <p id='header'><b>More information V</b></p>
-                <p><b>Status</b> inprogress</p>
+                <p id='header'><b>More information</b></p>
+                <p><b>Name</b> {{ $_Games->Game_name }} </p>
+                <p><b>Developer</b> {{ $_Games->User->name }} </p>
+                <p><b>Status</b> {{ $_Games->status }} </p>
                 <p><b>Rating</b> xxx</p>
                 <p><b>Tags</b>:
                 @foreach($_Games->gametypes as $gametype)
                 {{preg_replace('/{value:(.*?)}/', '$1', $gametype ->gametype_name)}},
-                @endforeach          
+                @endforeach
             </p>
             </div>
 
-            <div class='Play_demo' onclick="window.location.href='https://youtu.be/dQw4w9WgXcQ?si=MVb1-A0gu3qBBpFS'">
+            <!-- <div class='Play_demo' onclick="window.location.href='https://youtu.be/dQw4w9WgXcQ?si=MVb1-A0gu3qBBpFS'">
                 <button id="play_btn">Play Now!</button>
-            </div>
+            </div> -->
             <div class="downloadZone">
                 <p id='header'><b>Download</b></p>
                 <div class='downloadGame'>
@@ -66,16 +67,43 @@ body {
                 <p><a href="">swedrfghjkldfghjkldrfgthyju</a></p>
                 <p><a href="">swedrfghjkldfghjkldrfgthyju</a></p>
             </div>
+
+            <div class="commuzone">
+                <div id='header'><p>Community</p></div>
+                <div class="comment">
+                @if($_Comments->isEmpty())
+                    <div class="collection_empty">
+                        <p>Let's be the first Comment!</p>
+                    </div>
+                @else
+                    @foreach ($_Comments as $comment)
+                        <div class="commentContainer">
+                            <div class="commenterDetail">
+                                <p id='name'>{{ $comment->user->name }}</p>
+                                <p id='postedDay'>{{ \Carbon\Carbon::parse($comment->updated_at)->format('Y-m-d') }}</p>
+                            </div>
+                            <p id='detail'>{{ $comment->comment_detail }}</p>
+                        </div>
+                    @endforeach
+                @endif
+                <form action="/addComment" method="post">
+                    @csrf
+                    <input type="hidden" value="{{ Auth::user()->id }}" name="huser_id">
+                    <input type="hidden" name="game_id" value="{{ $_Games->idgames }}">
+                    <p>comment: <input type="text" name="detail" required></p>
+                    <p><input type="submit" value="post"></p>
+                </form>
+                </div>
+            </div>
         </div>
-        <div class='pictureZone'>              
+        <div class='pictureZone'>
         @foreach($_Games->screenshots as $screenshot)
             <img src="{{ asset($screenshot->image_path) }}" width="100" alt="#">
-        @endforeach   
+        @endforeach
         </div>
         
     </div>
-    <h3>Community</h3>
-    </div>  
+    </div>
 @else
         <p>No game found.</p>
 

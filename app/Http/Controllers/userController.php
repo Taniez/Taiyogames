@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\user_tier;
 use App\Models\game;
 use App\Models\Wishlist;
+use App\Models\comment;
 
 class userController extends Controller
 {
@@ -22,9 +23,29 @@ class userController extends Controller
         $user_tier = user_tier::all();
         $user_ = user::all();
         $_Wish_list = Wishlist::take(4)->get();
-        return view("user_posting", compact('user_tier','user_','_Wish_list'));
+        $_Comments = comment::all();
+        return view("user_posting", compact('user_tier','user_','_Wish_list','_Comments'));
     }
     public function donate() {
         return view("user_donate");
+    }
+    public function mygame() {
+        $user_tier = user_tier::all();
+        $user_ = user::all();
+        $_Wish_list = Wishlist::take(4)->get();
+        $_Comments = comment::all();
+        
+        return view("user_mygame", compact('user_tier','user_','_Wish_list','_Comments'));
+    }
+    public function add_comment(Request $request) {
+        $new_comment = new comment;
+        $new_comment->user_id = $request->huser_id;
+        $new_comment->idgames = $request->game_id;
+        $new_comment->comment_detail = $request->detail	;
+
+        $new_comment->save();
+        $_Comments = comment::all();
+        return back()->withInput(compact('_Comments'));
+        // return redirect("user_mygame", ['_Comments'=>$_Comments]);
     }
 }
