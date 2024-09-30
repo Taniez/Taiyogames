@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('home') }}">
-                        <img width="100px" src="{{asset('/img/Taiyo_pfp.png')}}"style="">
+                        <img  src="{{asset('/img/Taiyo_pfp.png')}}"style=" width:60px;height:60px;">
                     </a>
                 </div>
 
