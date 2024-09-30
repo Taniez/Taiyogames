@@ -29,7 +29,7 @@
             background-color: olive;
             border-bottom: 2px solid black;
         }
-        #pfp {
+        #pfp img{
             background-image: url("/img/Teriri7.png");
             background-color: grey;
             width: 217px;
