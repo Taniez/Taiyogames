@@ -16,3 +16,7 @@ class AdminMiddleware
         return redirect('/login')->with('error', 'You do not have admin access.');
     }
 }
+
+    return redirect('/');
+}
+}

@@ -83,7 +83,7 @@
         <!-- Main Content -->
         @if($_Games->isEmpty())
         <div class="ms-5 center w-100 ">
-        <p>No games found for this tag. :(</p>
+        <p>No games found for this tag. :</p>
         </div>
         @else
         <div class="w-3/4 p-6">

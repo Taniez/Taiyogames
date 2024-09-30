@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('home') }}">
-                        <x-application-mark class="block h-9 w-auto" />
+                        <img width="100px" src="{{asset('/img/Taiyo_pfp.png')}}"style="">
                     </a>
                 </div>
 
@@ -26,12 +26,7 @@
                         {{ __('wishlist') }}
                     </x-nav-link>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('home') }}">
-                        {{ __('Home') }}
-                    </x-nav-link>
-                </div>
-            </div>
+              </div>
 
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <!-- Teams Dropdown -->
