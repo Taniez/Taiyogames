@@ -52,7 +52,12 @@
             {{ __('Account Settings') }}
         </h2>
     </x-slot>
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css">
+    @guest
+    <script>window.location.href = "{{ route('register') }}";</script>
+    @endguest
+    
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
@@ -81,42 +86,28 @@
                                 @if (Laravel\Fortify\Features::canUpdateProfileInformation())
                                 @livewire('profile.update-profile-information-form')
                 
-                                
+                            </form>
                             @endif
                             </div>
-
-                            <!-- Display Name -->
-                            <div class="mb-4">
-                                <label for="display_name" class="block text-sm font-medium text-gray-700">Display Name</label>
-                                <input type="text" id="display_name" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                            </div>
-
-                            <!-- Website URL -->
-                            <div class="mb-4">
-                                <label for="website" class="block text-sm font-medium text-gray-700">Website</label>
-                                <input type="text" id="website" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                            </div>
-
-                            <!-- Twitter Handle -->
-                            <div class="mb-4">
-                                <label for="twitter" class="block text-sm font-medium text-gray-700">Twitter</label>
-                                <input type="text" id="twitter" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                            </div>
-
-                            <!-- Account Preferences -->
-                            <div class="mb-4">
-                                <label class="block text-sm font-medium text-gray-700">Account Type</label>
-                                <select class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                                    <option>Playing and downloading games</option>
-                                    <option>Developing and uploading games</option>
-                                </select>
-                            </div>
-
-                            <div>
-                                <button class="bg-blue-500 text-white px-4 py-2 rounded-md">Save</button>
-                            </div>
-                        </form>
-                    </div>
+                           
+                            
+                            
+                            <form method="POST" action="{{ route('user-profile-information.update') }}">
+                                @csrf
+                        
+                                <div>
+                                    <label for="name">Name</label>
+                                    <input id="name" type="text" name="name" value="{{ old('name', auth()->user()->name) }}" required autofocus  class="form-control" />
+                                </div>
+                        
+                                <div>
+                                    <label for="email">Email</label>
+                                    <input id="email" type="email" name="email" value="{{ old('name', auth()->user()->email) }}" required  class="form-control mb-3"  />
+                                </div>
+                        
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </form>
+                    </div> 
                 </div>
             </div>
         </div>
