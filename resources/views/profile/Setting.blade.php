@@ -57,12 +57,9 @@
                     <!-- Sidebar -->
                     <div class="w-1/4 bg-gray-100 p-4">
                         <ul class="space-y-4">
-                            <li><a href="#" class="text-blue-500">Profile</a></li>
+                            <li><a href="/settings" class="text-blue-500">Profile</a></li>
                             <li><a href="/Update" class="text-gray-500">Password</a></li>
-                            <li><a href="#" class="text-gray-500">Email Address</a></li>
-                            <li><a href="#" class="text-gray-500">Two Factor Authentication</a></li>
-                            <li><a href="#" class="text-gray-500">Payment Methods</a></li>
-                            <li><a href="#" class="text-gray-500">Notifications</a></li>
+                           
                         </ul>
                     </div>
 
@@ -78,8 +75,11 @@
                             <!-- Profile Image -->
                             <div class="mb-4">
                                 <label for="profile_image" class="block text-sm font-medium text-gray-700">Profile Image</label>
-                                <input type="file" id="profile_image" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                                <button class="mt-2 bg-blue-500 text-white px-4 py-2 rounded-md">Upload Image</button>
+                                @if (Laravel\Fortify\Features::canUpdateProfileInformation())
+                                @livewire('profile.update-profile-information-form')
+                
+                                
+                            @endif
                             </div>
 
                             <!-- Display Name -->
