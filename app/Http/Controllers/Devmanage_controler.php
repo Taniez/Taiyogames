@@ -82,7 +82,7 @@ class Devmanage_controler extends Controller
         $game->Game_name = $request->g_name;
         $game->Game_info = $request->g_details;
         $game->version = $request->g_version;
-        $new_game->Status = $request->g_status;
+        $game->Status = $request->g_status;
     
         // Handle image upload
         if ($request->hasFile('g_img') && $request->file('g_img')->isValid()) {

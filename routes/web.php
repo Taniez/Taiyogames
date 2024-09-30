@@ -1,4 +1,6 @@
 <?php
+
+use App\Models\admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Devmanage_controler;
@@ -9,6 +11,8 @@ use App\Http\Controllers\usercontroller;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\update_password;
 use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\guestController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,7 +37,14 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
 });
 
+Route::get('/guest', [guestController::class, 'index']);
+Route::get('/guest/serch', [guestController::class,'guestserch']);
+Route::get('/guest/search-by-tag/{tag}', [guestController::class, 'guestsearchByTag']);
+
+
+
 Route::get('/home', [Homecontroller::class,'index']);
+Route::get('/admin', [Homecontroller::class,'in']);
 Route::get('/home/serch', [Homecontroller::class,'serch']);
 Route::get('/search-by-tag/{tag}', [Homecontroller::class, 'searchByTag']);
 Route::get('/settings', [Settingcontroller::class, 'show'])->name('profile.Setting');
@@ -59,7 +70,7 @@ Route::middleware([
         return view('home');})->name('dashboard');
 });
 
-Route::get('/admin', [adminController::class, "index"]);
+Route::get('/admin', [adminController::class,"index","in"]);
 Route::get('/game', [gameController::class, "index"]);
 Route::get('/user/collection', [userController::class, "index"])->name('profile.user');
 Route::get('/user/posting', [userController::class, "posting"]);
