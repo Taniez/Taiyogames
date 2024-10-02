@@ -29,7 +29,7 @@
             background-color: olive;
             border-bottom: 2px solid black;
         }
-        #pfp {
+        #pfp img{
             background-image: url("/img/Teriri7.png");
             background-color: grey;
             width: 217px;
@@ -39,7 +39,8 @@
             border-radius: 5px;
         }
         .toSetting:hover #pfp {
-            background-image: linear-gradient(rgba(0, 0, 255, 0), rgba(0, 0, 0, 0.6)),url("/img/Teriri7.png");
+            background-image: linear-gradient(rgba(0, 0, 255, 0), rgba(0, 0, 0, 0.6)),url("{{ Auth::user()->profile_photo_url }}");
+            z-index: 5;
         }
     </style>
 </head>
@@ -50,7 +51,9 @@
             <div class="group1">
                 <div class="toSetting">
                     <a href="{{ url('settings') }}">
-                        <div id='pfp'></div>
+                    <div id='pfp'>
+                        <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                    </div>
                     </a>
                     <div class="middle">
                         <div class="setting">Edit</div>
@@ -69,62 +72,65 @@
                                     @endif
                                 @endforeach
                             </div>
-                            <div id='firstDaylogin'>Joined - {{ Auth::user()->updated_at }}</div>
+                            <div id='firstDaylogin'>Joined at {{ \Carbon\Carbon::parse(Auth::user()->updated_at)->format('Y-m-d') }}</div>
                         </div>
                     </div>
             </div>
             <div class="makeCenter">
                 <div class="stat">
-                    <div id='totalComment'><p>comment</p> 0 </div>
+                    <div id='totalComment'><p>comment</p> {{$_Num_comment}} </div>
                     <div id='totalVote'><p>vote</p> 0 </div>
-                    <div id='totalDonate'><p>donate</p> 0 <p>Baht</p></div>
+                    <div id='totalDonate'><p>donate</p>{{$_sum_user_recipts}}<p>Baht</p></div>
                 </div>
             </div>
         </div>
 
         <div class="collectionZone">
             <div class="navButton">
-                <a href="/user/collection"> <button id='button'> COLLECTION </button> </a>
-                <a href="/user/posting"> <button id='button'> POSTING </button> </a>
-                <a href="/user/donate"> <button id='button'> DONATE </button> </a>
+                <a href="/user/collection/{{ Auth::user()->id }}"> <button id='button'> COLLECTION </button> </a>
+                <a href="/user/posting/{{ Auth::user()->id }}"> <button id='button'> POSTING </button> </a>
+                <a href="/user/donate/{{ Auth::user()->id }}"> <button id='button'> DONATE </button> </a>
+                <a href="/user/mygame"> <button id='button'> MY GAME </button> </a>
             </div>
             <div class="AllUrCollection">
                 <div class="showBox">
-
-                <div class="w-4/4 p-6">
-            <div class="grid grid-cols-4 gap-6">
-                            @foreach($_Wish_list as $wishlist)
-                            <div class="bg-white shadow-md p-4 w-100 h-100 overflow-auto">
-                                <!-- Link ไปที่รายละเอียดเกม -->
-                                <a href="/game/{{ $wishlist->game->Game_name }}">
-                                    <img src="{{ asset($wishlist->game->Game_preview) }}" alt="Preview" class="mt-2 h-75 w-100">
-                                    <h3 class="font-bold text-lg mt-2">{{ $wishlist->game->Game_name }}</h3>
-                                    <p class="text-gray-600">{{ $wishlist->game->Game_info }}</p>
-                                </a>
-                                <form action="{{ route('wishlist.destroy',$wishlist->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <input type="hidden" name="idgames" value="{{ $wishlist->game->idgames }}">
-                                    <button type="submit" class="mt-2 bg-blue-500 text-white p-2 rounded">
-                                        Remove
-                                    </button>
-                                </form> 
-                            </div>
-                            
+                    @if($_Wish_list->isEmpty())
+                        <div class="collection_empty">
+                            <p class="wishlist_empty">You haven't Like any game yet. :(</p>
+                        </div>
+                    @else
+                        <div class="w-4/4 p-6">
+                            <div class="grid grid-cols-4 gap-6">
+                                @foreach($_Wish_list as $wishlist)
+                                <div class="bg-white shadow-md p-4 w-100 h-100 overflow-auto">
+                                    <!-- Link ไปที่รายละเอียดเกม -->
+                                    <a href="/game/{{ $wishlist->game->idgames }}">
+                                        <img src="{{ asset($wishlist->game->Game_preview) }}" alt="Preview" class="mt-2 h-75 w-100">
+                                        <h3 class="font-bold text-lg mt-2">{{ $wishlist->game->Game_name }}</h3>
+                                        <p class="text-gray-600">{{ $wishlist->game->Game_info }}</p>
+                                    </a>
+                                    <form action="{{ route('wishlist.destroy',$wishlist->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <input type="hidden" name="idgames" value="{{ $wishlist->game->idgames }}">
+                                        <button type="submit" class="mt-2 bg-blue-500 text-white p-2 rounded">
+                                            Remove
+                                        </button>
+                                    </form> 
+                                </div>
                         @endforeach
                         </div>
                     </div>
+                    @endif
                 </div>
-                <div class="fix_seeAll">
-                    <a href="" id='seeAll'>See All</a>
-                </div>
-            <div class="AllUrPost">
-                <div>Homu (waiting for code)</div>
+                @if($_Wish_list->isEmpty())
+
+                @else
+                    <div class="fix_seeAll">
+                        <a href="/wishlist" id='seeAll'>See All</a>
+                    </div>
+                @endif
             </div>
-            <div class="AllUrPost">
-                <div>Homu (waiting for code)</div>
-            </div>
-        </div>
     </div>
 
 

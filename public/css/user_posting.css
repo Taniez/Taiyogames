@@ -1,192 +1,169 @@
-p{
-    color: white;
+.baseBG {
+    background-color: rgba(255, 255, 255, 0.5);
 }
-img{
-    width: 350px;
-}
-
-.logoGame{
-    display: flex;
-    justify-content: center;
-    margin-bottom: 70px;
-   
-}
-.logoGame img{
-    width: 250px;
-    margin-top:50px; 
-    scale: 130%
-}
-p{
-    font-size: large;
-}
-
-#version{
-    padding: 0 15px;
-}
-#about{
-    text-indent: 2em;
-    padding: 0 360px 0 15px;
-    margin-bottom: 35px;
-}
-
-.gameInformation{
-    width: 600px;
-    padding-left: 50px;
-    margin-bottom: 35px;
-}
-
-#header{
-    text-indent: -1em;
-}
-
-.gameLogs{
-    width: 400px;
-
-    padding-left: 50px;
-    margin-bottom: 35px;
-}
-
-.Info{
-    padding: 0 15px;
+.profileNstat {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 40px;
+    border-bottom: 2px solid black;
 }
-.infoZone{
-    justify-content: center;
-}
-.infoZone .Play_demo{
+.group1 {
     display: flex;
-    justify-content: center;
 }
-.pictureZone{
-    justify-content: end;
-}
-.pictureZone img{
-    margin-bottom: 15px;
-}
-.downloadZone{
-    padding-left: 50px;
-    margin-bottom: 35px;
-}
-.downloadGame{
+.group2 {
     display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 216px;
+}
+.pfpInfo {
+    margin-left: 25px;
+    width: 270px;
+}
+#name {
+    font-size: 35px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: -7px;
+}
+#tier {
     margin-top: 10px;
+    font-size: 25px;
+    font-weight: bold;
+}
+#firstDaylogin {
+    margin-bottom: 25px;
+}
+.makeCenter {
+    display: flex;
     align-items: center;
 }
-.downloadGame button{
-    margin-right: 10px;
-}
-.Play_demo #play_btn{
-    margin-bottom: 35px;
-}
-#play_btn{
-    padding: 10px 12px;
-    background-color: green;
-    border-radius: 6px;
+.stat {
+    display: flex;
     text-align: center;
-}
-#play_btn:hover{
-    padding: 10px 12px;
-    background-color: blue;
-    border-radius: 6px;
-    cursor: pointer;
-}
-#Commu_header{
-    margin-bottom: 35px;
-    padding-left: 50px;
-    text-indent: -1em;
-}
-
-p{
-    color: white;
-}
-img{
-    width: 350px;
-}
-.logoGame{
-    display: flex;
-    justify-content: center;
-    margin-bottom: 70px;
-    
-}
-.logoGame img{
-    width: 250px;
-    scale: 130%;
-}
-p{
-    font-size: large;
-}
-
-#version{
-    padding: 0 15px;
-}
-#about{
-    text-indent: 2em;
-    padding: 0 360px 0 15px;
-    margin-bottom: 35px;
-}
-
-
-
-#header{
-    text-indent: -1em;
-}
-
-
-
-.Info{
-    padding: 0 15px;
-    display: flex;
+    margin-right: 100px;
+    width: 300px;
+    height: 100px;
     justify-content: space-between;
 }
-.infoZone{
-    justify-content: center;
+.stat p {
+    font-size: 25px;
+    font-weight: bold;
 }
-.infoZone .Play_demo{
-    display: flex;
-    justify-content: center;
+.middle {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%)
 }
-.pictureZone{
-    justify-content: end;
+.toSetting {
+    position: relative;
+    margin-left: 25px;
+    bottom: 30px;
 }
-.pictureZone img{
-    margin-bottom: 15px;
+.toSetting:hover .middle {
+    opacity: 1;
 }
-.downloadZone{
-    padding-left: 50px;
-    margin-bottom: 35px;
+.setting {
+    color: white;
+    font-size: 16px;
 }
-.downloadGame{
-    display: flex;
-    margin-top: 10px;
-    align-items: center;
+.collectionZone {
+    background-color: white;
 }
-.downloadGame button{
-    margin-right: 10px;
+.navButton {
+    margin-left: 25px;
 }
-.Play_demo #play_btn{
-    margin-bottom: 35px;
-}
-#play_btn{
-    padding: 10px 12px;
+.navButton #button {
     background-color: green;
-    border-radius: 6px;
+    padding: 10px 16px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: white;
+}
+.navButton #button:hover {
+    background-color: blue;
+    padding: 10px 16px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: white;
+}
+.showBox {
+    display: flex;
+    margin: 0 50px 50px 50px;
+    justify-content: space-between;
+    justify-content: center;
+}
+.showBox .game{
+    width: 220px;
+    height: 200px;
+    background-color: grey;
+    border-radius: 5px;
+}
+.showBox .game:hover{
+    width: 220px;
+    height: 200px;
+    background-color: green;
+    border-radius: 5px;
+    cursor: pointer
+}
+.game img {
+    width: 220px;
+    height: 200px;
+    border-radius: 5px;
+}
+.fix_seeAll{
+    position: absolute;
+    right: 275px; top: 494px;
+    font-weight: bold;
+    color: grey;
+}
+.fix_seeAll:hover{
+    position: absolute;
+    right: 275px; top: 494px;
+    font-weight: bold;
+    color: black;
+}
+.AllUrPost {
+    width: auto;
+    height: 70px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.AllUrPost:hover {
+    width: auto;
+    height: 70px;
+    background-color: rgb(180, 180, 180);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.collection_empty {
+    color: grey;
+    text-align: center;
+    margin: 70px 0;
+    font-weight: bold;
+}
+.AllUrPost {
+    border-bottom: 2px solid rgb(180, 180, 180);
+}
+.commenterDetail {
+    display: flex;
+    flex-direction: column;
+}
+.commenterDetail p {
     text-align: center;
 }
-#play_btn:hover{
-    padding: 10px 12px;
-    background-color: blue;
-    border-radius: 6px;
-    cursor: pointer;
+.commenterDetail #postedDay{
+    color: gray;
 }
-#Commu_header{
-    margin-bottom: 35px;
-    padding-left: 50px;
-    text-indent: -1em;
-}
-.ground{
-    background: rgba(0, 0, 0, 0.70);
-}
-iframe{
-    margin-bottom: 1rem;
+.comment_empty {
+    text-align: center;
+    padding-bottom: 8rem;
+    margin-top: 50px; margin-bottom: 50px;
 }

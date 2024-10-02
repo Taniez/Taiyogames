@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('home') }}">
-                        <x-application-mark class="block h-9 w-auto" />
+                        <img  src="{{asset('/img/Taiyo_pfp.png')}}"style=" width:60px;height:60px;">
                     </a>
                 </div>
 
@@ -26,12 +26,7 @@
                         {{ __('wishlist') }}
                     </x-nav-link>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('home') }}">
-                        {{ __('Home') }}
-                    </x-nav-link>
-                </div>
-            </div>
+              </div>
 
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <!-- Teams Dropdown -->
@@ -91,7 +86,7 @@
                         <x-slot name="trigger">
                             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                                 <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
-                                    <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                                   <div class="me-3 mt-1">{{ Auth::user()->name }} </div> <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
                                 </button>
                             @else
                                 <span class="inline-flex rounded-md">
@@ -111,7 +106,7 @@
                                 {{ __('Manage Account') }}
                             </div>
 
-                            <x-dropdown-link href="{{ route('profile.show') }}">
+                            <x-dropdown-link href="/user/collection/{{ Auth::user()->id }}">
                                 {{ __('Profile') }}
                             </x-dropdown-link>
                             

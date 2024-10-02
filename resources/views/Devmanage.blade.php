@@ -16,6 +16,9 @@
     @auth
     <style>
         @import url({{asset('css/style.css')}});
+
+        
+        
     </style>
 
 
@@ -77,7 +80,7 @@
                         
                         <div class="mb-3">
                             <label for="g_status" class="form-label">status</label>
-                                <select class="form-select" aria-label="Default select example"  name="g_status">
+                                <select class="form-select" aria-label="Default select example"  name="g_status" value="{{$games->Status}}">
                                     <option selected>Open this select menu</option>
                                     <option value="Released">Released</option>
                                     <option value="In development">In development</option>
@@ -91,6 +94,13 @@
                             <input type="file" class="form-control" name="g_img">
                             <img src="{{ asset($games->Game_preview) }}" alt="#" class="mt-2" width="100">
                         </div>
+
+                        <div class=" mb-3">
+                            <label for="g_bg" class="form-label">Game Image</label>
+                            <input type="file" class="form-control" name="g_bg">
+                            <img src="{{ asset($games->Gamebackground) }}" alt="#" class="mt-2" width="100">
+                        </div>
+
                         <div class="mb-3">
                             <label for="g_link" class="form-label">Download Link</label>
                             <input type="text" class="form-control" name="g_link" value="{{$games->Game_dowload_link}}" required>
@@ -112,6 +122,19 @@
                              <label for="screenshots" class="form-label">Upload Multiple Screenshots</label>
                             <input type="file" name="screenshots[]" class="form-control" multiple> <!-- multiple attribute allows multiple files -->
                         </div>
+
+                        <label for="devtopic" class="form-label">topic</label>
+                             <div class="mb-3 mt-3"> 
+                                <input type="text" name="devtopic" class="form-control" placeholder="topic" required>
+                            </div>
+                        
+                        <label for="devdetail" class="form-label">devlog</label>
+                             <div class="mb-3 mt-3"> 
+                                <input type="text" name="devdetail" class="form-control" placeholder="devlog" required>
+                            </div>
+                            
+                        <input type="hidden" value="{{ Auth::user()->id }}" name="huser_id">
+
                         <button type="submit" class="btn btn-success">Save changes</button>
                     </form>
                 </div>
@@ -172,12 +195,21 @@
                 <input type="file" name="g_img" id="g_img" required>
             </label>
             </div>
-            <label for="g_video" class="form-label">video Link</label>
+
             <div class="mb-3">
+            <label for="g_bg" class="form-label">Upload background</label>
+            <input type="file" name="g_bg" id="g_bg" >
+            </div>
+
+
+            <div class="mb-3">
+            <label for="g_video" class="form-label">video Link</label>
                 <input type="text" name="g_video" placeholder="video Link" >
             </div>
         </div>
 
+        <!-- create by auth -->
+        <input type="hidden" value="{{ Auth::user()->id }}" name="huser_id">
 
 
         </form>

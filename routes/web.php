@@ -1,4 +1,6 @@
 <?php
+
+use App\Models\admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Devmanage_controler;
@@ -9,8 +11,8 @@ use App\Http\Controllers\usercontroller;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\update_password;
 use App\Http\Controllers\WishlistController;
-use App\Http\Controllers\Communitycontroller;
-use App\Http\Controllers\DonateController;
+use App\Http\Controllers\guestController;
+use App\Http\Controllers\Update_username;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +38,14 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
 });
 
+Route::get('/guest', [guestController::class, 'index']);
+Route::get('/guest/serch', [guestController::class,'guestserch']);
+Route::get('/guest/search-by-tag/{tag}', [guestController::class, 'guestsearchByTag']);
+Route::post('/setting/profile-information/update', [Update_username::class, 'updateProfileInformation'])->name('user-profile-information.update');
+
+
 Route::get('/home', [Homecontroller::class,'index']);
+Route::get('/admin', [Homecontroller::class,'in']);
 Route::get('/home/serch', [Homecontroller::class,'serch']);
 Route::get('/search-by-tag/{tag}', [Homecontroller::class, 'searchByTag']);
 Route::get('/settings', [Settingcontroller::class, 'show'])->name('profile.Setting');
@@ -62,11 +71,16 @@ Route::middleware([
         return view('home');})->name('dashboard');
 });
 
-Route::get('/admin', [adminController::class, "index"]);
-Route::get('/game', [gameController::class, "index"]);
-Route::get('/user/collection', [userController::class, "index"]);
-Route::get('/user/posting', [userController::class, "posting"]);
-Route::get('/user/donate', [userController::class, "donate"])->name('user.donate');
-Route::post('/user/donate', [userController::class, "store_donate"])->name('user.donate');
-Route::post('/game/comment', [gameController::class, 'store'])->name('game.comment')->middleware('auth');
+Route::get('/admin/{adminid}/{adminpassword}', [adminController::class,"isaddmin"]);
+Route::post('/admin/report/{report_toadmin}', [adminController::class,"report"]);
 
+Route::get('/game', [gameController::class, "index"]);
+Route::get('/user/collection/{userID}', [userController::class, "index"])->name('profile.user');
+Route::get('/user/posting/{userID}', [userController::class, "posting"]);
+Route::get('/user/donate', [userController::class, "donate"]);
+Route::get('/user/mygame', [userController::class, "mygame"])->name("mygame");
+Route::post('/addComment', [userController::class, "add_comment"]);
+Route::middleware('admin')->group(function () {
+    Route::get('/adminlogin', [AdminLoginController::class, 'showLoginForm'])->name('admin-login');
+    Route::post('/admin/login', [AdminLoginController::class, 'login'])->name('admin-login.submit');
+});

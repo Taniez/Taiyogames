@@ -11,10 +11,11 @@ class developer_log extends Model
     // use HasFactory;
     use SoftDeletes;
 
-    public function developer() {
-        return $this->belongsTo(developer::class, "iddeveloper");
-    }
+    
     public function games() {
         return $this->belongsTo(game::class, "idgames");
+    }
+    public function user() {
+        return $this->belongsTo(User::class, "id");
     }
 }
