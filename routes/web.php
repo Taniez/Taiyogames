@@ -76,7 +76,7 @@ Route::get('/game', [gameController::class, "index"]);
 Route::get('/user/collection/{userID}', [userController::class, "index"])->name('profile.user');
 Route::get('/user/posting/{userID}', [userController::class, "posting"]);
 Route::get('/user/donate', [userController::class, "donate"]);
-Route::get('/user/mygame', [userController::class, "mygame"])->name("mygame");
+Route::get('/user/mygame/{userID}', [userController::class, "mygame"])->name("mygame"); 
 Route::post('/addComment', [userController::class, "add_comment"]);
 Route::middleware('admin')->group(function () {
     Route::get('/adminlogin', [AdminLoginController::class, 'showLoginForm'])->name('admin-login');

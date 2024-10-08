@@ -86,11 +86,10 @@
         </div>
 
         <div class="collectionZone">
-            <div class="navButton">
+        <div class="navButton">
                 <a href="/user/collection/{{ Auth::user()->id }}"> <button id='button'> COLLECTION </button> </a>
                 <a href="/user/posting/{{ Auth::user()->id }}"> <button id='button'> POSTING </button> </a>
-                <a href="/user/donate"> <button id='button'> DONATE </button> </a>
-                <a href="/user/mygame"> <button id='button'> MY GAME </button> </a>
+                <a href="/user/mygame/{{ Auth::user()->id }}"> <button id='button'> MY GAME </button> </a>
             </div>
             <div class="AllUrCollection">
                 @if($_Comments->isEmpty())

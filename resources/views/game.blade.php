@@ -20,7 +20,7 @@ body {
     margin: 0px auto;
     padding: 0px 15%;
     height: auto;
-    background-image: linear-gradient(rgba(0, 0, 255, 0), rgba(0, 0, 0, 0.8)), url("{{ asset($_Games->Game_preview)}}");
+    background-image: linear-gradient(rgba(0, 0, 255, 0), rgba(0, 0, 0, 0.8)), url("{{ asset($_Games->Gamebackground)}}");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -47,8 +47,8 @@ img{
                 <p><b>Status</b> {{ $_Games->status }} </p>
                 <p><b>Rating</b> xxx</p>
                 <p><b>Tags</b>:
-                @foreach($_Games->gametypes as $gametype)
-                {{preg_replace('/{value:(.*?)}/', '$1', $gametype ->gametype_name)}},
+                @foreach($_Games->gametags as $gametag)
+                {{preg_replace('/{value:(.*?)}/', '$1', $gametag ->gametag_name)}},
                 @endforeach
             </p>
             </div>
@@ -66,11 +66,22 @@ img{
             </div>
 
             <div class='gameLogs'>
-                <p id='header'><b>Development Log</b></p>
-                <p><a href="">swedrfghjkldfghjkldrfgthyju</a></p>
-                <p><a href="">swedrfghjkldfghjkldrfgthyju</a></p>
-                <p><a href="">swedrfghjkldfghjkldrfgthyju</a></p>
+                @if($_Dev_logs->isEmpty())
+                    
+                @else
+                    <p id='header'><b>Development Log</b></p>
+                    @foreach ($_Dev_logs as $log)
+                        <div class="dropdown">
+                            <span>{{$log->games->Game_name}} {{$log->games->version}}</span>
+                            <div class="dropdown-content">
+                                <p>topic: {{$log->topic}}</p>
+                                <p>detail: {{$log->detail}}</p>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
             </div>
+
 
             <div class="commuzone">
                 <div id='header'><p>Community</p></div>
@@ -94,7 +105,7 @@ img{
                     @csrf
                     <input type="hidden" value="{{ Auth::user()->id }}" name="huser_id">
                     <input type="hidden" name="game_id" value="{{ $_Games->idgames }}">
-                    <p>comment: <input type="text" name="detail" required></p>
+                    <p>comment: <input id='comment_text' type="text" name="detail" required></p>
                     <p><input type="submit" value="post"></p>
                 </form>
                 </div>
@@ -102,7 +113,7 @@ img{
         </div>
         <div class='pictureZone'>
         @foreach($_Games->screenshots as $screenshot)
-            <img src="{{ asset($screenshot->image_path) }}" width="100" alt="#">
+            <img src="{{ asset($screenshot->image_path) }}" width="1000" alt="#">
         @endforeach
         </div>
         

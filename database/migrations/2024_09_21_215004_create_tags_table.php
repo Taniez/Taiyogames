@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tags', function (Blueprint $table) {
-            $table->id('idgametypes');
-            $table->string("gametype_name");
+            $table->id('idgametag');
+            $table->string("gametag_name");
             $table->timestamps();
             $table->softDeletes();
         });

@@ -29,13 +29,13 @@ class userController extends Controller
     public function donate() {
         return view("user_donate");
     }
-    public function mygame() {
+    public function mygame($userID) {
         $user_tier = user_tier::all();
         $user_ = user::all();
-        $_Wish_list = Wishlist::take(4)->get();
-        $_Comments = comment::all();
-        
-        return view("user_mygame", compact('user_tier','user_','_Wish_list','_Comments'));
+        $_Games = game::where('user_id', $userID)->get();
+        $_Wish_list = Wishlist::where('user_id', $userID)->get();
+        $_Num_comment = comment::where('user_id', $userID)->count();
+        return view("user_mygame", compact('user_tier','user_','_Wish_list','_Num_comment','_Games'));
     }
     public function add_comment(Request $request) {
         $new_comment = new comment;

@@ -48,10 +48,10 @@
                 <ul>
                     @foreach ($tags as $tag)
                         @php
-                            $cleanedTag = preg_replace('/{value:(.*?)}/', '$1', $tag->gametype_name);
+                            $cleanedTag = preg_replace('/{value:(.*?)}/', '$1', $tag->gametag_name);
                         @endphp
                         <li>
-                            <a href="{{ url('/search-by-tag/'.$tag->gametype_name) }}">
+                            <a href="{{ url('/search-by-tag/'.$tag->gametag_name) }}">
                                 {{ $cleanedTag }}
                             </a>
                         </li>

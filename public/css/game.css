@@ -63,6 +63,7 @@ p{
 }
 .pictureZone img{
     margin-bottom: 15px;
+    width: 320px;
 }
 .downloadZone{
     padding-left: 50px;
@@ -224,4 +225,29 @@ iframe{
     border-top: 1px solid rgb(180, 180, 180);
     padding-top: 10px;
     margin-bottom: 10px;
+}
+.dropdown {
+    display: inline-flexbox;
+    position: relative;
+}
+.dropdown span{
+    color: white;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 300px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 3;
+}
+.dropdown-content p{
+    color: black;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+#comment_text {
+    color: black;
 }

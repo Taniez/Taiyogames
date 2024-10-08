@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string("Gamevideo",1024)->nullable(); 
             $table->string("Status")->nullable();  
             $table->unsignedBigInteger('user_id');
-
+            $table->string("Gamebackground",1024)->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->softDeletes();
             $table->timestamps();
