@@ -40,7 +40,7 @@ class Devmanage_controler extends Controller
         $new_game->Game_info = $request->g_details;
         $new_game->version = $request->g_version;
         $new_game->Status = $request->g_status;
-    
+        
         // Handle image upload
         if ($request->hasFile('g_img') && $request->file('g_img')->isValid()) {
             $imageName = time() . '.' . $request->g_img->extension();
@@ -105,7 +105,8 @@ class Devmanage_controler extends Controller
     
         // Validate the form data
         $request->validate([
-            'g_img' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5048', // Validate file type and size
+            'g_img' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5048',
+            'g_bg' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:20048' // Validate file type and size
         ]);
     
         // Update game fields
@@ -137,6 +138,7 @@ class Devmanage_controler extends Controller
         $devlogs->user_id =  $request->huser_id;
         $devlogs->topic = $request->devtopic;
         $devlogs->detail = $request->devdetail;
+        $devlogs->version = $request->g_version;
 
         $devlogs->save();
 

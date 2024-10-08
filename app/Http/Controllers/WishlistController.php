@@ -46,14 +46,20 @@ class WishlistController extends Controller
         $tags = gametag::all();
         $request->validate([
             'search_box' => 'nullable|string|max:255',
-        ]);
-        $_Games = game::where("Game_name","LIKE","%$request->serch_box%")->get(); // ดึงข้อมูลเกมทั้งหมดจากฐานข้อมูล
-        return view("wishlist", compact('_Games','tags'));
+        ]); 
+     
+        $wishlists = auth()->user()->wishlists()->whereHas('game', function($query) use ($request) {
+            $query->where('Game_name', 'LIKE', "%{$request->serch_box}%");
+        })->with('game')->get();
+        
+        return view("wishlist", compact('wishlists','tags'));
     }
+    
+   
 
 
 
-    public function searchByTag($tag)
+    public function favsearchByTag($tag)
     {
         $tags = gametag::all();
 
@@ -64,10 +70,10 @@ class WishlistController extends Controller
             $_Games = $gametag->games()->get();
         } else {
             // If tag doesn't exist, return an empty result or a message
-            $_Games = collect();  // Empty collection
+            $wishlists = collect();  // Empty collection
         }
 
         // Return the view with the filtered games
-        return view('wishlist', compact('_Games','tags'));
+        return view('wishlist', compact('wishlists','tags'));
     }
 }

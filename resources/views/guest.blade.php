@@ -94,8 +94,8 @@
                     </a>
             
                     <!-- ปุ่ม Wishlist -->
-                    <a href="register"><button type="submit" class="mt-2 bg-blue-500 text-white p-2 rounded">
-                        wishlist
+                    <a href="register"><button type="submit">
+                        <i class="bi bi-heart" style="color: red;"></i>
                     </button>
                 </a>
                 </div>

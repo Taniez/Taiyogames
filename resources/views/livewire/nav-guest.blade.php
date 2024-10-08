@@ -24,7 +24,7 @@
                     </div>
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link href="register">
-                            {{ __('wishlist') }}
+                            {{ __('Favorite') }}
                         </x-nav-link>
                     </div>
                   </div>
@@ -112,7 +112,7 @@
                                 </x-dropdown-link>
                                 
                                 <x-dropdown-link href="register">
-                                    {{ __('Setting') }}
+                                    {{ __('Profile Setting') }}
                                 </x-dropdown-link>
                                 
                                 <x-dropdown-link href="login">
