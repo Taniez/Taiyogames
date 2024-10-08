@@ -6,15 +6,15 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    protected $primaryKey = 'idgametypes';
+    protected $primaryKey = 'idgametag';
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('gametypes', function (Blueprint $table) {
-            $table->id('idgametypes');
-            $table->string("gametype_name");
+        Schema::create('gametags', function (Blueprint $table) {
+            $table->id('idgametag');
+            $table->string("gametag_name");
             $table->timestamps();
             $table->softDeletes();
         });
@@ -24,7 +24,7 @@ return new class extends Migration
      * Reverse the migrations.
      */
     public function down(){
-        Schema::table('gametypes', function (Blueprint $table) {
+        Schema::table('gametags', function (Blueprint $table) {
         $table->dropSoftDeletes();
         });
     }

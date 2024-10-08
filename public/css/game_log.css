@@ -1,0 +1,51 @@
+.ground{
+    background: rgba(0, 0, 0, 0.70);
+}
+.logoGame{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 70px;
+}
+.logoGame img{
+    width: 250px;
+    margin-top: 50px;
+    scale: 130%
+}
+h1 {
+    color: rgb(255, 180, 42);
+    font-size: 50px;
+    margin-bottom: -8px;
+}
+p {
+    color: white;
+}
+.name {
+    color: cornflowerblue;
+    margin-left: 5px;
+}
+.gameLogs {
+    padding-left: 25px;
+    padding-right: 25px;
+}
+.headerDetail {
+    display: flex;
+    margin-bottom: 20px;
+    width: max-content;
+}
+.LogCreateAt {
+    margin-left: 10px;
+    font-size: 12px;
+    padding-top: 5px;
+}
+#detailheader {
+    color: rgb(255, 180, 42);
+    font-size: 30px;
+    font-weight: bold;
+    padding-top: 20px;
+    border-top: 2px solid wheat;
+}
+.detail {
+    text-indent: 2em;
+    padding-bottom: 50px;
+    font-size: 20px;
+}

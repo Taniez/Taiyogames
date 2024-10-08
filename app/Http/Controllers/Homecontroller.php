@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\game;
 use App\Models\admin;
-use App\Models\gametype;
+use App\Models\gametag;
 use App\Models\User;
 
 use Illuminate\Support\Facades\Auth;
@@ -14,14 +14,14 @@ class Homecontroller extends Controller
 {
     public function index() {
       
-        $tags = gametype::all();
-        $_Games = game::with('gametypes')->get(); // ดึงข้อมูลเกมพร้อมประเภทของเกม
+        $tags = gametag::all();
+        $_Games = game::with('gametags')->get(); // ดึงข้อมูลเกมพร้อมประเภทของเกม
         
 
         return view("home", compact('_Games','tags'));
     }
     public function serch(Request $request) {
-        $tags = gametype::all();
+        $tags = gametag::all();
         $request->validate([
             'search_box' => 'nullable|string|max:255',
         ]);
@@ -33,19 +33,19 @@ class Homecontroller extends Controller
 
     public function searchByTag($tag)
     {
-        $tags = gametype::all();
-        // Find the tag in the 'gametypes' table
-        $gametype = gametype::where('gametype_name', $tag)->first();
+        $tags = gametag::all();
 
-        if ($gametype) {
-            // Get games associated with this tag
-            $_Games = $gametype->games()->get();
+        $gametag = gametag::where('gametag_name', $tag)->first();
+
+        if ($gametag) {
+
+            $_Games = $gametag->games()->get();
         } else {
-            // If tag doesn't exist, return an empty result or a message
-            $_Games = collect();  // Empty collection
+            
+            $_Games = collect();  
         }
 
-        // Return the view with the filtered games
+        
         return view('home', compact('_Games','tags'));
     }
 

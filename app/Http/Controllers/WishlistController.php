@@ -4,16 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\game;
 use Illuminate\Http\Request;
-use App\Models\gametype;
+use App\Models\gametag;
 
 class WishlistController extends Controller
 {
     public function index()
     {
         $wishlists = auth()->user()->wishlists()->with('game')->get(); 
-        $tags = gametype::all();
-       
-        return view('wishlist', compact('wishlists','tags'));
+        $tags = gametag::all();
+        $_Games = game::with('gametags')->get();
+        return view('wishlist', compact('wishlists','tags', '_Games'));
         
        
        
@@ -40,9 +40,10 @@ class WishlistController extends Controller
 
     }
 
-    public function favsearch(Request $request) {
-       
-        $tags = gametype::all();
+
+    
+    public function serch(Request $request) {
+        $tags = gametag::all();
         $request->validate([
             'search_box' => 'nullable|string|max:255',
         ]); 
@@ -60,14 +61,13 @@ class WishlistController extends Controller
 
     public function favsearchByTag($tag)
     {
-        
-        $tags = gametype::all();
-        // Find the tag in the 'gametypes' table
-        $gametype = gametype::where('gametype_name', $tag)->first();
-    $wishlists = auth()->user()->wishlists()->with('game')->get(); 
-        if ($gametype) {
+        $tags = gametag::all();
+
+        $gametag = gametag::where('gametag_name', $tag)->first();
+
+        if ($gametag) {
             // Get games associated with this tag
-            $wishlists = $gametype->games()->get();
+            $_Games = $gametag->games()->get();
         } else {
             // If tag doesn't exist, return an empty result or a message
             $wishlists = collect();  // Empty collection

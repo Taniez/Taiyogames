@@ -50,10 +50,10 @@
             <ul>
             @foreach ($tags as $tag)
                 @php
-                    $cleanedTag = preg_replace('/{value:(.*?)}/', '$1', $tag->gametype_name);
+                    $cleanedTag = preg_replace('/{value:(.*?)}/', '$1', $tag->gametag_name);
                 @endphp
                 <li>
-                    <a href="{{ url('/search-by-tag/'.$tag->gametype_name) }}">
+                    <a href="{{ url('/search-by-tag/'.$tag->gametag_name) }}">
                         {{ $cleanedTag }}
                     </a>
                 </li>
@@ -63,20 +63,7 @@
 
             <a href="#" class="text-orange-500 mt-4 block">See all Tags &rarr;</a>
 
-            <h3 class="text-lg font-bold mt-8 mb-4">Browse</h3>
-            <ul class="space-y-2">
-                <li>Games</li>
-                <li>Tools</li>
-            </ul>
-
-            <h3 class="text-lg font-bold mt-8 mb-4">Games by Price</h3>
-            <ul class="space-y-2">
-                <li>Onsale</li>
-                <li>Free Game</li>
-                <li>With Demo</li>
-                <li>$5 or less</li>
-                <p>Tags:</p>
-            </ul>
+            
         </div>
     
 

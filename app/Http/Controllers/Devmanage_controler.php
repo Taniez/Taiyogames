@@ -1,24 +1,39 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Auth;
 use App\Models\screenshot;
 use Illuminate\Http\Request;
-use App\Models\gametype;
+use App\Models\gametag;
 use App\Models\game;
-use App\Models\Auth;
+
 use App\Models\developer_log;
+use App\Models\User;
+
 class Devmanage_controler extends Controller
 {
     public function index(){
-        $games = game::all();
-        return view('Devmanage', compact('games'));
+        if (Auth::check()) {
+            $user = Auth::user();
+    
+            // Fetch games that belong to the current user
+            $games = $user->games;
+    
+            return view('Devmanage', compact('games'));
+        }
+    
+        // Redirect to login or another appropriate page if not authenticated
+        return redirect()->route('login');
+    
      }
     //
     public function create(Request $request){
         $request->validate([
-            'g_img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:20048', // Validate file type and size
-            'g_bg' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:20048'
+            'g_img' => 'image|mimes:jpeg,png,jpg,gif,svg|max:20048',
+            'g_bg' => 'image|mimes:jpeg,png,jpg,gif,svg|max:20048', // remove required here
         ]);
+        
+
        
         $new_game = new game;
     
@@ -39,19 +54,18 @@ class Devmanage_controler extends Controller
             $new_game->Game_preview = null;  // or a default image path if needed
         }
 
-    
         if ($request->hasFile('g_bg') && $request->file('g_bg')->isValid()) {
-                $bgName = time() . '.' . $request->g_bg->extension();
-                $request->g_bg->move(public_path('img_bg'), $bgName);
-                $new_game->Gamebackground = 'img_bg/' . $bgName;
-                }
-        else {
-                $new_game->Game_preview = null;
+            $bgName = time() . '.' . $request->g_bg->extension();
+            $request->g_bg->move(public_path('img_bg'), $bgName);
+            $new_game->Gamebackground = 'img_bg/' . $bgName;
             }
+    else {
+            $new_game->Gamebackground   = null;
+        }
     
         // Assign download link
         $new_game->Game_dowload_link = $request->g_link;
-        $new_game->Gamevideo = $request->g_video;
+       
 
         // Syn user id auth who created the game
         $new_game->user_id = $request->huser_id;
@@ -63,12 +77,12 @@ class Devmanage_controler extends Controller
                 return trim(str_replace(['[', ']', '"'], '', $tag));}, $tags);
             $tagIds = [];
             foreach ($cleanTags as $tagName) {
-                $gametype = gametype::firstOrCreate(['gametype_name' => $tagName]);
-                $tagIds[] = $gametype->idgametypes;
+                $gametag = gametag::firstOrCreate(['gametag_name' => $tagName]);
+                $tagIds[] = $gametag->idgametag;
             }
         
             // Sync tags with the game
-            $new_game->gametypes()->sync($tagIds);
+            $new_game->gametags()->sync($tagIds);
 
             // Handle multiple screenshots
             if($request->hasFile('screenshots')){
@@ -93,7 +107,7 @@ class Devmanage_controler extends Controller
     
         // Validate the form data
         $request->validate([
-            'g_img' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5048',
+            'g_img' => 'image|mimes:jpeg,png,jpg,gif,svg|max:20048',
             'g_bg' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:20048' // Validate file type and size
         ]);
     
@@ -109,17 +123,16 @@ class Devmanage_controler extends Controller
             $request->g_img->move(public_path('img'), $imageName);
             $game->Game_preview = 'img/' . $imageName;
         }
+
+        
         if ($request->hasFile('g_bg') && $request->file('g_bg')->isValid()) {
             $bgName = time() . '.' . $request->g_bg->extension();
             $request->g_bg->move(public_path('img_bg'), $bgName);
-            $new_game->Gamebackground = 'img_bg/' . $bgName;
-            }
-    else {
-            $new_game->Game_preview = null;
+            $game->Gamebackground = 'img_bg/' . $bgName; // Use $game instead of $new_game
         }
-    
+        
         $game->Game_dowload_link = $request->g_link;
-        $game->Gamevideo = $request->g_video;
+       
         $game->save();
     
         $devlogs =  new developer_log;
@@ -128,14 +141,13 @@ class Devmanage_controler extends Controller
         $devlogs->topic = $request->devtopic;
         $devlogs->detail = $request->devdetail;
         $devlogs->version = $request->g_version;
-
         $devlogs->save();
 
 
 
         // Handle tags
         // First, detach all existing tags
-        $game->gametypes()->detach();
+        $game->gametags()->detach();
     
         // Process and attach new tags
         $tags = explode(',', $request->g_tags);
@@ -143,12 +155,12 @@ class Devmanage_controler extends Controller
             return trim(str_replace(['[', ']', '"'], '', $tag));}, $tags);
         $tagIds = [];
         foreach ($cleanTags as $tagName) {
-            $gametype = gametype::firstOrCreate(['gametype_name' => trim($tagName)]);
-            $tagIds[] = $gametype->idgametypes;
+            $gametag = gametag::firstOrCreate(['gametag_name' => trim($tagName)]);
+            $tagIds[] = $gametag->idgametag;
         }
     
         // Sync the updated tags
-        $game->gametypes()->sync($tagIds);
+        $game->gametags()->sync($tagIds);
     
         // Handle multiple screenshots
         // First, delete old screenshots
@@ -176,7 +188,7 @@ class Devmanage_controler extends Controller
                 ]);
             }
         }
-    
+
         return redirect('/Devmanage');
     }
     
@@ -184,7 +196,7 @@ class Devmanage_controler extends Controller
 
     public function delete($idgames){
         $games = game::destroy($idgames);
-        return redirect('/Devmanage');
+        return redirect('/home');
     }
     
     // public function serch(Request $request){

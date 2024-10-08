@@ -1,0 +1,211 @@
+.baseBG {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+.profileNstat {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+.group1 {
+    display: flex;
+}
+.group2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 216px;
+}
+.pfpInfo {
+    margin-left: 25px;
+    width: 270px;
+}
+#name {
+    font-size: 35px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: -7px;
+    margin-right: 10px;
+}
+.nameDetail {
+    display: flex;
+    width: 400px;
+}
+.tierIcon {
+    width: 40px;
+    height: 40px;
+    margin-right: 7px;
+    margin-top: 30px;
+}
+#tier {
+    margin-top: 10px;
+    font-size: 25px;
+    font-weight: bold;
+}
+#firstDaylogin {
+    margin-bottom: 25px;
+}
+.makeCenter {
+    display: flex;
+    align-items: center;
+}
+.stat {
+    display: flex;
+    text-align: center;
+    margin-right: 100px;
+    width: 300px;
+    height: 100px;
+    justify-content: space-between;
+}
+.stat p {
+    font-size: 25px;
+    font-weight: bold;
+}
+.middle {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%)
+}
+.toSetting {
+    position: relative;
+    margin-left: 25px;
+    bottom: 30px;
+}
+.toSetting:hover .middle {
+    opacity: 1;
+}
+.setting {
+    color: white;
+    font-size: 16px;
+}
+.collectionZone {
+    background-color: rgb(231, 231, 231);
+}
+.navButton {
+    margin-left: 25px;
+    padding-top: 10px;
+}
+/* .navButton #button {
+    background-color: rgb(255, 180, 42);
+    padding: 10px 16px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: black;
+    border-radius: 5px;
+}
+.navButton #button:hover {
+    background-color: blue;
+    padding: 10px 16px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: white;
+} */
+.navButton #button {
+    padding: 10px 16px;
+    margin-bottom: 20px;
+    background: #ffb42a;
+  border: 3px solid #ffb42a;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 16px;
+  min-height: 40px;
+  outline: 0;
+  padding: 12px 14px;
+  text-align: center;
+  text-rendering: geometricprecision;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+}
+
+.navButton #button:hover,
+.navButton #button:active {
+  background-color: initial;
+  background-position: 0 0;
+  color: #ffb42a;
+  padding: 10px 16px;
+    margin-bottom: 20px;
+}
+
+.navButton #button:active {
+  opacity: .5;
+}
+
+
+
+
+.showBox {
+    display: flex;
+    margin: 0 50px 50px 50px;
+    justify-content: space-between;
+    justify-content: center;
+}
+.showBox .game{
+    width: 220px;
+    height: 200px;
+    background-color: grey;
+    border-radius: 5px;
+}
+.showBox .game:hover{
+    width: 220px;
+    height: 200px;
+    background-color: green;
+    border-radius: 5px;
+    cursor: pointer
+}
+.game img {
+    width: 220px;
+    height: 200px;
+    border-radius: 5px;
+}
+.fix_seeAll{
+    position: absolute;
+    right: 275px; top: 494px;
+    font-weight: bold;
+    color: grey;
+}
+.fix_seeAll:hover{
+    position: absolute;
+    right: 275px; top: 494px;
+    font-weight: bold;
+    color: black;
+}
+.AllUrPost {
+    width: auto;
+    height: 70px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.AllUrPost:hover {
+    width: auto;
+    height: 70px;
+    background-color: grey;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.collection_empty {
+    color: grey;
+    text-align: center;
+    margin: 70px 0;
+    font-weight: bold;
+}
+.wishlist_empty {
+    text-align: center;
+    padding-bottom: 3rem;
+    margin-top: 50px; margin-bottom: 50px;
+}

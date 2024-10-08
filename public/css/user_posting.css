@@ -5,7 +5,6 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 40px;
-    border-bottom: 2px solid black;
 }
 .group1 {
     display: flex;
@@ -25,6 +24,17 @@
     font-weight: bold;
     margin-top: 20px;
     margin-bottom: -7px;
+    margin-right: 10px;
+}
+.nameDetail {
+    display: flex;
+    width: 400px;
+}
+.tierIcon {
+    width: 40px;
+    height: 40px;
+    margin-right: 7px;
+    margin-top: 30px;
 }
 #tier {
     margin-top: 10px;
@@ -76,21 +86,54 @@
 }
 .navButton {
     margin-left: 25px;
+    padding-top: 10px;
 }
+
+
+
 .navButton #button {
-    background-color: green;
     padding: 10px 16px;
     margin-bottom: 20px;
-    font-weight: bold;
-    color: white;
+    background: #ffb42a;
+  border: 3px solid #ffb42a;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 16px;
+  min-height: 40px;
+  outline: 0;
+  padding: 12px 14px;
+  text-align: center;
+  text-rendering: geometricprecision;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
 }
-.navButton #button:hover {
-    background-color: blue;
-    padding: 10px 16px;
+
+.navButton #button:hover,
+.navButton #button:active {
+  background-color: initial;
+  background-position: 0 0;
+  color: #ffb42a;
+  padding: 10px 16px;
     margin-bottom: 20px;
-    font-weight: bold;
-    color: white;
 }
+
+.navButton #button:active {
+  opacity: .5;
+}
+
+
+
+
 .showBox {
     display: flex;
     margin: 0 50px 50px 50px;
@@ -143,6 +186,10 @@
     align-items: center;
     justify-content: center;
 }
+.AllUrPost:hover .commenterDetail #postedDay{
+    color: white;
+}
+
 .collection_empty {
     color: grey;
     text-align: center;

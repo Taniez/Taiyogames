@@ -16,31 +16,30 @@
     @auth
     <style>
         @import url({{asset('css/style.css')}});
-
-        
         
     </style>
 
 
 </head>
 <body>
-    <h1>insert</h1>
-    <table  class="table table-bordered">
+    <h1>Upload</h1>
+    <table  class="table table-bordered mt-3">
     <tr>
         <th>ชื่อเกม</th>
-        <th>ข้อมูลเกมกากๆ</th>
+        <th>ข้อมูลเกม</th>
         <th>เวอร์ชั่น</th>
-        <th>รูปเกมหมา</th>
-        <th>ลิงค์โหลดเกมหมาๆ</th>
+        <th>รูปเกม</th>
+        <th>ลิงค์โหลดเกม</th>
     </tr>
+    
     @foreach ($games as $games)
     <tr>
-        <td>{{$games -> Game_name}}</td>
+        <td>{{$games -> Game_name}}</td>    
         <td>{{$games -> Game_info}}</td>
         <td>{{$games -> version}}</td>
         <td>
         <a href="{{ asset($games->Game_preview) }}" download>    
-            <img src="{{ asset($games->Game_preview) }}" alt="#" >
+            <img src="{{ asset($games->Game_preview) }}" alt="#" class="w-90 rem h-90">
         </a>
         </td>
         <td><a href="{{$games -> Game_dowload_link}}">ลิงค์โหลดเกมหมาๆ</a></td>
@@ -51,9 +50,7 @@
             </button>
         </td>
     </tr>
-    @foreach ($games->screenshots as $screenshot)
-    <img src="{{ asset($screenshot->image_path) }}" alt="Screenshot" width="100">
-    @endforeach
+
     <!-- Modal -->
     <div class="modal fade" id="updateModal{{$games->idgames}}" tabindex="-1" aria-labelledby="updateModalLabel{{$games->idgames}}" aria-hidden="true">
         <div class="modal-dialog">
@@ -96,7 +93,7 @@
                         </div>
 
                         <div class=" mb-3">
-                            <label for="g_bg" class="form-label">Game Image</label>
+                            <label for="g_bg" class="form-label">Game Background</label>
                             <input type="file" class="form-control" name="g_bg">
                             <img src="{{ asset($games->Gamebackground) }}" alt="#" class="mt-2" width="100">
                         </div>
@@ -105,16 +102,13 @@
                             <label for="g_link" class="form-label">Download Link</label>
                             <input type="text" class="form-control" name="g_link" value="{{$games->Game_dowload_link}}" required>
                         </div>
-                        <div class="mb-3">
-                            <label for="g_link" class="form-label">video Link</label>
-                            <input type="text" class="form-control" name="g_video" value="{{$games->Gamevideo}}" required>
-                        </div>
+
 
 
                         <div class="mb-3">
                             <label for="g_tags" class="form-label">Game Tags</label>
 
-                            <input id="tags{{$games->idgames}}" name="g_tags" class="form-control" value="{{  preg_replace('/{value:(.*?)}/', '$1', implode(',', $games->gametypes->pluck('gametype_name')->toArray())) }}">
+                            <input id="tags{{$games->idgames}}" name="g_tags" class="form-control" value="{{  preg_replace('/{value:(.*?)}/', '$1', implode(',', $games->gametags->pluck('gametag_name')->toArray())) }}">
                         </div>
 
                         
@@ -143,27 +137,37 @@
     </div>
 
     @endforeach
-
-    <div class="container mt-3">
+<!-- เเก้ตั้งแต่ตรงนี้ -->
+    <div class="container mt-3 border-1">
         <div class="form-container">
         <form action="/Devmanage/create" method="POST" enctype="multipart/form-data">
             @csrf
             <label for="g_name" class="form-label">Game Name</label>
-            <div class="mb-3 mt-3"> 
-                <input type="text" name="g_name" placeholder="Game Name" required>
+            <div class="mb-3 mt-3 "> 
+                <input type="text" name="g_name" placeholder="Game Name" class="form-control" required>
             </div>
             <label for="g_details" class="form-label">Game Details</label>
             <div class="mb-3">
-                <input type="text" name="g_details" placeholder="Game Details" required>
+                
+                <textarea name="g_details" cols="90" rows="10" required></textarea>
             </div>
             <label for="g_version" class="form-label">Game Version</label>
             <div class="mb-3">
-                <input type="text" name="g_version" placeholder="Game Version" required>
+                <input type="text" name="g_version" placeholder="Game Version" class="form-control" required>
             </div>
             <label for="g_link" class="form-label">Download Link</label>
             <div class="mb-3">
-                <input type="text" name="g_link" placeholder="Download Link" >
+                <input type="text" name="g_link" class="form-control" placeholder="Download Link" >
             </div>
+            <div class="mb-3">
+            <label for="g_img" class="form-label">Game icon</label>
+                    <input type="file" class="form-control" name="g_img" id="g_img" required>
+            </div>
+            <div class="mb-3">
+            <label for="g_bg" class="form-label">Upload background</label>
+            <input type="file" class="form-control" name="g_bg" id="g_bg"  required>
+            </div>
+
             <div class="mb-3">
             <label for="g_status" class="form-label">status</label>
                 <select class="form-select" aria-label="Default select example"  name="g_status">
@@ -188,25 +192,7 @@
         
             <button type="submit" class="btn btn-warning mb-3">Submit</button>
             </div>
-        <div class="screen-container">
-            <div class="icon mb-3">
-            <label for="images" class="drop-container" id="dropcontainer">
-                <span class="drop-title">Drop files here</span>or
-                <input type="file" name="g_img" id="g_img" required>
-            </label>
-            </div>
 
-            <div class="mb-3">
-            <label for="g_bg" class="form-label">Upload background</label>
-            <input type="file" name="g_bg" id="g_bg" >
-            </div>
-
-
-            <div class="mb-3">
-            <label for="g_video" class="form-label">video Link</label>
-                <input type="text" name="g_video" placeholder="video Link" >
-            </div>
-        </div>
 
         <!-- create by auth -->
         <input type="hidden" value="{{ Auth::user()->id }}" name="huser_id">

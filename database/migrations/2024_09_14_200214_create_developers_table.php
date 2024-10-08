@@ -27,7 +27,7 @@ return new class extends Migration
      * Reverse the migrations.
      */
     public function down(){
-        Schema::table('gametypes', function (Blueprint $table) {
+        Schema::table('gametags', function (Blueprint $table) {
         $table->dropSoftDeletes();
         });
     }

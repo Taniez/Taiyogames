@@ -17,6 +17,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     @guest
     <script>window.location.href = "{{ route('register') }}";</script>
     @endguest
@@ -30,7 +31,7 @@ body {
     padding: 0px 15%;
     height: auto;
     background-image: linear-gradient(rgba(0, 0, 255, 0), rgba(0, 0, 0, 0.8)), url("{{ asset($_Games->Gamebackground)}}");
-    background-repeat: no-repeat;
+    /* background-repeat: no-repeat; */
     background-position: center;
     background-size: cover;
 }
@@ -38,6 +39,8 @@ body {
 img{
     width: 60px;
 }
+
+
     </style>
 </head>
 <body>
@@ -48,18 +51,18 @@ img{
         <div class="logoGame ">
         <img src="{{ asset($_Games->Game_preview)}}" alt="logo">
         </div>
-    <p id='version' ><b>Lastest Version : {{ $_Games->version }} | {{ \Carbon\Carbon::parse($_Games->updated_at)->format('Y-m-d') }}</b></p>
+    <p><b id='version' >Lastest Version</b> {{ $_Games->version }} | {{ \Carbon\Carbon::parse($_Games->updated_at)->format('Y-m-d') }}</p>
     <p id="about" > {{ $_Games->Game_info }} </about>
-    <div class='Info '>
+    <div class='Info'>
         <div class='infoZone '>
             <div class='gameInformation'>
-                <p id='header'><b>More information</b></p>
-                <p><b>Name</b> {{ $_Games->Game_name }} </p>
-                <p><b>Developer</b> {{ $_Games->User->name }} </p>
-                <p><b>Status</b> {{ $_Games->status }} </p>
-                <p><b>Tags</b>:
-                @foreach($_Games->gametypes as $gametype)
-                {{preg_replace('/{value:(.*?)}/', '$1', $gametype ->gametype_name)}},
+                <p id='header'><b>About this game</b></p>
+                <p><b class="Abt" >Name</b> {{ $_Games->Game_name }} </p>
+                <p><b class="Abt" >Developer</b> {{ $_Games->User->name }} </p>
+                <p><b class="Abt" >Status</b> {{ $_Games->Status }} </p>
+                <p><b class="Abt" >Tags</b>
+                @foreach($_Games->gametags  as $gametag)
+                {{preg_replace('/{value:(.*?)}/', '$1', $gametag ->gametag_name)}},
                 @endforeach
             </p>
             </div>
@@ -70,24 +73,43 @@ img{
             <div class="downloadZone">
                 <p id='header'><b>Download</b></p>
                 <div class='downloadGame'>
-                    <div onclick="window.location.href='{{ $_Games->Game_dowload_link }}'">
-                        <button id="play_btn">Download</button>
+                    <div class="box">
+                        <a class="button" href="#popup1">Download</a>
+                    </div>
+
+                    <div id="popup1" class="overlay">
+                        <div class="popup">
+                            <h2>Download '{{ $_Games->Game_name }}'</h2>
+                            <a class="close" href="#">&times;</a>
+                            <div class="content">
+                                This game is free but the developer accepts your support by letting you pay what you think is fair for the game.
+                                <p class="toDownload" onclick="window.location.href='{{ $_Games->Game_dowload_link }}'">
+                                    No thanks, just take me to the downloads.
+                                </p>
+                                <h4>Spending coin?</h4>
+                                <div class="spendSelectContainer">
+                                    <button class="btn" onclick="window.location.href='#'">1c</button>
+                                    <button class="btn" onclick="window.location.href='#'">10c</button>
+                                    <button class="btn" onclick="window.location.href='#'">50c</button>
+                                    <button class="btn" onclick="window.location.href='#'">100c</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">report</button>
+
+            <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">report</button> -->
+            
             <div class='gameLogs'>
                 @if($_Dev_logs->isEmpty())
                     
                 @else
                     <p id='header'><b>Development Log</b></p>
                     @foreach ($_Dev_logs as $log)
-                        <div class="dropdown">
-                            <span>{{$log->games->Game_name}} {{$log->version}}</span>
-                            <div class="dropdown-content">
-                                <p>topic: {{$log->topic}}</p>
-                                <p>detail: {{$log->detail}}</p>
-                            </div>
+                        <div class="Logcontainer">
+                            <a class="toLog" onclick="window.location.href='/game/{{ $_Games->idgames }}/gamelog/{{ $log->topic }}'">{{$log->topic}} {{$log->version}}</a>
+                            <p class="LogCreateAt">{{ \Carbon\Carbon::parse($log->updated_at)->format('Y-m-d') }}</p>
                         </div>
                     @endforeach
                 @endif
@@ -139,7 +161,7 @@ img{
         </div>
 
             <div class="commuzone">
-                <div id='header'><p>Community</p></div>
+                <div id='header'><p>Comment</p></div>
                 <div class="comment">
                 @if($_Comments->isEmpty())
                     <div class="collection_empty">
@@ -147,21 +169,40 @@ img{
                     </div>
                 @else
                     @foreach ($_Comments as $comment)
-                        <div class="commentContainer">
-                            <div class="commenterDetail">
-                                <p id='name'>{{ $comment->user->name }}</p>
-                                <p id='postedDay'>{{ \Carbon\Carbon::parse($comment->updated_at)->format('Y-m-d') }}</p>
+                        <div class="commentBoxDetail">
+                            <div class="commentContainer">
+                                <div class="commenterDetail">
+                                    @if ($comment->user_id == $_Games->user_id)
+                                        <p id='name'>{{ $comment->user->name }} <b class="GameOwner">(Author)</b></p>
+                                    @else
+                                        <p id='name'>{{ $comment->user->name }}</p>
+                                    @endif
+
+                                    @if ($comment->user->id_user_tier == 2)
+                                        <img class="tierIcon" src="/img/cotton.png" alt="tier แรงงาน">
+                                    @else
+                                        <img class="tierIcon" src="/img/pickaxe.png" alt="tier ทาส">
+                                    @endif
+                                    <p id='postedDay'>{{ \Carbon\Carbon::parse($comment->updated_at)->format('Y-m-d') }}</p>
+                                </div>
+                                <p id='detail'>{{ $comment->comment_detail }}</p>
                             </div>
-                            <p id='detail'>{{ $comment->comment_detail }}</p>
+                            <div class="commentIcon">
+                                @if (Auth::user()->id == $comment->user_id)
+                                    <a href="/deleteComment/{{ $comment->id_comment }}"><i class="fa fa-trash-o"></i></a>
+                                @else
+                                    <a href="#"><i class="fa fa-flag"></i></a>
+                                @endif
+                            </div>
                         </div>
                     @endforeach
                 @endif
-                <form action="/addComment" method="post">
+                <form action="/addComment" method="post" class="commentBox">
                     @csrf
                     <input type="hidden" value="{{ Auth::user()->id }}" name="huser_id">
                     <input type="hidden" name="game_id" value="{{ $_Games->idgames }}">
-                    <p>comment: <input type="text" name="detail" required></p>
-                    <p><input type="submit" value="post"></p>
+                    <p><input class="commentTextBox" id='comment_text' type="text" name="detail" required></p>
+                    <p><input class="commentSendBtn" type="submit" value="post"></p>
                 </form>
                 </div>
             </div>
@@ -173,41 +214,14 @@ img{
         </div>
 
     </div>
+    <div class="fix_report">
+        <a href="#"><i class="fa fa-flag reportBtn"></i> Report</a>
     </div>
 @else
         <p>No game found.</p>
-
 @endif
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">report</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form action="/admin/report/{{$_Games->idgames}}" method="POST">
-        @csrf
-          <div class="mb-3">
-            <label for="report-topic" class="col-form-label">report topic:</label>
-            <input type="text" class="form-control" id="report_topic" name="report_topics" required>
-          </div>
-          <div class="mb-3">
-            <label for="message-text" class="col-form-label">details:</label>
-            <input type="text" class="form-control" id="message-text" name="report_text" required>
-          </div>
-          <input type="hidden" value="{{ Auth::user()->id }}" name="huser_id">
-          <button type="submit" class="btn btn-success">Save changes</button>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        
-      </div>
-    </div>
-  </div>
-</div>
+
 </body>
 </html>
 </x-app-layout>

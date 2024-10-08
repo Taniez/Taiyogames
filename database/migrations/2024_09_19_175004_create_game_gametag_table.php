@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('game_gametypes', function (Blueprint $table) {
-            $table->id('id_game_gametype');
+        Schema::create('game_gametags', function (Blueprint $table) {
+            $table->id('id_game_gametags');
             $table->foreignId('idgames')->constrained('games', 'idgames');
-            $table->foreignId('idgametypes')->constrained('gametypes', 'idgametypes');
+            $table->foreignId('idgametag')->constrained('gametags', 'idgametag');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -25,7 +25,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('game_gametypes',function (Blueprint $table) {
+        Schema::dropIfExists('game_gametags',function (Blueprint $table) {
             $table->dropSoftDeletes();
             });
     }
