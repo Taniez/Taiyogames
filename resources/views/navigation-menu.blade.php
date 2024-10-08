@@ -111,7 +111,7 @@
                             </x-dropdown-link>
                             
                             <x-dropdown-link href="{{ route('profile.Setting') }}">
-                                {{ __('Setting') }}
+                                {{ __('Profile Setting') }}
                             </x-dropdown-link>
 
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())

@@ -112,7 +112,7 @@
                                 </x-dropdown-link>
                                 
                                 <x-dropdown-link href="register">
-                                    {{ __('Setting') }}
+                                    {{ __('Profile Setting') }}
                                 </x-dropdown-link>
                                 
                                 <x-dropdown-link href="login">

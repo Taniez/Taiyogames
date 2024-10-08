@@ -64,8 +64,8 @@
                         @csrf
                         @method('DELETE')
                         <input type="hidden" name="idgames" value="{{ $wishlist->game->idgames }}">
-                        <button type="submit" class="mt-2 bg-blue-500 text-white p-2 rounded">
-                            Remove
+                        <button type="submit" class="p-2 rounded">
+                            <i class="bi bi-heart-fill" style="color: red;"></i>
                         </button>
                     </form> 
                 </div>

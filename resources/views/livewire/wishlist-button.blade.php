@@ -1,7 +1,7 @@
 <div>
     @if($isInWishlist)
-        <button wire:click="toggleWishlist" class="bg-red-500 text-white p-2 rounded">Remove from Wishlist</button>
+        <button wire:click="toggleWishlist" ><i class="bi bi-heart-fill" style="color: red;"></i></button>
     @else
-        <button wire:click="toggleWishlist" class="bg-blue-500 text-white p-2 rounded">Add to Wishlist</button>
+        <button wire:click="toggleWishlist" >  <i class="bi bi-heart" style="color: red;"></i></button>
     @endif
 </div>
