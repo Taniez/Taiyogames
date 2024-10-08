@@ -29,9 +29,11 @@ class Devmanage_controler extends Controller
     //
     public function create(Request $request){
         $request->validate([
-            'g_img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:20048', 
-            'g_bg' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:20048',// Validate file type and size
+            'g_img' => 'image|mimes:jpeg,png,jpg,gif,svg|max:20048',
+            'g_bg' => 'image|mimes:jpeg,png,jpg,gif,svg|max:20048', // remove required here
         ]);
+        
+
        
         $new_game = new game;
     
@@ -105,7 +107,7 @@ class Devmanage_controler extends Controller
     
         // Validate the form data
         $request->validate([
-            'g_img' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5048',
+            'g_img' => 'image|mimes:jpeg,png,jpg,gif,svg|max:20048',
             'g_bg' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:20048' // Validate file type and size
         ]);
     
@@ -123,12 +125,12 @@ class Devmanage_controler extends Controller
         }
 
         
-    if ($request->hasFile('g_bg') && $request->file('g_bg')->isValid()) {
+        if ($request->hasFile('g_bg') && $request->file('g_bg')->isValid()) {
             $bgName = time() . '.' . $request->g_bg->extension();
             $request->g_bg->move(public_path('img_bg'), $bgName);
-            $new_game->Gamebackground = 'img_bg/' . $bgName;
-            }
-
+            $game->Gamebackground = 'img_bg/' . $bgName; // Use $game instead of $new_game
+        }
+        
         $game->Game_dowload_link = $request->g_link;
        
         $game->save();
@@ -186,7 +188,7 @@ class Devmanage_controler extends Controller
                 ]);
             }
         }
-    
+
         return redirect('/Devmanage');
     }
     
@@ -194,7 +196,7 @@ class Devmanage_controler extends Controller
 
     public function delete($idgames){
         $games = game::destroy($idgames);
-        return redirect('/Devmanage');
+        return redirect('/home');
     }
     
     // public function serch(Request $request){

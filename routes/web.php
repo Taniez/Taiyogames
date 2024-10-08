@@ -83,6 +83,6 @@ Route::get('/user/mygame/{userID}', [userController::class, "mygame"])->name("my
 Route::post('/addComment', [userController::class, "add_comment"]);
 Route::get('/deleteComment/{commentID}', [userController::class, "del_comment"]);
 Route::middleware('admin')->group(function () {
-    Route::get('/adminlogin', [AdminLoginController::class, 'showLoginForm'])->name('admin-login');
-    Route::post('/admin/login', [AdminLoginController::class, 'login'])->name('admin-login.submit');
+Route::get('/adminlogin', [AdminLoginController::class, 'showLoginForm'])->name('admin-login');
+Route::post('/admin/login', [AdminLoginController::class, 'login'])->name('admin-login.submit');
 });

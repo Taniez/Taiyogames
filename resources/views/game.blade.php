@@ -61,8 +61,8 @@ img{
                 <p><b class="Abt" >Developer</b> {{ $_Games->User->name }} </p>
                 <p><b class="Abt" >Status</b> {{ $_Games->Status }} </p>
                 <p><b class="Abt" >Tags</b>
-                @foreach($_Games->gametypes as $gametype)
-                {{preg_replace('/{value:(.*?)}/', '$1', $gametype ->gametype_name)}},
+                @foreach($_Games->gametags  as $gametag)
+                {{preg_replace('/{value:(.*?)}/', '$1', $gametag ->gametag_name)}},
                 @endforeach
             </p>
             </div>
@@ -220,6 +220,8 @@ img{
 @else
         <p>No game found.</p>
 @endif
+
+
 </body>
 </html>
 </x-app-layout>
