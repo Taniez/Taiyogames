@@ -139,7 +139,6 @@ class Devmanage_controler extends Controller
         $devlogs->topic = $request->devtopic;
         $devlogs->detail = $request->devdetail;
         $devlogs->version = $request->g_version;
-
         $devlogs->save();
 
 

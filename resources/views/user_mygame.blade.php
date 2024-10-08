@@ -1,4 +1,3 @@
-Au Thanapat
 <x-app-layout>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,7 +63,14 @@ Au Thanapat
                         <div class="group2">
                             <div class="group3">
                                 
-                                <p id='name'>{{ Auth::user()->name }}</p>
+                            <div class='nameDetail'>
+                                    <p id='name'>{{ Auth::user()->name }}</p>
+                                    @if (Auth::user()->id_user_tier == 2)
+                                        <img class="tierIcon" src="/img/cotton.png" alt="tier แรงงาน">
+                                    @else
+                                        <img class="tierIcon" src="/img/pickaxe.png" alt="tier ทาส">
+                                    @endif
+                                </div>
                                 <p id='mail'>{{ Auth::user()->email }}</p>
                                 @foreach ($user_tier as $a)
                                     @if (Auth::user()->id_user_tier == $a->id_user_tier)
@@ -79,17 +85,20 @@ Au Thanapat
             </div>
             <div class="makeCenter">
                 <div class="stat">
-                    <div id='totalComment'><p>comment</p> {{$_Num_comment}} </div>
-                    <div id='totalVote'><p>vote</p> 0 </div>
-                    <div id='totalDonate'><p>donate</p> 0 <p>Baht</p></div>
+                    <div id='totalComment'><p>comment</p> <p>{{$_Num_comment}}</p> </div>
+                    <div id='totalCoint'>
+                        <p>Coin</p>
+                        <p>0</p>
+                        <button>Add coin</button>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="collectionZone">
             <div class="navButton">
-                <a href="/user/collection/{{ Auth::user()->id }}"> <button id='button'> COLLECTION </button> </a>
-                <a href="/user/posting/{{ Auth::user()->id }}"> <button id='button'> POSTING </button> </a>
+                <a href="/user/favorite/{{ Auth::user()->id }}"> <button id='button'> FAVORITE </button> </a>
+                <a href="/user/allurcomment/{{ Auth::user()->id }}"> <button id='button'> COMMENT </button> </a>
                 <a href="/user/mygame/{{ Auth::user()->id }}"> <button id='button'> MY GAME </button> </a>
             </div>
             <div class="AllUrCollection">
@@ -115,9 +124,17 @@ Au Thanapat
                     </div>
                     @endif
                 </div>
-         
+                @if($_Wish_list->isEmpty())
+
+                @else
+                    <div class="fix_seeAll">
+                        <a href="/Devmanage" id='seeAll'>See All</a>
+                    </div>
+                @endif
             </div>
     </div>
+
+
 </body>
 </html>
 </x-app-layout>

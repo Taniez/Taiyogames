@@ -14,6 +14,6 @@ class comment extends Model
         return $this->belongsTo(User::class); 
     }
     public function game(){
-        return $this->belongsTo(game::class); 
+        return $this->belongsTo(game::class, "idgames"); 
     }
 }
