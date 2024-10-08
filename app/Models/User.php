@@ -33,6 +33,9 @@ class User extends Authenticatable
     public function developer_logs(){
         return $this->hasMany(developer_log::class);
     }
+    public function admin_reports(){
+        return $this->hasMany(admin_report::class);
+    }
 
     /**
      * The attributes that are mass assignable.

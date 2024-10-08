@@ -1,4 +1,4 @@
-
+<x-guest-layout>
 @extends
 
 @section('content')
@@ -42,3 +42,4 @@
     </div>
 </div>
 @endsection
+</x-guest-layout>

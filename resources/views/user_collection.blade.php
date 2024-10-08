@@ -80,7 +80,7 @@
                 <div class="stat">
                     <div id='totalComment'><p>comment</p> {{$_Num_comment}} </div>
                     <div id='totalVote'><p>vote</p> 0 </div>
-                    <div id='totalDonate'><p>donate</p> 0 <p>Baht</p></div>
+                    <div id='totalDonate'><p>donate</p>{{$_sum_user_recipts}}<p>Baht</p></div>
                 </div>
             </div>
         </div>
@@ -89,7 +89,7 @@
             <div class="navButton">
                 <a href="/user/collection/{{ Auth::user()->id }}"> <button id='button'> COLLECTION </button> </a>
                 <a href="/user/posting/{{ Auth::user()->id }}"> <button id='button'> POSTING </button> </a>
-                <a href="/user/donate"> <button id='button'> DONATE </button> </a>
+                <a href="/user/donate/{{ Auth::user()->id }}"> <button id='button'> DONATE </button> </a>
                 <a href="/user/mygame"> <button id='button'> MY GAME </button> </a>
             </div>
             <div class="AllUrCollection">

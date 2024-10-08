@@ -94,6 +94,13 @@
                             <input type="file" class="form-control" name="g_img">
                             <img src="{{ asset($games->Game_preview) }}" alt="#" class="mt-2" width="100">
                         </div>
+
+                        <div class=" mb-3">
+                            <label for="g_bg" class="form-label">Game Image</label>
+                            <input type="file" class="form-control" name="g_bg">
+                            <img src="{{ asset($games->Gamebackground) }}" alt="#" class="mt-2" width="100">
+                        </div>
+
                         <div class="mb-3">
                             <label for="g_link" class="form-label">Download Link</label>
                             <input type="text" class="form-control" name="g_link" value="{{$games->Game_dowload_link}}" required>
@@ -188,8 +195,15 @@
                 <input type="file" name="g_img" id="g_img" required>
             </label>
             </div>
-            <label for="g_video" class="form-label">video Link</label>
+
             <div class="mb-3">
+            <label for="g_bg" class="form-label">Upload background</label>
+            <input type="file" name="g_bg" id="g_bg" >
+            </div>
+
+
+            <div class="mb-3">
+            <label for="g_video" class="form-label">video Link</label>
                 <input type="text" name="g_video" placeholder="video Link" >
             </div>
         </div>

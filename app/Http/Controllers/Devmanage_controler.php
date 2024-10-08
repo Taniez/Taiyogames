@@ -17,6 +17,7 @@ class Devmanage_controler extends Controller
     public function create(Request $request){
         $request->validate([
             'g_img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:20048', // Validate file type and size
+            'g_bg' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:20048'
         ]);
        
         $new_game = new game;
@@ -26,7 +27,7 @@ class Devmanage_controler extends Controller
         $new_game->Game_info = $request->g_details;
         $new_game->version = $request->g_version;
         $new_game->Status = $request->g_status;
-    
+        
         // Handle image upload
         if ($request->hasFile('g_img') && $request->file('g_img')->isValid()) {
             $imageName = time() . '.' . $request->g_img->extension();
@@ -37,6 +38,16 @@ class Devmanage_controler extends Controller
             // Set a default image or keep it null if no image is provided
             $new_game->Game_preview = null;  // or a default image path if needed
         }
+
+    
+        if ($request->hasFile('g_bg') && $request->file('g_bg')->isValid()) {
+                $bgName = time() . '.' . $request->g_bg->extension();
+                $request->g_bg->move(public_path('img_bg'), $bgName);
+                $new_game->Gamebackground = 'img_bg/' . $bgName;
+                }
+        else {
+                $new_game->Game_preview = null;
+            }
     
         // Assign download link
         $new_game->Game_dowload_link = $request->g_link;
@@ -82,7 +93,8 @@ class Devmanage_controler extends Controller
     
         // Validate the form data
         $request->validate([
-            'g_img' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5048', // Validate file type and size
+            'g_img' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5048',
+            'g_bg' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:20048' // Validate file type and size
         ]);
     
         // Update game fields
@@ -97,6 +109,14 @@ class Devmanage_controler extends Controller
             $request->g_img->move(public_path('img'), $imageName);
             $game->Game_preview = 'img/' . $imageName;
         }
+        if ($request->hasFile('g_bg') && $request->file('g_bg')->isValid()) {
+            $bgName = time() . '.' . $request->g_bg->extension();
+            $request->g_bg->move(public_path('img_bg'), $bgName);
+            $new_game->Gamebackground = 'img_bg/' . $bgName;
+            }
+    else {
+            $new_game->Game_preview = null;
+        }
     
         $game->Game_dowload_link = $request->g_link;
         $game->Gamevideo = $request->g_video;
@@ -107,6 +127,7 @@ class Devmanage_controler extends Controller
         $devlogs->user_id =  $request->huser_id;
         $devlogs->topic = $request->devtopic;
         $devlogs->detail = $request->devdetail;
+        $devlogs->version = $request->g_version;
 
         $devlogs->save();
 
