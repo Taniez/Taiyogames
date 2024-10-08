@@ -30,11 +30,11 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
-    Route::get('/wishlist', [WishlistController::class, 'index'])->name(' wishlist.index');
-    Route::post('/wishlist', [WishlistController::class, 'store'])->name('wishlist.store');
-    Route::delete('/wishlist/{id}', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
-    Route::get('/wishlist/serch', [WishlistController::class,'serch']);
-    Route::get('/wishlist/search-by-tag/{tag}', [WishlistController::class, 'searchByTag']);
+    Route::get('/Favorite', [WishlistController::class, 'index'])->name(' wishlist.index');
+    Route::post('/Favorite', [WishlistController::class, 'store'])->name('wishlist.store');
+    Route::delete('/Favorite/{id}', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
+    Route::get('/Favorite/search', [WishlistController::class,'favsearch']);
+    Route::get('/Favorite/search-by-tag/{tag}', [WishlistController::class, 'favsearchByTag']);
 
 });
 

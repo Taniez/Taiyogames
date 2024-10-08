@@ -12,8 +12,8 @@ class WishlistController extends Controller
     {
         $wishlists = auth()->user()->wishlists()->with('game')->get(); 
         $tags = gametype::all();
-        $_Games = game::with('gametypes')->get();
-        return view('wishlist', compact('wishlists','tags', '_Games'));
+       
+        return view('wishlist', compact('wishlists','tags'));
         
        
        
@@ -40,34 +40,40 @@ class WishlistController extends Controller
 
     }
 
-
-    
-    public function serch(Request $request) {
+    public function favsearch(Request $request) {
+       
         $tags = gametype::all();
         $request->validate([
             'search_box' => 'nullable|string|max:255',
-        ]);
-        $_Games = game::where("Game_name","LIKE","%$request->serch_box%")->get(); // ดึงข้อมูลเกมทั้งหมดจากฐานข้อมูล
-        return view("wishlist", compact('_Games','tags'));
+        ]); 
+     
+        $wishlists = auth()->user()->wishlists()->whereHas('game', function($query) use ($request) {
+            $query->where('Game_name', 'LIKE', "%{$request->serch_box}%");
+        })->with('game')->get();
+        
+        return view("wishlist", compact('wishlists','tags'));
     }
+    
+   
 
 
 
-    public function searchByTag($tag)
+    public function favsearchByTag($tag)
     {
+        
         $tags = gametype::all();
         // Find the tag in the 'gametypes' table
         $gametype = gametype::where('gametype_name', $tag)->first();
-
+    $wishlists = auth()->user()->wishlists()->with('game')->get(); 
         if ($gametype) {
             // Get games associated with this tag
-            $_Games = $gametype->games()->get();
+            $wishlists = $gametype->games()->get();
         } else {
             // If tag doesn't exist, return an empty result or a message
-            $_Games = collect();  // Empty collection
+            $wishlists = collect();  // Empty collection
         }
 
         // Return the view with the filtered games
-        return view('wishlist', compact('_Games','tags'));
+        return view('wishlist', compact('wishlists','tags'));
     }
 }
