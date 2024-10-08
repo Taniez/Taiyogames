@@ -9,13 +9,12 @@ class AdminMiddleware
 {
     public function handle($request, Closure $next)
     {
-        if (Auth::check() && Auth::admins()->is_admin) {
+        // ตรวจสอบว่าผู้ใช้เข้าสู่ระบบและเป็นผู้ดูแลระบบ
+        if (Auth::check() && Auth::user()->isAdmin()) {
             return $next($request);
         }
 
-        return redirect('/login')->with('error', 'You do not have admin access.');
+        // หากไม่ใช่ผู้ดูแลระบบ ให้เปลี่ยนเส้นทางไปที่หน้าแรกหรือหน้าที่ไม่อนุญาต
+        return redirect('/')->with('error', 'You do not have admin access.');
     }
 }
-
-    return redirect('/');
-

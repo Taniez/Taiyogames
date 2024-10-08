@@ -44,8 +44,8 @@ Route::get('/guest/search-by-tag/{tag}', [guestController::class, 'guestsearchBy
 Route::post('/setting/profile-information/update', [Update_username::class, 'updateProfileInformation'])->name('user-profile-information.update');
 
 
-Route::get('/home', [Homecontroller::class,'index']);
-Route::get('/admin', [Homecontroller::class,'in']);
+
+
 Route::get('/home/serch', [Homecontroller::class,'serch']);
 Route::get('/search-by-tag/{tag}', [Homecontroller::class, 'searchByTag']);
 Route::get('/settings', [Settingcontroller::class, 'show'])->name('profile.Setting');
@@ -71,8 +71,7 @@ Route::middleware([
         return view('home');})->name('dashboard');
 });
 
-Route::get('/admin/{adminid}/{adminpassword}', [adminController::class,"isaddmin"]);
-Route::post('/admin/report/{report_toadmin}', [adminController::class,"report"]);
+
 
 Route::get('/game', [gameController::class, "index"]);
 Route::get('/user/collection/{userID}', [userController::class, "index"])->name('profile.user');
@@ -80,7 +79,11 @@ Route::get('/user/posting/{userID}', [userController::class, "posting"]);
 Route::get('/user/donate', [userController::class, "donate"]);
 Route::get('/user/mygame', [userController::class, "mygame"])->name("mygame");
 Route::post('/addComment', [userController::class, "add_comment"]);
-Route::middleware('admin')->group(function () {
-    Route::get('/adminlogin', [AdminLoginController::class, 'showLoginForm'])->name('admin-login');
-    Route::post('/admin/login', [AdminLoginController::class, 'login'])->name('admin-login.submit');
+
+
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin', [adminController::class, 'index'])->name('admin.dashboard');
+    Route::post('/admin/report/{report_toadmin}', [adminController::class,"report"]);
+    Route::get('/admin/delete/{idgames}', [adminController::class,'delete']);
 });

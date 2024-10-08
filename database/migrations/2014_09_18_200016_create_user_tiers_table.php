@@ -22,6 +22,9 @@ return new class extends Migration
             ['id_user_tier' => 1, 'user_tier_name' => 'ทาส'],
             ['id_user_tier' => 2, 'user_tier_name' => 'คนใช้เเรงงาน'],
             ['id_user_tier' => 3, 'user_tier_name' => 'ใหญ่มากๆ'],
+            ['id_user_tier' => 4, 'user_tier_name' => 'พ่อขุน'],
+
+
         ]);
     }
 
