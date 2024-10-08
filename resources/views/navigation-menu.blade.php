@@ -106,7 +106,7 @@
                                 {{ __('Manage Account') }}
                             </div>
 
-                            <x-dropdown-link href="/user/collection/{{ Auth::user()->id }}">
+                            <x-dropdown-link href="/user/favorite/{{ Auth::user()->id }}">
                                 {{ __('Profile') }}
                             </x-dropdown-link>
                             

@@ -21,7 +21,8 @@ p{
 }
 
 #version{
-    padding: 0 15px;
+    color: rgb(255, 180, 42);
+    margin-left: 20px;
 }
 #about{
     text-indent: 2em;
@@ -58,6 +59,10 @@ p{
     display: flex;
     justify-content: center;
 }
+.Abt {
+    color: skyblue;
+    font-size: 20px;
+}
 .pictureZone{
     justify-content: end;
 }
@@ -79,18 +84,6 @@ p{
 }
 .Play_demo #play_btn{
     margin-bottom: 35px;
-}
-#play_btn{
-    padding: 10px 12px;
-    background-color: green;
-    border-radius: 6px;
-    text-align: center;
-}
-#play_btn:hover{
-    padding: 10px 12px;
-    background-color: blue;
-    border-radius: 6px;
-    cursor: pointer;
 }
 #Commu_header{
     margin-bottom: 35px;
@@ -127,13 +120,11 @@ p{
     margin-bottom: 35px;
 }
 
-
-
 #header{
     text-indent: -1em;
+    font-size: 30px;
+    color: rgb(255, 180, 42);
 }
-
-
 
 .Info{
     padding: 0 15px;
@@ -170,14 +161,15 @@ p{
 }
 #play_btn{
     padding: 10px 12px;
-    background-color: green;
+    background-color: white;
     border-radius: 6px;
     text-align: center;
 }
 #play_btn:hover{
     padding: 10px 12px;
-    background-color: blue;
+    background-color: rgb(255, 180, 42);;
     border-radius: 6px;
+    font-weight: bolder;
     cursor: pointer;
 }
 #Commu_header{
@@ -195,56 +187,271 @@ iframe{
     text-align: center;
     margin-top: 50px; margin-bottom: 50px;
 }
-.commuzone {
-    margin-top: 100px;
-    border: 3px solid white;
-    border-radius: 5px;
-}
 .commuzone #header {
     padding: 15px 0 15px 50px;
     font-weight: bold;
-    background-color: rgb(255, 255, 255);
+    color: white;
 }
 .commuzone #header p {
-    color: black;
+    font-size: 25px;
+    color: rgb(255, 180, 42);
 }
 .comment .commenterDetail {
     padding-left: 50px;
 }
 .comment #detail {
-    padding-left: 70px;
-    font-size: 25px;
+    padding-left: 50px;
 }
 .commenterDetail {
     display: flex;
+    margin-bottom: -20px;
 }
 .commenterDetail #name{
-    margin-right: 10px;
+    margin-right: 7px;
+    font-size: 15px;
+    color: cornflowerblue;
 }
-.commentContainer {
-    border-top: 1px solid rgb(180, 180, 180);
-    padding-top: 10px;
-    margin-bottom: 10px;
+.GameOwner {
+    color: rgb(255, 180, 42);
 }
-.dropdown {
-    display: inline-flexbox;
-    position: relative;
+.tierIcon {
+    width: 20px;
+    height: 20px;
+    margin-right: 7px;
+    margin-top: 2px;
 }
-.dropdown span{
-    color: white;
+.commenterDetail #postedDay{
+    font-size: 10px;
+    padding-top: 5px;
 }
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 300px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    padding: 12px 16px;
-    z-index: 3;
+.commentBoxDetail {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
-.dropdown-content p{
+.commentIcon {
+    padding-right: 50px;
+}
+
+#comment_text {
     color: black;
 }
-.dropdown:hover .dropdown-content {
+.commentBox {
+    display: flex;
+}
+.commentTextBox {
+    margin-left: 50px;
+    width: 450px;
+    height: 30px;
+    background-color: whitesmoke;
+}
+.commentSendBtn {
+    background-color: rgb(255, 180, 42);
+    height: 30px;
+    width: 55px;
+    color: black;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.Logcontainer {
+    display: flex;
+}
+.toLog {
+    font-size: 18px;
+    margin-right: 10px;
+}
+.toLog:hover {
+    cursor: pointer;
+    color: white;
+}
+.LogCreateAt {
+    font-size: 15px;
+    padding-top: 5px;
+}
+.fix_report{
+    position: absolute;
+    right: 275px; top: 70px;
+    font-weight: bold;
+    color: grey;
+}
+.fix_report a{
+    font-weight: bold;
+    color: rgb(255, 180, 42);
+    text-decoration: none;
+    font-size: 20px;
+}
+.fix_report:hover{
+    position: absolute;
+    right: 275px; top: 70px;
+    font-weight: bold;
+}
+.fix_report:hover a{
+    color: rgb(165, 117, 28);
+    text-decoration: underline;
+}
+.commentBoxDetail .commentIcon {
+    display: none;
+}
+.commentBoxDetail:hover {
+    background-color: rgba(128, 128, 128, 0.537);
+}
+.commentBoxDetail:hover .commentIcon {
     display: block;
 }
+.commentIcon a {
+    color: white;
+}
+.commentIcon a:hover {
+    color: red;
+}
+
+
+
+.button {
+    font-size: 1em;
+    padding: 10px;
+    color: #fff;
+    border: 2px solid rgb(255, 180, 42);
+    border-radius: 20px/50px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+  }
+  .button:hover {
+    background: rgb(255, 180, 42);
+    color: black;
+    font-weight: bold;
+  }
+  
+  .overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+  }
+  .overlay:target {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .popup {
+    margin: 70px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    width: 30%;
+    position: relative;
+    transition: all 5s ease-in-out;
+  }
+  
+  .popup h2 {
+    margin-top: 0;
+    color: #333;
+    font-family: Tahoma, Arial, sans-serif;
+  }
+  .popup .close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    transition: all 200ms;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+  }
+  .popup .close:hover {
+    color: red
+  }
+  .popup .content {
+    max-height: 30%;
+    overflow: auto;
+  }
+  
+  @media screen and (max-width: 700px){
+    .box{
+      width: 70%;
+    }
+    .popup{
+      width: 70%;
+    }
+  }
+.toDownload {
+    color: rgb(135, 135, 135);
+    text-decoration: underline;
+    cursor: pointer;
+    font-family: Tahoma, Arial, sans-serif;
+}
+.toDownload:hover {
+    color: red;
+    text-decoration: underline;
+    font-family: Tahoma, Arial, sans-serif;
+}
+.spendSelectContainer {
+    display: flex;
+}
+.spendSelect {
+    color: green;
+}
+
+
+
+.btn {
+    --color: #00A97F;
+    --color2: rgb(10, 25, 30);
+    padding: 0.8em 1.75em;
+    background-color: transparent;
+    border-radius: 6px;
+    border: .3px solid var(--color);
+    transition: .5s;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    z-index: 1;
+    font-weight: 300;
+    font-size: 17px;
+    font-family: 'Roboto', 'Segoe UI', sans-serif;
+    text-transform: uppercase;
+    color: var(--color);
+   }
+   
+   .btn::after, .btn::before {
+    content: '';
+    display: block;
+    height: 100%;
+    width: 100%;
+    transform: skew(90deg) translate(-50%, -50%);
+    position: absolute;
+    inset: 50%;
+    left: 25%;
+    z-index: -1;
+    transition: .5s ease-out;
+    background-color: var(--color);
+   }
+   
+   .btn::before {
+    top: -50%;
+    left: -25%;
+    transform: skew(90deg) rotate(180deg) translate(-50%, -50%);
+   }
+   
+   .btn:hover::before {
+    transform: skew(0deg) rotate(180deg) translate(-50%, -50%);
+   }
+   
+   .btn:hover::after {
+    transform: skew(180deg) translate(-50%, -50%);
+   }
+   
+   .btn:hover {
+    color: var(--color2);
+   }
+   
+   .btn:active {
+    filter: brightness(.7);
+    transform: scale(.98);
+   }

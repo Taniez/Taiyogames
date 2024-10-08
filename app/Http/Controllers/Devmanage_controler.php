@@ -109,6 +109,10 @@ class Devmanage_controler extends Controller
             $request->g_img->move(public_path('img'), $imageName);
             $game->Game_preview = 'img/' . $imageName;
         }
+        else {
+            // Set a default image or keep it null if no image is provided
+            $new_game->Game_preview = null;  // or a default image path if needed
+        }
         if ($request->hasFile('g_bg') && $request->file('g_bg')->isValid()) {
             $bgName = time() . '.' . $request->g_bg->extension();
             $request->g_bg->move(public_path('img_bg'), $bgName);
@@ -128,7 +132,6 @@ class Devmanage_controler extends Controller
         $devlogs->topic = $request->devtopic;
         $devlogs->detail = $request->devdetail;
         $devlogs->version = $request->g_version;
-
         $devlogs->save();
 
 

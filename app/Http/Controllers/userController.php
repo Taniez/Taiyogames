@@ -8,6 +8,7 @@ use App\Models\user_tier;
 use App\Models\game;
 use App\Models\Wishlist;
 use App\Models\comment;
+use Illuminate\Support\Facades\DB;
 
 class userController extends Controller
 {
@@ -29,13 +30,13 @@ class userController extends Controller
     public function donate() {
         return view("user_donate");
     }
-    public function mygame() {
+    public function mygame($userID) {
         $user_tier = user_tier::all();
         $user_ = user::all();
-        $_Wish_list = Wishlist::take(4)->get();
-        $_Comments = comment::all();
-        
-        return view("user_mygame", compact('user_tier','user_','_Wish_list','_Comments'));
+        $_Games = game::where('user_id', $userID)->get();
+        $_Wish_list = Wishlist::where('user_id', $userID)->take(4)->get();
+        $_Num_comment = comment::where('user_id', $userID)->count();
+        return view("user_mygame", compact('user_tier','user_','_Wish_list','_Num_comment','_Games'));
     }
     public function add_comment(Request $request) {
         $new_comment = new comment;
@@ -44,6 +45,13 @@ class userController extends Controller
         $new_comment->comment_detail = $request->detail	;
 
         $new_comment->save();
+        $_Comments = comment::all();
+        return back()->withInput(compact('_Comments'));
+        // return redirect("user_mygame", ['_Comments'=>$_Comments]);
+    }
+    public function del_comment($commentID) {
+        DB::table('game_user')->where('id_comment', '=', $commentID)->delete();
+
         $_Comments = comment::all();
         return back()->withInput(compact('_Comments'));
         // return redirect("user_mygame", ['_Comments'=>$_Comments]);
