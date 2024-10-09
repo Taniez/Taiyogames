@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string("version")->nullable();
             $table->string("Game_preview")->nullable();
             $table->string("Game_dowload_link",1024)->nullable(); 
-            $table->string("Gamevideo",1024)->nullable(); 
             $table->string("Status")->nullable();  
             $table->unsignedBigInteger('user_id');
             $table->string("Gamebackground",1024)->nullable();

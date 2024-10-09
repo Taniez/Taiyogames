@@ -28,7 +28,7 @@
         @import url({{asset('css/game.css')}});
 body {
     margin: 0px auto;
-    padding: 0px 15%;
+    padding: 0px 10%;
     height: auto;
     background-image: linear-gradient(rgba(0, 0, 255, 0), rgba(0, 0, 0, 0.8)), url("{{ asset($_Games->Gamebackground)}}");
     /* background-repeat: no-repeat; */
@@ -54,6 +54,8 @@ img{
     <p><b id='version' >Lastest Version</b> {{ $_Games->version }} | {{ \Carbon\Carbon::parse($_Games->updated_at)->format('Y-m-d') }}</p>
     <p id="about" > {{ $_Games->Game_info }} </about>
     <div class='Info'>
+    </div>
+    <div class="Info">
         <div class='infoZone '>
             <div class='gameInformation'>
                 <p id='header'><b>About this game</b></p>
@@ -64,7 +66,7 @@ img{
                 @foreach($_Games->gametags  as $gametag)
                 {{preg_replace('/{value:(.*?)}/', '$1', $gametag ->gametag_name)}},
                 @endforeach
-            </p>
+                </p>
             </div>
 
             <!-- <div class='Play_demo' onclick="window.location.href='https://youtu.be/dQw4w9WgXcQ?si=MVb1-A0gu3qBBpFS'">
@@ -88,10 +90,16 @@ img{
                                 </p>
                                 <h4>Spending coin?</h4>
                                 <div class="spendSelectContainer">
-                                    <button class="btn" onclick="window.location.href='#'">1c</button>
-                                    <button class="btn" onclick="window.location.href='#'">10c</button>
-                                    <button class="btn" onclick="window.location.href='#'">50c</button>
-                                    <button class="btn" onclick="window.location.href='#'">100c</button>
+                                    <form action="/donate_coins" method="POST" id="spendCoinForm">
+                                        @csrf
+                                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                        <input type="hidden" name="game_id" value="{{ $_Games->idgames }}">
+                                        <input type="hidden" name="donate_money" id="donate_money" value=""> <!-- ค่าที่เลือก -->
+                                        <button type="button" class="btn" onclick="setCoinAmount(1)">1c</button>
+                                        <button type="button" class="btn" onclick="setCoinAmount(10)">10c</button>
+                                        <button type="button" class="btn" onclick="setCoinAmount(50)">50c</button>
+                                        <button type="button" class="btn" onclick="setCoinAmount(100)">100c</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -115,104 +123,105 @@ img{
                 @endif
             </div>
             <div class="container mt-5">
-        @if(session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
-
-        @if($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
-        <!-- ปุ่มสีเหลืองที่ใช้ Bootstrap -->
-        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#donateModal">
-            Click to Donate
-        </button>
-
-        <!-- Popup Modal -->
-        <div class="modal fade" id="donateModal" tabindex="-1" aria-labelledby="donateModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="donateModalLabel">Donate</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- ฟอร์มสำหรับรับเงินบริจาค -->
-                        <form action="/add_donate" method="POST">
-                            @csrf
-                            <div class="mb-3">
-                                <input type="hidden" value="{{ Auth::user()->id }}" name="recipts_id">
-                                <label for="donate_money" class="form-label">Amount to Donate:</label>
-                                <input type="number" id="donate_money" name="donate_money" class="form-control" required min="1" step="0.01">
-                            </div>
-                            <button type="submit" class="btn btn-success">Donate</button>
-                        </form>
-                    </div>
+                    @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
                 </div>
-            </div>
-        </div>
+                    @endif
 
-            <div class="commuzone">
-                <div id='header'><p>Comment</p></div>
-                <div class="comment">
-                @if($_Comments->isEmpty())
-                    <div class="collection_empty">
-                        <p>Let's be the first Comment!</p>
-                    </div>
-                @else
-                    @foreach ($_Comments as $comment)
-                        <div class="commentBoxDetail">
-                            <div class="commentContainer">
-                                <div class="commenterDetail">
-                                    @if ($comment->user_id == $_Games->user_id)
-                                        <p id='name'>{{ $comment->user->name }} <b class="GameOwner">(Author)</b></p>
-                                    @else
-                                        <p id='name'>{{ $comment->user->name }}</p>
-                                    @endif
+                @if($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
 
-                                    @if ($comment->user->id_user_tier == 2)
-                                        <img class="tierIcon" src="/img/cotton.png" alt="tier แรงงาน">
-                                    @else
-                                        <img class="tierIcon" src="/img/pickaxe.png" alt="tier ทาส">
-                                    @endif
-                                    <p id='postedDay'>{{ \Carbon\Carbon::parse($comment->updated_at)->format('Y-m-d') }}</p>
-                                </div>
-                                <p id='detail'>{{ $comment->comment_detail }}</p>
+                <!-- ปุ่มสีเหลืองที่ใช้ Bootstrap -->
+                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#donateModal">
+                    Click to Donate
+                </button>
+
+                <!-- Popup Modal -->
+                <div class="modal fade" id="donateModal" tabindex="-1" aria-labelledby="donateModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="donateModalLabel">Donate</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <div class="commentIcon">
-                                @if (Auth::user()->id == $comment->user_id)
-                                    <a href="/deleteComment/{{ $comment->id_comment }}"><i class="fa fa-trash-o"></i></a>
-                                @else
-                                    <a href="#"><i class="fa fa-flag"></i></a>
-                                @endif
+                            <div class="modal-body">
+                                <!-- ฟอร์มสำหรับรับเงินบริจาค -->
+                                <form action="/donate_coins" method="POST">
+                                    @csrf
+                                    <div class="mb-3">
+                                        <input type="hidden" value="{{ Auth::user()->id }}" name="user_id">
+                                        <input type="hidden" name="game_id" value="{{ $_Games->idgames }}"> <!-- Include the game ID -->
+                                        <label for="donate_money" class="form-label">Amount to Donate:</label>
+                                        <input type="number" id="donate_money" name="donate_money" class="form-control" required min="1">
+                                    </div>
+                                    <button type="submit" class="btn btn-success">Donate</button>
+                                </form>
                             </div>
                         </div>
-                    @endforeach
-                @endif
-                <form action="/addComment" method="post" class="commentBox">
-                    @csrf
-                    <input type="hidden" value="{{ Auth::user()->id }}" name="huser_id">
-                    <input type="hidden" name="game_id" value="{{ $_Games->idgames }}">
-                    <p><input class="commentTextBox" id='comment_text' type="text" name="detail" required></p>
-                    <p><input class="commentSendBtn" type="submit" value="post"></p>
-                </form>
+                    </div>
+                </div>
+
+                <div class="commuzone">
+                    <div id='header'><p>Comment</p></div>
+                    <div class="comment">
+                    @if($_Comments->isEmpty())
+                        <div class="collection_empty">
+                            <p>Let's be the first Comment!</p>
+                        </div>
+                    @else
+                        @foreach ($_Comments as $comment)
+                            <div class="commentBoxDetail">
+                                <div class="commentContainer">
+                                    <div class="commenterDetail">
+                                        @if ($comment->user_id == $_Games->user_id)
+                                            <p id='name'>{{ $comment->user->name }} <b class="GameOwner">(Author)</b></p>
+                                        @else
+                                            <p id='name'>{{ $comment->user->name }}</p>
+                                        @endif
+
+                                        @if ($comment->user->id_user_tier == 2)
+                                            <img class="tierIcon" src="/img/cotton.png" alt="tier แรงงาน">
+                                        @else
+                                            <img class="tierIcon" src="/img/pickaxe.png" alt="tier ทาส">
+                                        @endif
+                                        <p id='postedDay'>{{ \Carbon\Carbon::parse($comment->updated_at)->format('Y-m-d') }}</p>
+                                    </div>
+                                    <p id='detail'>{{ $comment->comment_detail }}</p>
+                                </div>
+                                <div class="commentIcon">
+                                    @if (Auth::user()->id == $comment->user_id)
+                                        <a href="/deleteComment/{{ $comment->id_comment }}"><i class="fa fa-trash-o"></i></a>
+                                    @else
+                                        <a href="#"><i class="fa fa-flag"></i></a>
+                                    @endif
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
+                    <form action="/addComment" method="post" class="commentBox">
+                        @csrf
+                        <input type="hidden" value="{{ Auth::user()->id }}" name="huser_id">
+                        <input type="hidden" name="game_id" value="{{ $_Games->idgames }}">
+                        <p><input class="commentTextBox" id='comment_text' type="text" name="detail" required></p>
+                        <p><input class="commentSendBtn" type="submit" value="post"></p>
+                    </form>
                 </div>
             </div>
         </div>
+    
         <div class='pictureZone'>
-        @foreach($_Games->screenshots as $screenshot)
-            <img id='sceenshot' src="{{ asset($screenshot->image_path) }}" alt="#">
-        @endforeach
+            @foreach($_Games->screenshots as $screenshot)
+                <img id='sceenshot' src="{{ asset($screenshot->image_path) }}" alt="#">
+            @endforeach
         </div>
-
     </div>
     <div class="fix_report">
         <a href="#"><i class="fa fa-flag reportBtn"></i> Report</a>
@@ -223,5 +232,22 @@ img{
 
 
 </body>
+
+<script>
+    function setCoinAmount(amount) {
+        // ตั้งค่าจำนวนเงินบริจาค
+        document.getElementById('donate_money').value = amount;
+
+        // ส่งฟอร์มไปยัง backend
+        document.getElementById('spendCoinForm').submit();
+
+        // รอให้การส่งฟอร์มเสร็จสิ้น และเปลี่ยนเส้นทางไปยังลิงก์ดาวน์โหลด
+        setTimeout(function() {
+            window.location.href = '{{ $_Games->Game_dowload_link }}'; // เปลี่ยนเส้นทางไปยังลิงก์ดาวน์โหลด
+        }, 1000); // รอ 1 วินาทีก่อนเปลี่ยนเส้นทาง
+    }
+</script>
+
+
 </html>
 </x-app-layout>

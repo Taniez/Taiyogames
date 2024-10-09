@@ -108,7 +108,8 @@ class Devmanage_controler extends Controller
         // Validate the form data
         $request->validate([
             'g_img' => 'image|mimes:jpeg,png,jpg,gif,svg|max:20048',
-            'g_bg' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:20048' // Validate file type and size
+            'g_bg' => 'image|mimes:jpeg,png,jpg,gif,svg|max:20048',
+
         ]);
     
         // Update game fields
@@ -130,9 +131,11 @@ class Devmanage_controler extends Controller
             $request->g_bg->move(public_path('img_bg'), $bgName);
             $game->Gamebackground = 'img_bg/' . $bgName; // Use $game instead of $new_game
         }
-        
+        else {
+            $game->Gamebackground   = null;
+        }     
         $game->Game_dowload_link = $request->g_link;
-       
+    
         $game->save();
     
         $devlogs =  new developer_log;
@@ -189,7 +192,7 @@ class Devmanage_controler extends Controller
             }
         }
 
-        return redirect('/Devmanage');
+        return redirect('/home');
     }
     
 
