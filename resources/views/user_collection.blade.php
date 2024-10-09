@@ -115,7 +115,6 @@
                                     <a href="/game/{{ $wishlist->game->idgames }}">
                                         <img src="{{ asset($wishlist->game->Game_preview) }}" alt="Preview" class="mt-2 h-75 w-100">
                                         <h3 class="font-bold text-lg mt-2">{{ $wishlist->game->Game_name }}</h3>
-                                        <p class="text-gray-600">{{ $wishlist->game->Game_info }}</p>
                                     </a>
                                     <form action="{{ route('wishlist.destroy',$wishlist->id) }}" method="POST">
                                         @csrf
@@ -135,7 +134,7 @@
 
                 @else
                     <div class="fix_seeAll">
-                        <a href="/wishlist" id='seeAll'>See All</a>
+                        <a href="/Favorite" id='seeAll'>See All</a>
                     </div>
                 @endif
             </div>

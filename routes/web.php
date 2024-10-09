@@ -13,6 +13,7 @@ use App\Http\Controllers\update_password;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\guestController;
 use App\Http\Controllers\Update_username;
+use App\Http\Controllers\DB;
 
 /*
 |--------------------------------------------------------------------------

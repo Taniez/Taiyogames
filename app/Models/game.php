@@ -18,7 +18,7 @@ class game extends Model
         return $this->belongsToMany(gametype::class, 'game_gametypes', 'idgames', 'idgametypes');
     }
     public function user(){
-        return $this->belongsTo(User::class);  
+        return $this->belongsTo(User::class);
     }
     public function admin_reports() {
         return $this->hasMany(admin_report::class, "idgames");

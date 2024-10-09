@@ -22,7 +22,7 @@
 
 </head>
 <body>
-    <h1>insert</h1>
+    <h1>Upload your Game!</h1>
     <table  class="table table-bordered">
     <tr>
         <th>ชื่อเกม</th>
