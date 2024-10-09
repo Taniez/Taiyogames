@@ -43,6 +43,12 @@ class game extends Model
 {
     return $this->hasMany(Wishlist::class);
 }
+
+    public function admin_report()
+    {
+    return $this->hasMany(admin_report::class, 'idgames'); 
+    }
+
     public function comments(){
     return $this->hasMany(comment::class, "idgames", "idgames");
 }

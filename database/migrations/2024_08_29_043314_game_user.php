@@ -12,16 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('game_user', function (Blueprint $table) {
-            $table->id("id_comment");
-            $table->string("comment_detail");
+            $table->id('id_comment'); 
+            $table->string('comment_detail');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('idgames');
-
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('idgames')->references('idgames')->on('games');
-
+        
+            // Foreign keys
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('idgames')->references('idgames')->on('games')->onDelete('cascade');
+        
             $table->timestamps();
         });
+        
     }
 
     /**

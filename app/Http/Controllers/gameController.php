@@ -24,7 +24,7 @@ class gameController extends Controller
         return view("game", compact('_Games','tags','_Comments','_Num_comment','_Dev_logs'));
     }
     public function toLog($idgame, $log_topic) {
-        $tags = gametype::all();
+        $tags = gametag::all();
         $_Games = game::where('idgames', $idgame)->first();
         $_Comments = comment::where('idgames', $idgame)->get();
         $_Num_comment = comment::where('idgames', $idgame)->count();

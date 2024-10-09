@@ -17,6 +17,9 @@ return new class extends Migration
         DB::table('users')->insert([
             ['id' => 1, 'name' => 'admin', 'email'=> 'admin@gmail.com','password'=> bcrypt('admin1234'), 'is_admin' => 1],
         ]);
+        DB::table('users')->insert([
+            ['id' => 2, 'name' => 'user', 'email'=> 'user@gmail.com','password'=> bcrypt('user1234')],
+        ]);
     }
     
     public function down()

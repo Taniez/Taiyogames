@@ -13,6 +13,7 @@ use App\Http\Controllers\update_password;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\guestController;
 use App\Http\Controllers\Update_username;
+use App\Http\Controllers\AdminReportgameController;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,11 +81,19 @@ Route::get('/user/donate', [userController::class, "donate"]);
 Route::get('/game/{idgame}/gamelog/{log_topic}', [gameController::class, "toLog"]);
 Route::get('/user/mygame/{userID}', [userController::class, "mygame"])->name("mygame");
 Route::post('/addComment', [userController::class, "add_comment"]);
-
+Route::get('/deleteComment/{commentID}', [userController::class, "del_comment"]);
 
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin', [adminController::class, 'index'])->name('admin.dashboard');
-    Route::post('/admin/report/{report_toadmin}', [adminController::class,"report"]);
-    Route::get('/admin/delete/{idgames}', [adminController::class,'delete']);
+    Route::delete('/delete-report-game/{idgames}', [adminController::class, 'deleteReportGame'])->name('delete.report_game');    
+    Route::get('/admin/delete/{idgames}/{idreport}', [adminController::class,'delete']);
+    Route::post('/report/game/{id}', [adminController::class, 'reportGame'])->name('report.game');    
 });
+
+
+
+
+
+
+

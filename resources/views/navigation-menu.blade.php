@@ -126,6 +126,7 @@
                                 <x-dropdown-link href="{{ route('admin.dashboard') }}">
                                     {{ __('Admin') }}
                                 </x-dropdown-link>
+                               
                             @endif
 
                             <div class="border-t border-gray-200"></div>
