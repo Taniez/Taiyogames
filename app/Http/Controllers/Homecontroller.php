@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\game;
 use App\Models\admin;
-use App\Models\gametype;
+use App\Models\gametag;
 use App\Models\User;
 
 use Illuminate\Support\Facades\DB;
@@ -58,12 +58,12 @@ class Homecontroller extends Controller
         // Find the tag in the 'gametypes' table
         $gametype = gametype::where('gametype_name', $tag)->first();
 
-        if ($gametype) {
-            // Get games associated with this tag
-            $_Games = $gametype->games()->get();
+        if ($gametag) {
+
+            $_Games = $gametag->games()->get();
         } else {
-            // If tag doesn't exist, return an empty result or a message
-            $_Games = collect();  // Empty collection
+            
+            $_Games = collect();  
         }
 
         // Return the view with the filtered games

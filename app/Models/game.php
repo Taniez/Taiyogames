@@ -13,9 +13,9 @@ class game extends Model
     protected $primaryKey = 'idgames';
     protected $fillable = ['Game_name', 'Game_info', 'version', 'Game_preview', 'Game_dowload_link'];
    
-    public function gametypes()
+    public function gametags()
     {
-        return $this->belongsToMany(gametype::class, 'game_gametypes', 'idgames', 'idgametypes');
+        return $this->belongsToMany(gametag::class, 'game_gametags', 'idgames', 'idgametag');
     }
     public function user(){
         return $this->belongsTo(User::class);
@@ -43,6 +43,12 @@ class game extends Model
 {
     return $this->hasMany(Wishlist::class);
 }
+
+    public function admin_report()
+    {
+    return $this->hasMany(admin_report::class, 'idgames'); 
+    }
+
     public function comments(){
     return $this->hasMany(comment::class, "idgames", "idgames");
 }
