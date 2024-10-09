@@ -87,12 +87,19 @@ img{
                                     No thanks, just take me to the downloads.
                                 </p>
                                 <h4>Spending coin?</h4>
-                                <div class="spendSelectContainer">
-                                    <button class="btn" onclick="window.location.href='#'">1c</button>
-                                    <button class="btn" onclick="window.location.href='#'">10c</button>
-                                    <button class="btn" onclick="window.location.href='#'">50c</button>
-                                    <button class="btn" onclick="window.location.href='#'">100c</button>
-                                </div>
+                                    <div class="spendSelectContainer">
+                                            <form action="/donate_coins" method="POST" id="spendCoinForm">
+                                                @csrf
+                                            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                            <input type="hidden" name="game_id" value="{{ $_Games->idgames }}">
+                                            <input type="hidden" name="donate_money" id="donate_money" value=""> <!-- ค่าที่เลือก -->
+                                             <button type="button" class="btn" onclick="setCoinAmount(1)">1c</button>
+                                            <button type="button" class="btn" onclick="setCoinAmount(10)">10c</button>
+                                            <button type="button" class="btn" onclick="setCoinAmount(50)">50c</button>
+                                            <button type="button" class="btn" onclick="setCoinAmount(100)">100c</button>
+                                            </form>
+                                        </div>
+
                             </div>
                         </div>
                     </div>
@@ -146,15 +153,18 @@ img{
                     </div>
                     <div class="modal-body">
                         <!-- ฟอร์มสำหรับรับเงินบริจาค -->
-                        <form action="/add_donate" method="POST">
+                        <form action="/donate_coins" method="POST">
                             @csrf
                             <div class="mb-3">
-                                <input type="hidden" value="{{ Auth::user()->id }}" name="recipts_id">
+                                <input type="hidden" value="{{ Auth::user()->id }}" name="user_id">
+                                <input type="hidden" name="game_id" value="{{ $_Games->idgames }}"> <!-- Include the game ID -->
                                 <label for="donate_money" class="form-label">Amount to Donate:</label>
-                                <input type="number" id="donate_money" name="donate_money" class="form-control" required min="1" step="0.01">
+                                 <input type="number" id="donate_money" name="donate_money" class="form-control" required min="1">
                             </div>
-                            <button type="submit" class="btn btn-success">Donate</button>
+                                <button type="submit" class="btn btn-success">Donate</button>
                         </form>
+
+
                     </div>
                 </div>
             </div>
@@ -223,5 +233,22 @@ img{
 
 
 </body>
+
+<script>
+    function setCoinAmount(amount) {
+        // ตั้งค่าจำนวนเงินบริจาค
+        document.getElementById('donate_money').value = amount;
+
+        // ส่งฟอร์มไปยัง backend
+        document.getElementById('spendCoinForm').submit();
+
+        // รอให้การส่งฟอร์มเสร็จสิ้น และเปลี่ยนเส้นทางไปยังลิงก์ดาวน์โหลด
+        setTimeout(function() {
+            window.location.href = '{{ $_Games->Game_dowload_link }}'; // เปลี่ยนเส้นทางไปยังลิงก์ดาวน์โหลด
+        }, 1000); // รอ 1 วินาทีก่อนเปลี่ยนเส้นทาง
+    }
+</script>
+
+
 </html>
 </x-app-layout>

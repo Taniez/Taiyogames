@@ -8,8 +8,9 @@ use App\Models\user_tier;
 use App\Models\game;
 use App\Models\Wishlist;
 use App\Models\comment;
+use App\Models\user_wallet;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Auth;
 class userController extends Controller
 {
     public function index($userID) {
@@ -17,7 +18,10 @@ class userController extends Controller
         $user_ = user::all();
         $_Wish_list = Wishlist::where('user_id', $userID)->take(4)->get();
         $_Num_comment = comment::where('user_id', $userID)->count();
-        return view("user_collection", compact('user_tier','user_','_Wish_list','_Num_comment'));
+        $user = Auth::user();
+        $userWallet = user_wallet::where('user_id', $userID)->first();
+        $coins = $userWallet ? $userWallet->coin : 0;
+        return view("user_collection", compact('user_tier','user_','_Wish_list','_Num_comment','coins'));
     }
     public function posting($userID) {
         $user_tier = user_tier::all();

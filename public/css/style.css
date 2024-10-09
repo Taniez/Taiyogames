@@ -1,7 +1,14 @@
+
+
+.head h1{font-family:  'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+
+}
 .container{
   justify-content: center;
   width: 50rem ;
-    
+  
+  
 }
 img {
     width: 10rem;

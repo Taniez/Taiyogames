@@ -13,6 +13,7 @@ use App\Http\Controllers\update_password;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\guestController;
 use App\Http\Controllers\Update_username;
+use App\Http\Controllers\Donatecontroller;
 
 /*
 |--------------------------------------------------------------------------
@@ -86,3 +87,5 @@ Route::middleware('admin')->group(function () {
 Route::get('/adminlogin', [AdminLoginController::class, 'showLoginForm'])->name('admin-login');
 Route::post('/admin/login', [AdminLoginController::class, 'login'])->name('admin-login.submit');
 });
+Route::post('/reedeem/{userID}', [Donatecontroller::class, "index"]);
+Route::post('/donate_coins', [DonateController::class, 'donateCoins']);

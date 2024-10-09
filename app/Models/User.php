@@ -18,6 +18,9 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
 
+    public function user_wallet(){
+        return $this->hasOne(user_wallet::class);  
+    }
     public function user_tier(){
         return $this->belongsTo(user_tier::class);  
     }
@@ -36,6 +39,7 @@ class User extends Authenticatable
     public function admin_reports(){
         return $this->hasMany(admin_report::class);
     }
+    
 
     /**
      * The attributes that are mass assignable.

@@ -124,7 +124,7 @@
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateModal{{$Game->idgames}}">Update</button>
                                 </div>
                                 <div class="modal fade" id="updateModal{{$Game->idgames}}" tabindex="-1" aria-labelledby="updateModalLabel{{$Game->idgames}}" aria-hidden="true">
-                                <div class="modal-dialog">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="updateModalLabel{{$Game->idgames}}">Update Game</h5>
@@ -159,7 +159,7 @@
 
                         <div class=" mb-3">
                             <label for="g_img" class="form-label">Game Image</label>
-                            <input type="file" class="form-control" name="g_img" >
+                            <input type="file" class="form-control" name="g_img">
                             <img src="{{ asset($Game->Game_preview) }}" alt="#" class="mt-2" width="100">
                         </div>
 
@@ -199,13 +199,13 @@
                             </div>
                             
                         <input type="hidden" value="{{ Auth::user()->id }}" name="huser_id">
-
                         <button type="submit" class="btn btn-success">Save changes</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
                             @endforeach
     </div>
                     </div>
