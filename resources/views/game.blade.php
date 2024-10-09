@@ -7,6 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- jQuery (ถ้าใช้ Bootstrap 5, jQuery ไม่จำเป็น) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <!-- Tagify JS -->
     <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
@@ -28,7 +35,7 @@
         @import url({{asset('css/game.css')}});
 body {
     margin: 0px auto;
-    padding: 0px 15%;
+    padding: 0px 10%;
     height: auto;
     background-image: linear-gradient(rgba(0, 0, 255, 0), rgba(0, 0, 0, 0.8)), url("{{ asset($_Games->Gamebackground)}}");
     /* background-repeat: no-repeat; */
@@ -54,6 +61,8 @@ img{
     <p><b id='version' >Lastest Version</b> {{ $_Games->version }} | {{ \Carbon\Carbon::parse($_Games->updated_at)->format('Y-m-d') }}</p>
     <p id="about" > {{ $_Games->Game_info }} </about>
     <div class='Info'>
+    </div>
+    <div class="Info">
         <div class='infoZone '>
             <div class='gameInformation'>
                 <p id='header'><b>About this game</b></p>
@@ -64,7 +73,7 @@ img{
                 @foreach($_Games->gametags  as $gametag)
                 {{preg_replace('/{value:(.*?)}/', '$1', $gametag ->gametag_name)}},
                 @endforeach
-            </p>
+                </p>
             </div>
 
             <!-- <div class='Play_demo' onclick="window.location.href='https://youtu.be/dQw4w9WgXcQ?si=MVb1-A0gu3qBBpFS'">
@@ -122,26 +131,26 @@ img{
                 @endif
             </div>
             <div class="container mt-5">
-        @if(session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
+                    @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+                    @endif
 
-        @if($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+                @if($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
 
-        <!-- ปุ่มสีเหลืองที่ใช้ Bootstrap -->
-        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#donateModal">
-            Click to Donate
-        </button>
+                <!-- ปุ่มสีเหลืองที่ใช้ Bootstrap -->
+                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#donateModal">
+                    Click to Donate
+                </button>
 
         <!-- Popup Modal -->
         <div class="modal fade" id="donateModal" tabindex="-1" aria-labelledby="donateModalLabel" aria-hidden="true">
@@ -161,78 +170,116 @@ img{
                                 <label for="donate_money" class="form-label">Amount to Donate:</label>
                                  <input type="number" id="donate_money" name="donate_money" class="form-control" required min="1">
                             </div>
+                        </div>
                                 <button type="submit" class="btn btn-success">Donate</button>
                         </form>
 
 
                     </div>
                 </div>
-            </div>
-        </div>
 
-            <div class="commuzone">
-                <div id='header'><p>Comment</p></div>
-                <div class="comment">
-                @if($_Comments->isEmpty())
-                    <div class="collection_empty">
-                        <p>Let's be the first Comment!</p>
-                    </div>
-                @else
-                    @foreach ($_Comments as $comment)
-                        <div class="commentBoxDetail">
-                            <div class="commentContainer">
-                                <div class="commenterDetail">
-                                    @if ($comment->user_id == $_Games->user_id)
-                                        <p id='name'>{{ $comment->user->name }} <b class="GameOwner">(Author)</b></p>
-                                    @else
-                                        <p id='name'>{{ $comment->user->name }}</p>
-                                    @endif
-
-                                    @if ($comment->user->id_user_tier == 2)
-                                        <img class="tierIcon" src="/img/cotton.png" alt="tier แรงงาน">
-                                    @else
-                                        <img class="tierIcon" src="/img/pickaxe.png" alt="tier ทาส">
-                                    @endif
-                                    <p id='postedDay'>{{ \Carbon\Carbon::parse($comment->updated_at)->format('Y-m-d') }}</p>
-                                </div>
-                                <p id='detail'>{{ $comment->comment_detail }}</p>
-                            </div>
-                            <div class="commentIcon">
-                                @if (Auth::user()->id == $comment->user_id)
-                                    <a href="/deleteComment/{{ $comment->id_comment }}"><i class="fa fa-trash-o"></i></a>
-                                @else
-                                    <a href="#"><i class="fa fa-flag"></i></a>
-                                @endif
-                            </div>
+                <div class="commuzone">
+                    <div id='header'><p>Comment</p></div>
+                    <div class="comment">
+                    @if($_Comments->isEmpty())
+                        <div class="collection_empty">
+                            <p>Let's be the first Comment!</p>
                         </div>
-                    @endforeach
-                @endif
-                <form action="/addComment" method="post" class="commentBox">
-                    @csrf
-                    <input type="hidden" value="{{ Auth::user()->id }}" name="huser_id">
-                    <input type="hidden" name="game_id" value="{{ $_Games->idgames }}">
-                    <p><input class="commentTextBox" id='comment_text' type="text" name="detail" required></p>
-                    <p><input class="commentSendBtn" type="submit" value="post"></p>
-                </form>
+                    @else
+                        @foreach ($_Comments as $comment)
+                            <div class="commentBoxDetail">
+                                <div class="commentContainer">
+                                    <div class="commenterDetail">
+                                        @if ($comment->user_id == $_Games->user_id)
+                                            <p id='name'>{{ $comment->user->name }} <b class="GameOwner">(Author)</b></p>
+                                        @else
+                                            <p id='name'>{{ $comment->user->name }}</p>
+                                        @endif
+
+                                        @if ($comment->user->id_user_tier == 2)
+                                            <img class="tierIcon" src="/img/cotton.png" alt="tier แรงงาน">
+                                        @else
+                                            <img class="tierIcon" src="/img/pickaxe.png" alt="tier ทาส">
+                                        @endif
+                                        <p id='postedDay'>{{ \Carbon\Carbon::parse($comment->updated_at)->format('Y-m-d') }}</p>
+                                    </div>
+                                    <p id='detail'>{{ $comment->comment_detail }}</p>
+                                </div>
+                                <div class="commentIcon">
+                                    @if (Auth::user()->id == $comment->user_id)
+                                        <a href="/deleteComment/{{ $comment->id_comment }}"><i class="fa fa-trash-o"></i></a>
+                                    @else
+                                        <a href="#"><i class="fa fa-flag"></i></a>
+                                    @endif
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
+                    <form action="/addComment" method="post" class="commentBox">
+                        @csrf
+                        <input type="hidden" value="{{ Auth::user()->id }}" name="huser_id">
+                        <input type="hidden" name="game_id" value="{{ $_Games->idgames }}">
+                        <p><input class="commentTextBox" id='comment_text' type="text" name="detail" required></p>
+                        <p><input class="commentSendBtn" type="submit" value="post"></p>
+                    </form>
                 </div>
             </div>
         </div>
+    
         <div class='pictureZone'>
-        @foreach($_Games->screenshots as $screenshot)
-            <img id='sceenshot' src="{{ asset($screenshot->image_path) }}" alt="#">
-        @endforeach
+            @foreach($_Games->screenshots as $screenshot)
+                <img id='sceenshot' src="{{ asset($screenshot->image_path) }}" alt="#">
+            @endforeach
         </div>
-
     </div>
     <div class="fix_report">
-        <a href="#"><i class="fa fa-flag reportBtn"></i> Report</a>
+        <a href="#" data-bs-toggle="modal" data-bs-target="#reportGameModal"><i class="fa fa-flag reportBtn"></i> Report</a>
+    </div>
+    
+    <!-- Modal สำหรับการรายงานเกม -->
+    <div class="modal fade" id="reportGameModal" tabindex="-1" aria-labelledby="reportGameLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Report Game</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('report.game', $_Games->idgames) }}" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <label for="reason">เหตุผลในการรายงาน:</label>
+                        <textarea name="reason" class="form-control" required></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger">Report</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 @else
         <p>No game found.</p>
 @endif
-
+ 
 
 </body>
+
+<script>
+    function setCoinAmount(amount) {
+        // ตั้งค่าจำนวนเงินบริจาค
+        document.getElementById('donate_money').value = amount;
+
+        // ส่งฟอร์มไปยัง backend
+        document.getElementById('spendCoinForm').submit();
+
+        // รอให้การส่งฟอร์มเสร็จสิ้น และเปลี่ยนเส้นทางไปยังลิงก์ดาวน์โหลด
+        setTimeout(function() {
+            window.location.href = '{{ $_Games->Game_dowload_link }}'; // เปลี่ยนเส้นทางไปยังลิงก์ดาวน์โหลด
+        }, 1000); // รอ 1 วินาทีก่อนเปลี่ยนเส้นทาง
+    }
+</script>
+
+
 
 <script>
     function setCoinAmount(amount) {

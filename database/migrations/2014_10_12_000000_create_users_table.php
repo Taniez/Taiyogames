@@ -17,13 +17,15 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('usertype')->default('user');
+            
             $table->foreignId('id_user_tier')->default(1)->constrained('user_tiers', 'id_user_tier');
             $table->rememberToken();
             $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
+        
+        
     }
 
     /**

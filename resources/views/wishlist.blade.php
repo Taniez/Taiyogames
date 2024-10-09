@@ -14,10 +14,21 @@
     padding-top:18%; 
    }
    .center{
-    
     margin-right:15px 
-   
    }
+    .header {
+    font-size: 30px;
+    font-weight: bold;
+    margin-left: 40px;
+    margin-top: 60px;
+   }
+   body {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)),url("/img/BG_genshin.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    padding: 0 10%;
+}
 
     </style>
 </head>
@@ -27,10 +38,6 @@
 
     <x-slot name="header">
    
-
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('My Favorite') }}
-        </h2>
         <form action="/Favorite/search" method="get">
             <div class="input-group">
                 <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" name="serch_box" />
@@ -42,7 +49,7 @@
 
    
     
-
+        <h1 class="header">My Favorite</h1>
         <!-- Main Content -->
         @if($wishlists->isEmpty())
         <div class="ms-5 center w-100 ">

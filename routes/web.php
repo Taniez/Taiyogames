@@ -13,6 +13,9 @@ use App\Http\Controllers\update_password;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\guestController;
 use App\Http\Controllers\Update_username;
+use App\Http\Controllers\AdminReportgameController;
+use App\Http\Controllers\DB;
+use App\Http\Controllers\Donatecontroller;
 use App\Http\Controllers\Donatecontroller;
 
 /*
@@ -45,8 +48,8 @@ Route::get('/guest/search-by-tag/{tag}', [guestController::class, 'guestsearchBy
 Route::post('/setting/profile-information/update', [Update_username::class, 'updateProfileInformation'])->name('user-profile-information.update');
 
 
-Route::get('/home', [Homecontroller::class,'index']);
-Route::get('/admin', [Homecontroller::class,'in']);
+
+
 Route::get('/home/serch', [Homecontroller::class,'serch']);
 Route::get('/search-by-tag/{tag}', [Homecontroller::class, 'searchByTag']);
 Route::get('/settings', [Settingcontroller::class, 'show'])->name('profile.Setting');
@@ -72,8 +75,7 @@ Route::middleware([
         return view('home');})->name('dashboard');
 });
 
-Route::get('/admin/{adminid}/{adminpassword}', [adminController::class,"isaddmin"]);
-Route::post('/admin/report/{report_toadmin}', [adminController::class,"report"]);
+
 
 Route::get('/game', [gameController::class, "index"]);
 Route::get('/user/favorite/{userID}', [userController::class, "index"])->name('profile.user');
@@ -83,9 +85,13 @@ Route::get('/game/{idgame}/gamelog/{log_topic}', [gameController::class, "toLog"
 Route::get('/user/mygame/{userID}', [userController::class, "mygame"])->name("mygame");
 Route::post('/addComment', [userController::class, "add_comment"]);
 Route::get('/deleteComment/{commentID}', [userController::class, "del_comment"]);
-Route::middleware('admin')->group(function () {
-Route::get('/adminlogin', [AdminLoginController::class, 'showLoginForm'])->name('admin-login');
-Route::post('/admin/login', [AdminLoginController::class, 'login'])->name('admin-login.submit');
+
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin', [adminController::class, 'index'])->name('admin.dashboard');
+    Route::delete('/delete-report-game/{idgames}', [adminController::class, 'deleteReportGame'])->name('delete.report_game');    
+    Route::get('/admin/delete/{idgames}/{idreport}', [adminController::class,'delete']);
+    Route::post('/report/game/{id}', [adminController::class, 'reportGame'])->name('report.game');    
 });
 Route::post('/reedeem/{userID}', [Donatecontroller::class, "index"]);
 Route::post('/donate_coins', [DonateController::class, 'donateCoins']);

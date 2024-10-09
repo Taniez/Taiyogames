@@ -29,7 +29,10 @@ class userController extends Controller
         $_Wish_list = Wishlist::take(4)->get();
         $_Comments = comment::where('user_id', $userID)->get();
         $_Num_comment = comment::where('user_id', $userID)->count();
-        return view("user_posting", compact('user_tier','user_','_Wish_list','_Comments','_Num_comment'));
+        $user = Auth::user();
+        $userWallet = user_wallet::where('user_id', $userID)->first();
+        $coins = $userWallet ? $userWallet->coin : 0;
+        return view("user_posting", compact('user_tier','user_','_Wish_list','_Comments','_Num_comment','coins'));
     }
     public function donate() {
         return view("user_donate");
@@ -40,7 +43,10 @@ class userController extends Controller
         $_Games = game::where('user_id', $userID)->get();
         $_Wish_list = Wishlist::where('user_id', $userID)->take(4)->get();
         $_Num_comment = comment::where('user_id', $userID)->count();
-        return view("user_mygame", compact('user_tier','user_','_Wish_list','_Num_comment','_Games'));
+        $user = Auth::user();
+        $userWallet = user_wallet::where('user_id', $userID)->first();
+        $coins = $userWallet ? $userWallet->coin : 0;
+        return view("user_mygame", compact('user_tier','user_','_Wish_list','_Num_comment','_Games','coins'));
     }
     public function add_comment(Request $request) {
         $new_comment = new comment;

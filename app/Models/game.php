@@ -18,7 +18,7 @@ class game extends Model
         return $this->belongsToMany(gametag::class, 'game_gametags', 'idgames', 'idgametag');
     }
     public function user(){
-        return $this->belongsTo(User::class);  
+        return $this->belongsTo(User::class);
     }
     public function admin_reports() {
         return $this->hasMany(admin_report::class, "idgames");
@@ -43,6 +43,12 @@ class game extends Model
 {
     return $this->hasMany(Wishlist::class);
 }
+
+    public function admin_report()
+    {
+    return $this->hasMany(admin_report::class, 'idgames'); 
+    }
+
     public function comments(){
     return $this->hasMany(comment::class, "idgames", "idgames");
 }
