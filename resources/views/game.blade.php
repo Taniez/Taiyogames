@@ -7,6 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- jQuery (ถ้าใช้ Bootstrap 5, jQuery ไม่จำเป็น) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <!-- Tagify JS -->
     <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
@@ -63,8 +70,8 @@ img{
                 <p><b class="Abt" >Developer</b> {{ $_Games->User->name }} </p>
                 <p><b class="Abt" >Status</b> {{ $_Games->Status }} </p>
                 <p><b class="Abt" >Tags</b>
-                @foreach($_Games->gametags  as $gametag)
-                {{preg_replace('/{value:(.*?)}/', '$1', $gametag ->gametag_name)}},
+                @foreach($_Games->gametypes as $gametype)
+                    {{preg_replace('/{value:(.*?)}/', '$1', $gametype ->gametype_name)}},
                 @endforeach
                 </p>
             </div>
@@ -224,12 +231,34 @@ img{
         </div>
     </div>
     <div class="fix_report">
-        <a href="#"><i class="fa fa-flag reportBtn"></i> Report</a>
+        <a href="#" data-bs-toggle="modal" data-bs-target="#reportGameModal"><i class="fa fa-flag reportBtn"></i> Report</a>
+    </div>
+    
+    <!-- Modal สำหรับการรายงานเกม -->
+    <div class="modal fade" id="reportGameModal" tabindex="-1" aria-labelledby="reportGameLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Report Game</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('report.game', $_Games->idgames) }}" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <label for="reason">เหตุผลในการรายงาน:</label>
+                        <textarea name="reason" class="form-control" required></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger">Report</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 @else
         <p>No game found.</p>
 @endif
-
+ 
 
 </body>
 

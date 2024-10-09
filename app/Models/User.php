@@ -39,7 +39,10 @@ class User extends Authenticatable
     public function admin_reports(){
         return $this->hasMany(admin_report::class);
     }
-    
+    public function isAdmin()
+    {
+    return $this->is_admin;
+    }
 
     /**
      * The attributes that are mass assignable.

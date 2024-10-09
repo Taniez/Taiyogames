@@ -17,6 +17,6 @@ class Wishlist extends Model
 
     public function game()
 {
-    return $this->belongsTo(game::class, 'idgames');  // หรือใช้ 'idgames' ถ้าชื่อคอลัมน์ในฐานข้อมูลเป็น idgames
+    return $this->belongsTo(game::class, 'idgames');  
 }
 }
